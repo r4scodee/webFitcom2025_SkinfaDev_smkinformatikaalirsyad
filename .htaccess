@@ -1,0 +1,15 @@
+# Aktifkan rewrite engine
+RewriteEngine On
+RewriteBase /work/webFitcom2025_SkinfaDev_smkinformatikaalirsyad/
+
+# Jangan langsung akses file/directory yang ada
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Semua request non-file => index.php (front controller)
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Proteksi folder app agar tidak bisa diakses langsung via URL
+<IfModule mod_rewrite.c>
+    RewriteRule ^app/ - [F,L]
+</IfModule>

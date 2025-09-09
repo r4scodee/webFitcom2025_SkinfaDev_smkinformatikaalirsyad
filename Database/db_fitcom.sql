@@ -14,24 +14,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- Dumping database structure for market_crud_app
-CREATE DATABASE IF NOT EXISTS `market_crud_app` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `market_crud_app`;
-
--- Dumping structure for table market_crud_app.products
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(50) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `price` decimal(12,2) NOT NULL DEFAULT '0.00',
-  `image` varchar(255) DEFAULT NULL,
-  `supplier` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 -- Data exporting was unselected.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;

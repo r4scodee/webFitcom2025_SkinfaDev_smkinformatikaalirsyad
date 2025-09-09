@@ -1,6 +1,6 @@
 # Aktifkan rewrite engine
 RewriteEngine On
-RewriteBase /work/webFitcom2025_SkinfaDev_smkinformatikaalirsyad/
+RewriteBase /webFitcom2025_SkinfaDev_smkinformatikaalirsyad/
 
 # Jangan langsung akses file/directory yang ada
 RewriteCond %{REQUEST_FILENAME} !-f

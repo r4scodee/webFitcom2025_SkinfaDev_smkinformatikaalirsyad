@@ -2,10 +2,10 @@
 // config.php - simpan konfigurasi aplikasi di sini
 // NOTE: Untuk production, letakkan file ini di luar public_html jika memungkinkan.
 
-define('DB_HOST', 'localhost');      // host DB
-define('DB_NAME', 'market_crud_app');       // nama DB (ubah sesuai yang kamu buat)
-define('DB_USER', 'root');           // user DB
-define('DB_PASS', '');               // password DB
+define('DB_HOST', '103.163.138.166');      // host DB
+define('DB_NAME', 'smkinfor_lombafitcom2025');       // nama DB (ubah sesuai yang kamu buat)
+define('DB_USER', 'smkinfor_root_lombafitcom2025');           // user DB
+define('DB_PASS', 'JoB!um&aTxvuWvq2');               // password DB
 
 // BASE_URL berguna buat redirect / membuat asset URL (ubah kalau di subfolder)
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';

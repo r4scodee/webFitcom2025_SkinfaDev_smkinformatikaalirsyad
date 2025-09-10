@@ -1,7 +1,5 @@
 <?php
-// ProductsController.php
-// Controller untuk handle semua request CRUD produk.
-// Memakai Controller base class (render, e(), CSRF helpers).
+require_once __DIR__ . '/../libs/Controller.php';
 
 class ProductsController extends Controller
 {
@@ -18,7 +16,11 @@ class ProductsController extends Controller
     {
         $products = $this->model->all();
         // panggil view dengan data products
-        $this->view('products/index', ['products' => $products]);
+        $this->view('products/index', [
+        'title' => 'Table Produk - Smart Farm',
+        'active' => 'products',
+        'products' => $products
+        ]);
     }
 
     // GET /products/create (tampilkan form create)
@@ -251,3 +253,4 @@ class ProductsController extends Controller
         return ['success'=>true, 'filename'=>$newName];
     }
 }
+

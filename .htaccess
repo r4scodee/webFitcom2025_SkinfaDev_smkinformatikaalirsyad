@@ -6,8 +6,8 @@ RewriteBase /webFitcom2025_SkinfaDev_smkinformatikaalirsyad/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Semua request non-file => index.php (front controller)
-RewriteRule ^(.*)$ index.php [QSA,L]
+# Semua request non-file => index.php + parameter url
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # Proteksi folder app agar tidak bisa diakses langsung via URL
 <IfModule mod_rewrite.c>

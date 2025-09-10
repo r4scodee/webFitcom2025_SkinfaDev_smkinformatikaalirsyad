@@ -77,7 +77,10 @@ $val = function($key, $default = '') use ($product, $old, $isEdit) {
                 <input type="file" name="image" id="image" accept="image/*" class="form-control">
                 <div class="mt-2">
                     <?php $img = $val('image'); ?>
-                    <img id="preview" src="<?= $img ? UPLOAD_URL . $this->e($img) : '#' ?>" alt="preview" class="img-thumbnail" style="<?= $img ? '' : 'display:none' ?> max-width:220px;">
+                    <img id="preview" src="<?= $img ? UPLOAD_URL . $this->e($img) : '#' ?>" 
+                    alt="preview" 
+                    class="img-thumbnail" 
+                    style="<?= $img ? 'max-width:220px;' : 'display:none; max-width:220px;' ?>">
                 </div>
             </div>
 

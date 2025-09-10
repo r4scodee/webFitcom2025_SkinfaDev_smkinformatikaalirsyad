@@ -5,22 +5,25 @@ class Controller
     // Render view: otomatis include header & footer layout
     protected function view($viewPath, $data = [])
     {
-        // ekstrak data jadi variabel di view (misal $products)
-        extract($data);
+    // ekstrak data jadi variabel di view (misal $products, $title, $active)
+    extract($data);
 
-        // header layout
-        require_once __DIR__ . '/../views/layouts/header.php';
+    // Mulai buffer
+    ob_start();
 
-        // main view
-        $viewFile = __DIR__ . '/../views/' . $viewPath . '.php';
-        if (is_file($viewFile)) {
-            require_once $viewFile;
-        } else {
-            echo "<div class='container mt-4'><div class='alert alert-danger'>View $viewPath tidak ditemukan.</div></div>";
-        }
+    // file view utama
+    $viewFile = __DIR__ . '/../views/' . $viewPath . '.php';
+    if (is_file($viewFile)) {
+        require $viewFile;
+    } else {
+        echo "<div class='alert alert-danger'>View $viewPath tidak ditemukan.</div>";
+    }
 
-        // footer layout
-        require_once __DIR__ . '/../views/layouts/footer.php';
+    // Ambil hasil render view dan simpan ke $content
+    $content = ob_get_clean();
+
+    // Sekarang panggil layout utama
+    require __DIR__ . '/../views/layouts/layout.php';
     }
 
     // Redirect helper

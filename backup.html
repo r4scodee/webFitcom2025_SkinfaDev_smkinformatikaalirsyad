@@ -1,0 +1,57 @@
+<?php
+// products/index.php - list produk
+// $products tersedia dari controller
+?>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Daftar Produk</h3>
+    <a href="<?= BASE_URL ?>products/create" class="btn btn-primary">+ Tambah</a>
+</div>
+
+<?php if (empty($products)): ?>
+    <div class="alert alert-info">Belum ada produk.</div>
+<?php else: ?>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Kode</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Supplier</th>
+                    <th>Gambar</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($products as $p): ?>
+                <tr>
+                    <td><?= $this->e($p['id']) ?></td>
+                    <td><?= $this->e($p['code']) ?></td>
+                    <td><?= $this->e($p['name']) ?></td>
+                    <td>Rp <?= number_format($p['price'],0,',','.') ?></td>
+                    <td><?= $this->e($p['supplier']) ?></td>
+                    <td>
+                        <?php if (!empty($p['image'])): ?>
+                            <img src="<?= UPLOAD_URL . $this->e($p['image']) ?>" alt="img" class="thumb img-thumbnail">
+                        <?php else: ?>
+                            <span class="text-muted">-</span>
+                        <?php endif; ?>
+                    </td>
+                    <td style="white-space:nowrap">
+                        <a href="<?= BASE_URL ?>products/edit/<?= $this->e($p['id']) ?>" class="btn btn-sm btn-warning me-1">
+                            <i class="fa fa-edit"></i> Edit
+                        </a>
+
+                        <!-- Hapus pakai form POST untuk lebih aman (CSRF) -->
+                        <form method="post" action="<?= BASE_URL ?>products/delete/<?= $this->e($p['id']) ?>" style="display:inline">
+                            <input type="hidden" name="_csrf" value="<?= $this->generateCSRFToken() ?>">
+                            <button class="btn btn-sm btn-danger btn-delete"><i class="fa fa-trash"></i> Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif; ?>

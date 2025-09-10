@@ -1,10 +1,7 @@
 <?php
-// index.php - Front controller sederhana
-// Mulai session untuk CSRF token & kebutuhan session lainnya
 session_start();
 
-// ===== Autoload sederhana =====
-// Mencari class di folder app/libs, app/controller, app/models
+// Autoload sederhana
 spl_autoload_register(function ($class) {
     $paths = [
         __DIR__ . '/app/libs/',
@@ -20,59 +17,37 @@ spl_autoload_register(function ($class) {
     }
 });
 
-// ===== Load config =====
-require_once __DIR__ . '/app/config/config.php'; // file config (dibuat di step ini)
+// Load config
+require_once __DIR__ . '/app/config/config.php';
 
-// ===== Simple routing =====
-// Ambil URI path (tanpa query string)
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// Router sederhana
+$url = $_GET['url'] ?? '';
+$segments = explode('/', trim($url, '/'));
 
-// Jika aplikasi berjalan di subfolder, hapus base path
-$scriptName = dirname($_SERVER['SCRIPT_NAME']); // bisa jadi '/'
-if ($scriptName !== '/') {
-    $uri = preg_replace('#^' . preg_quote($scriptName) . '#', '', $uri);
-}
+// default controller = dashboard
+$controllerName = ucfirst($segments[0] ?: 'dashboard') . 'Controller';
+$method = $segments[1] ?? 'index';
+$params = array_slice($segments, 2);
 
-// Hilangkan leading/trailing slash dan pecah segmen
-$uri = trim($uri, '/');
-$segments = $uri === '' ? [] : explode('/', $uri);
-
-// Default controller/action
-$controllerSegment = $segments[0] ?? 'products';        // contoh: /products/create
-$actionSegment     = $segments[1] ?? 'index';           // contoh: 'create' atau 'edit'
-$idSegment         = $segments[2] ?? null;              // contoh: id
-
-// Buat nama class controller: ProductsController
-$controllerName = ucfirst($controllerSegment) . 'Controller';
-$actionName = $actionSegment;
-
-// Path file controller
+// cek file controller
 $controllerFile = __DIR__ . '/app/controller/' . $controllerName . '.php';
-
-// Jika file controller ada, include lalu panggil action; kalau nggak ada, 404 sederhana
-if (is_file($controllerFile)) {
-    require_once $controllerFile;
+if (file_exists($controllerFile)) {
+    require $controllerFile;
     if (!class_exists($controllerName)) {
-        header("HTTP/1.0 500 Internal Server Error");
-        echo "Controller class $controllerName tidak ditemukan.";
+        http_response_code(500);
+        echo "Controller class $controllerName not found.";
         exit;
     }
+
     $controller = new $controllerName();
 
-    // Jika method ada, panggil. Pass $id jika tersedia.
-    if (method_exists($controller, $actionName)) {
-        if ($idSegment !== null) {
-            $controller->{$actionName}($idSegment);
-        } else {
-            $controller->{$actionName}();
-        }
+    if (method_exists($controller, $method)) {
+        call_user_func_array([$controller, $method], $params);
     } else {
-        // action tidak ditemukan
-        header("HTTP/1.0 404 Not Found");
-        echo "Action '$actionName' tidak ditemukan pada controller $controllerName.";
+        http_response_code(404);
+        echo "Method not found: $method";
     }
 } else {
-    // controller file tidak ditemukan -> default ke products index (opsional) atau 404
-    header("HTTP/1.0 404 Not Found");
-    echo "Halaman tidak ditemukan.";
+    http_response_code(404);
+    echo "Controller not found: $controllerName";
 }

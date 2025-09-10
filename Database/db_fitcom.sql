@@ -1,13 +1,11 @@
+CREATE DATABASE smart_farm_db;
+USE smart_farm_db;
 
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(50) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `price` decimal(12,2) NOT NULL DEFAULT '0.00',
-  `image` varchar(255) DEFAULT NULL,
-  `supplier` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`)
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(50) NOT NULL UNIQUE,  -- Kode unik produk
+    name VARCHAR(100) NOT NULL,        
+    price DECIMAL(10,2) NOT NULL,      
+    image VARCHAR(255) DEFAULT NULL,  
+    supplier VARCHAR(100) NOT NULL     
 );
-

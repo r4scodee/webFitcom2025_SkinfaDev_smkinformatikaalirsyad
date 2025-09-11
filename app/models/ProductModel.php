@@ -16,7 +16,8 @@ class ProductModel
     // Ambil semua produk (optionally paginated nanti)
     public function all()
     {
-        $stmt = $this->db->prepare("SELECT * FROM products ORDER BY created_at DESC");
+        $stmt = $this->db->prepare("SELECT * FROM products ORDER BY id ASC
+");
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -36,10 +37,10 @@ class ProductModel
                 VALUES (:code, :name, :price, :image, :supplier)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
-            ':code'     => $data['code'],
-            ':name'     => $data['name'],
-            ':price'    => $data['price'],
-            ':image'    => $data['image'],
+            ':code' => $data['code'],
+            ':name' => $data['name'],
+            ':price' => $data['price'],
+            ':image' => $data['image'],
             ':supplier' => $data['supplier'],
         ]);
         return $this->db->lastInsertId();
@@ -51,12 +52,12 @@ class ProductModel
         $sql = "UPDATE products SET code = :code, name = :name, price = :price, image = :image, supplier = :supplier WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            ':code'     => $data['code'],
-            ':name'     => $data['name'],
-            ':price'    => $data['price'],
-            ':image'    => $data['image'],
+            ':code' => $data['code'],
+            ':name' => $data['name'],
+            ':price' => $data['price'],
+            ':image' => $data['image'],
             ':supplier' => $data['supplier'],
-            ':id'       => $id,
+            ':id' => $id,
         ]);
     }
 

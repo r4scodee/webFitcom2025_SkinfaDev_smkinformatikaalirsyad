@@ -8,7 +8,7 @@
   <div class="col-md-3">
     <select id="filterSupplier" class="form-select">
       <option value="">Semua Supplier</option>
-      <?php 
+      <?php
       $suppliers = array_unique(array_column($products, 'supplier'));
       foreach ($suppliers as $s): ?>
         <option value="<?= strtolower($s) ?>"><?= htmlspecialchars($s) ?></option>
@@ -39,52 +39,55 @@
         </tr>
       </thead>
       <tbody id="productTable">
-      <?php foreach ($products as $p): ?>
-        <tr>
-          <td><?= $this->e($p['id']) ?></td>
-          <td><?= $this->e($p['code']) ?></td>
-          <td><?= $this->e($p['name']) ?></td>
-          <td>Rp <?= number_format($p['price'],0,',','.') ?></td>
-          <td><?= $this->e($p['supplier']) ?></td>
-          <td>
-            <?php if (!empty($p['image'])): ?>
-              <img src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>" alt="img" class="thumb img-thumbnail" width="60">
-            <?php else: ?>
-              <span class="text-muted">-</span>
-            <?php endif; ?>
-          </td>
-          <td style="white-space:nowrap">
-            <a href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>" class="btn btn-sm btn-warning me-1">
-              <i class="bi bi-pencil"></i>
-            </a>
-            <form method="post" action="<?= BASE_URL ?>products/delete/<?= htmlspecialchars($p['id']) ?>" style="display:inline" onsubmit="return confirm('Yakin hapus produk ini?')">
-              <input type="hidden" name="_csrf" value="<?= $this->generateCSRFToken() ?>">
-              <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-            </form>
-          </td>
-        </tr>
-      <?php endforeach; ?>
+        <?php $no = 1;
+        foreach ($products as $p): ?>
+          <tr>
+            <td><?= $no++ ?></td>
+            <td><?= $this->e($p['code']) ?></td>
+            <td><?= $this->e($p['name']) ?></td>
+            <td>Rp <?= number_format($p['price'], 0, ',', '.') ?></td>
+            <td><?= $this->e($p['supplier']) ?></td>
+            <td>
+              <?php if (!empty($p['image'])): ?>
+                <img src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>" alt="img" class="thumb img-thumbnail" width="60">
+              <?php else: ?>
+                <span class="text-muted">-</span>
+              <?php endif; ?>
+            </td>
+            <td style="white-space:nowrap">
+              <a href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>" class="btn btn-sm btn-warning me-1">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <form method="post" action="<?= BASE_URL ?>products/delete/<?= htmlspecialchars($p['id']) ?>"
+                style="display:inline" onsubmit="return confirm('Yakin hapus produk ini?')">
+                <input type="hidden" name="_csrf" value="<?= $this->generateCSRFToken() ?>">
+                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
       </tbody>
+
     </table>
   </div>
 <?php endif; ?>
 
 <script>
-function filterTable() {
-  var searchVal = $("#searchProduct").val().toLowerCase();
-  var supplierVal = $("#filterSupplier").val().toLowerCase();
+  function filterTable() {
+    var searchVal = $("#searchProduct").val().toLowerCase();
+    var supplierVal = $("#filterSupplier").val().toLowerCase();
 
-  $("#productTable tr").filter(function() {
-    var text = $(this).text().toLowerCase();
-    var supplier = $(this).find("td:nth-child(5)").text().toLowerCase(); // kolom ke-5 supplier
+    $("#productTable tr").filter(function () {
+      var text = $(this).text().toLowerCase();
+      var supplier = $(this).find("td:nth-child(5)").text().toLowerCase(); // kolom ke-5 supplier
 
-    var matchSearch = text.indexOf(searchVal) > -1;
-    var matchSupplier = !supplierVal || supplier === supplierVal;
+      var matchSearch = text.indexOf(searchVal) > -1;
+      var matchSupplier = !supplierVal || supplier === supplierVal;
 
-    $(this).toggle(matchSearch && matchSupplier);
-  });
-}
+      $(this).toggle(matchSearch && matchSupplier);
+    });
+  }
 
-$("#searchProduct").on("keyup", filterTable);
-$("#filterSupplier").on("change", filterTable);
+  $("#searchProduct").on("keyup", filterTable);
+  $("#filterSupplier").on("change", filterTable);
 </script>

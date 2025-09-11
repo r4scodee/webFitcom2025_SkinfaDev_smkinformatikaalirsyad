@@ -15,23 +15,27 @@ $csrf = $csrf ?? '';
 
 // Detect apakah edit atau create
 $isEdit = ($action === 'update');
-$formAction = $isEdit 
-    ? BASE_URL . 'products/update/' . ($product['id'] ?? '') 
+$formAction = $isEdit
+    ? BASE_URL . 'products/update/' . ($product['id'] ?? '')
     : BASE_URL . 'products/store';
 
 // Helper untuk ambil value lama
-$val = function($key, $default = '') use ($product, $old, $isEdit) {
-    if (!empty($old) && isset($old[$key])) return $old[$key];
-    if ($isEdit && !empty($product) && isset($product[$key])) return $product[$key];
+$val = function ($key, $default = '') use ($product, $old, $isEdit) {
+    if (!empty($old) && isset($old[$key]))
+        return $old[$key];
+    if ($isEdit && !empty($product) && isset($product[$key]))
+        return $product[$key];
     return $default;
 };
 
 $isEdit = ($action === 'update');
 $formAction = $isEdit ? BASE_URL . 'products/update/' . ($product['id'] ?? '') : BASE_URL . 'products/store';
-$val = function($key, $default = '') use ($product, $old, $isEdit) {
+$val = function ($key, $default = '') use ($product, $old, $isEdit) {
     // Prioritas: $old (ketika validasi gagal) > $product (edit) > default
-    if (!empty($old) && isset($old[$key])) return $old[$key];
-    if ($isEdit && !empty($product) && isset($product[$key])) return $product[$key];
+    if (!empty($old) && isset($old[$key]))
+        return $old[$key];
+    if ($isEdit && !empty($product) && isset($product[$key]))
+        return $product[$key];
     return $default;
 };
 ?>
@@ -42,9 +46,9 @@ $val = function($key, $default = '') use ($product, $old, $isEdit) {
         <?php if (!empty($errors)): ?>
             <div class="alert alert-danger">
                 <ul class="mb-0">
-                <?php foreach ($errors as $err): ?>
-                    <li><?= $this->e($err) ?></li>
-                <?php endforeach; ?>
+                    <?php foreach ($errors as $err): ?>
+                        <li><?= $this->e($err) ?></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
@@ -64,8 +68,9 @@ $val = function($key, $default = '') use ($product, $old, $isEdit) {
 
             <div class="mb-3">
                 <label class="form-label">Harga (angka)</label>
-                <input type="number" name="price" min="0" step="0.01" class="form-control" value="<?= $this->e($val('price', 0)) ?>">
+                <input type="text" name="price" id="price" class="form-control" placeholder="0">
             </div>
+
 
             <div class="mb-3">
                 <label class="form-label">Supplier</label>
@@ -77,10 +82,9 @@ $val = function($key, $default = '') use ($product, $old, $isEdit) {
                 <input type="file" name="image" id="image" accept="image/*" class="form-control">
                 <div class="mt-2">
                     <?php $img = $val('image'); ?>
-                    <img id="preview" src="<?= $img ? UPLOAD_URL . $this->e($img) : '#' ?>" 
-                    alt="preview" 
-                    class="img-thumbnail" 
-                    style="<?= $img ? 'max-width:220px;' : 'display:none; max-width:220px;' ?>">
+                    <img id="preview" src="<?= $img ? UPLOAD_URL . $this->e($img) : '#' ?>" alt="preview"
+                        class="img-thumbnail"
+                        style="<?= $img ? 'max-width:220px;' : 'display:none; max-width:220px;' ?>">
                 </div>
             </div>
 
@@ -91,3 +95,23 @@ $val = function($key, $default = '') use ($product, $old, $isEdit) {
         </form>
     </div>
 </div>
+<script>
+    // Fungsi format angka ke ribuan
+    function formatRupiah(angka) {
+        return angka.replace(/\D/g, "")        // hapus semua non-digit
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    $(document).ready(function () {
+        $("#price").on("input", function () {
+            let nilai = $(this).val();
+            $(this).val(formatRupiah(nilai));
+        });
+
+        // Saat form disubmit, hapus titik biar ke DB nyimpen angka bersih
+        $("form").on("submit", function () {
+            let harga = $("#price").val().replace(/\./g, "");
+            $("#price").val(harga);
+        });
+    });
+</script>

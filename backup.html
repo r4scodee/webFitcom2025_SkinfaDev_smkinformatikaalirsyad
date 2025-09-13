@@ -55,3 +55,48 @@
         </table>
     </div>
 <?php endif; ?>
+
+
+    <style>
+    /* Sidebar styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f8f2;
+  margin: 0c !important;        /* hilangkan margin bawaan body */
+  padding: 0 !important;       /* hilangkan padding bawaan body */
+}
+
+.container-fluid {
+  padding-left: 20;  /* hilangkan padding kiri-kanan bootstrap */
+  padding-right: 20;
+}
+
+.sidebar {
+  min-height: 100vh;
+  background: #3E5F44;
+  border-right: 1px solid #5E936C;
+}
+
+.sidebar-link {
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  margin: 6px 0;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background: #e9f7ef;
+  color: #5E936C;
+  transform: translateX(5px);
+}
+
+.sidebar-link.active {
+  background: #5E936C;
+  color: #fff !important;
+  box-shadow: 0 3px 10px rgba(25, 135, 84, 0.3);
+}
+  </style>

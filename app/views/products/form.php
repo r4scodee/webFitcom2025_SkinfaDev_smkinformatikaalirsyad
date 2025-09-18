@@ -78,7 +78,7 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
                         <option value="pcs" <?= $val('unit') == 'pcs' ? 'selected' : '' ?>>pcs</option>
                         <option value="g" <?= $val('unit') == 'g' ? 'selected' : '' ?>>g</option>
                         <option value="kg" <?= $val('unit') == 'kg' ? 'selected' : '' ?>>kg</option>
-                        <option value="kg" <?= $val('unit') == 'ton' ? 'selected' : '' ?>>ton</option>
+                        <option value="ton" <?= $val('unit') == 'ton' ? 'selected' : '' ?>>ton</option>
                     </select>
                 </div>
     

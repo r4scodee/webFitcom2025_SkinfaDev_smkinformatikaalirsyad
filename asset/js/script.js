@@ -1,31 +1,116 @@
-const toggleButton = document.getElementById('toggle-btn')
-const sidebar = document.getElementById('sidebar')
+// Growth Chart
+const growthCtx = document.getElementById("growthChart").getContext("2d");
+new Chart(growthCtx, {
+  type: "line",
+  data: {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [
+      {
+        label: "Plant Growth (cm)",
+        data: [12, 15, 18, 22, 25, 28, 32],
+        borderColor: "#4a7c59",
+        backgroundColor: "rgba(74, 124, 89, 0.1)",
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: "rgba(0,0,0,0.05)",
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
+  },
+});
 
-function toggleSidebar(){
-  sidebar.classList.toggle('close')
-  toggleButton.classList.toggle('rotate')
+// Weather Chart
+const weatherCtx = document.getElementById("weatherChart").getContext("2d");
+new Chart(weatherCtx, {
+  type: "doughnut",
+  data: {
+    labels: ["Sunny", "Cloudy", "Rainy"],
+    datasets: [
+      {
+        data: [60, 30, 10],
+        backgroundColor: ["#d4af37", "#6c757d", "#2196f3"],
+        borderWidth: 0,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "bottom",
+        labels: {
+          padding: 20,
+          usePointStyle: true,
+        },
+      },
+    },
+  },
+});
 
-  closeAllSubMenus()
-}
+// Navigation
+$(".nav-link[data-page]").on("click", (e) => {
+  e.preventDefault();
+  const page = $(e.currentTarget).data("page");
+  this.navigateToPage(page);
+});
 
-function toggleSubMenu(button){
+// Sidebar toggle for mobile
+$("#sidebarToggle").on("click", () => {
+  $("#sidebar").toggleClass("show");
+});
 
-  if(!button.nextElementSibling.classList.contains('show')){
-    closeAllSubMenus()
+// Close sidebar on mobile when clicking outside
+$(document).on("click", (e) => {
+  if (
+    $(window).width() <= 768 &&
+    !$(e.target).closest(".sidebar, #sidebarToggle").length
+  ) {
+    $("#sidebar").removeClass("show");
   }
+});
 
-  button.nextElementSibling.classList.toggle('show')
-  button.classList.toggle('rotate')
+// Logout
+$("#logoutBtn").on("click", (e) => {
+  e.preventDefault();
+  this.logout();
+});
 
-  if(sidebar.classList.contains('close')){
-    sidebar.classList.toggle('close')
-    toggleButton.classList.toggle('rotate')
-  }
+// Cari dan Filter Produk
+function filterTable() {
+  var searchVal = $("#searchProduct").val().toLowerCase();
+  var unitVal = $("#filterUnit").val().toLowerCase();
+
+  $("#productTable tr").filter(function () {
+    var text = $(this).text().toLowerCase();
+    var unit = $(this).find("td:nth-child(5)").text().toLowerCase(); // kolom ke-5 unit
+
+    var matchSearch = text.indexOf(searchVal) > -1;
+    var matchUnit = !unitVal || unit === unitVal;
+
+    $(this).toggle(matchSearch && matchUnit);
+  });
 }
-
-function closeAllSubMenus(){
-  Array.from(sidebar.getElementsByClassName('show')).forEach(ul => {
-    ul.classList.remove('show')
-    ul.previousElementSibling.classList.remove('rotate')
-  })
-}
+$("#searchProduct").on("keyup", filterTable);
+$("#filterUnit").on("change", filterTable);

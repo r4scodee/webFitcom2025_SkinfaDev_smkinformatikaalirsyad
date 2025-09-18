@@ -1,84 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= $title ?? "Smart Farm" ?></title>
-  <link rel="stylesheet" href="<?= BASE_URL ?>asset/css/style.css">
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-<div class="container-fluid">
-  <div class="row">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><?= $title ?? "Smart Farm" ?></title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>asset/css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-thin-rounded/css/uicons-thin-rounded.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
     <!-- Sidebar -->
-    <nav id="sidebar">
-    <ul>
-      <li>
-        <span class="logo">Digital Farming</span>
-        <button onclick=toggleSidebar() id="toggle-btn">
-          <svg xmlns="" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-480 155 156q11 11 11.5 27.5T468-268q-11 11-28 11t-28-11L228-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T468-692q11 11 11 28t-11 28L313-480Zm264 0 155 156q11 11 11.5 27.5T732-268q-11 11-28 11t-28-11L492-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T732-692q11 11 11 28t-11 28L577-480Z"/></svg>
-        </button>
-      </li>
-      <li class="active">
-        <a href="<?= BASE_URL ?>dashboard" 
-        class="nav-link sidebar-link <?= ($active ?? '') === 'dashboard' ? 'active' : '' ?>">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-200h120v-200q0-17 11.5-28.5T400-440h160q17 0 28.5 11.5T600-400v200h120v-360L480-740 240-560v360Zm-80 0v-360q0-19 8.5-36t23.5-28l240-180q21-16 48-16t48 16l240 180q15 11 23.5 28t8.5 36v360q0 33-23.5 56.5T720-120H560q-17 0-28.5-11.5T520-160v-200h-80v200q0 17-11.5 28.5T400-120H240q-33 0-56.5-23.5T160-200Zm320-270Z"/></svg>
-        <span>Dashboard</span>
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="<?= BASE_URL ?>dashboard" class="sidebar-brand">
+          <i class="fas fa-seedling"></i>
+          <span>Digital Farm</span>
         </a>
-      </li>
-      <li>
-        <a href="<?= BASE_URL ?>products" 
-        class="nav-link sidebar-link <?= ($active ?? '') === 'products' ? 'active' : '' ?>">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M520-640v-160q0-17 11.5-28.5T560-840h240q17 0 28.5 11.5T840-800v160q0 17-11.5 28.5T800-600H560q-17 0-28.5-11.5T520-640ZM120-480v-320q0-17 11.5-28.5T160-840h240q17 0 28.5 11.5T440-800v320q0 17-11.5 28.5T400-440H160q-17 0-28.5-11.5T120-480Zm400 320v-320q0-17 11.5-28.5T560-520h240q17 0 28.5 11.5T840-480v320q0 17-11.5 28.5T800-120H560q-17 0-28.5-11.5T520-160Zm-400 0v-160q0-17 11.5-28.5T160-360h240q17 0 28.5 11.5T440-320v160q0 17-11.5 28.5T400-120H160q-17 0-28.5-11.5T120-160Zm80-360h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></svg>
-        <span>Tabel Produk</span>
-        </a>
-      </li>
-      <li>
-        <button onclick=toggleSubMenu(this) class="dropdown-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h207q16 0 30.5 6t25.5 17l57 57h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H447l-80-80H160v480Zm0 0v-480 480Zm400-160v40q0 17 11.5 28.5T600-320q17 0 28.5-11.5T640-360v-40h40q17 0 28.5-11.5T720-440q0-17-11.5-28.5T680-480h-40v-40q0-17-11.5-28.5T600-560q-17 0-28.5 11.5T560-520v40h-40q-17 0-28.5 11.5T480-440q0 17 11.5 28.5T520-400h40Z"/></svg>
-          <span>List Tabel</span>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z"/></svg>
-        </button>
-        <ul class="sub-menu">
-          <div>
-            <li><a href="#">Gudang</a></li>
-            <li><a href="#">Produk</a></li>
-          </div>
-        </ul>
-      </li>
-      <li>
-        <button onclick=toggleSubMenu(this) class="dropdown-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m221-313 142-142q12-12 28-11.5t28 12.5q11 12 11 28t-11 28L250-228q-12 12-28 12t-28-12l-86-86q-11-11-11-28t11-28q11-11 28-11t28 11l57 57Zm0-320 142-142q12-12 28-11.5t28 12.5q11 12 11 28t-11 28L250-548q-12 12-28 12t-28-12l-86-86q-11-11-11-28t11-28q11-11 28-11t28 11l57 57Zm339 353q-17 0-28.5-11.5T520-320q0-17 11.5-28.5T560-360h280q17 0 28.5 11.5T880-320q0 17-11.5 28.5T840-280H560Zm0-320q-17 0-28.5-11.5T520-640q0-17 11.5-28.5T560-680h280q17 0 28.5 11.5T880-640q0 17-11.5 28.5T840-600H560Z"/></svg>
-          <span>Todo-Lists</span>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-361q-8 0-15-2.5t-13-8.5L268-556q-11-11-11-28t11-28q11-11 28-11t28 11l156 156 156-156q11-11 28-11t28 11q11 11 11 28t-11 28L508-372q-6 6-13 8.5t-15 2.5Z"/></svg>
-        </button>
-        <ul class="sub-menu">
-          <div>
-            <li><a href="#">Work</a></li>
-            <li><a href="#">Private</a></li>
-            <li><a href="#">Coding</a></li>
-            <li><a href="#">Gardening</a></li>
-            <li><a href="#">School</a></li>
-          </div>
-        </ul>
-      </li>
-    </ul>
-  </nav>
+      </div>
+      <ul class="sidebar-nav">
+        <li class="nav-item">
+          <a
+            href="<?= BASE_URL ?>dashboard"
+            class="nav-link sidebar-link <?= ($active ?? '') === 'dashboard' ? 'active' : '' ?>"
+          >
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="<?= BASE_URL ?>products"
+            class="nav-link sidebar-link <?= ($active ?? '') === 'products' ? 'active' : '' ?>"
+          >
+            <i class="fas fa-boxes"></i>
+            <span>Products</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#sensors" class="nav-link">
+            <i class="fas fa-thermometer-half"></i>
+            <span>Sensors</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#reports" class="nav-link">
+            <i class="fas fa-chart-line"></i>
+            <span>Reports</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#settings" class="nav-link">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+        <li class="nav-item mt-4">
+          <a href="#" class="nav-link" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-    <!-- Content -->
-    <main class="col-md-10 p-4">
+    <div class="main-content">
       <?= $content ?>
-    </main>
-  </div>
-</div>
+    </div>
 
-<script src="<?= BASE_URL ?>asset/js/script.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="<?= BASE_URL ?>asset/js/script.js"></script>
+  </body>
 </html>

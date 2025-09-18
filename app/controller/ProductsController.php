@@ -43,7 +43,7 @@ class ProductsController extends Controller
         $code = trim($_POST['code'] ?? '');
         $name = trim($_POST['name'] ?? '');
         $price = trim($_POST['price'] ?? '0');
-        $supplier = trim($_POST['supplier'] ?? '');
+        $unit = trim($_POST['unit'] ?? '');
 
         $errors = [];
 
@@ -72,7 +72,7 @@ class ProductsController extends Controller
             $this->view('products/form', [
                 'action' => 'store',
                 'errors' => $errors,
-                'old'    => ['code'=>$code,'name'=>$name,'price'=>$price,'supplier'=>$supplier],
+                'old'    => ['code'=>$code,'name'=>$name,'price'=>$price,'unit'=>$unit],
                 'csrf'   => $csrf
             ]);
             return;
@@ -84,7 +84,7 @@ class ProductsController extends Controller
             'name'     => $name,
             'price'    => $price,
             'image'    => $uploadedFilename,
-            'supplier' => $supplier,
+            'unit'     => $unit,
         ];
 
         $id = $this->model->create($data);
@@ -122,7 +122,7 @@ class ProductsController extends Controller
         $code = trim($_POST['code'] ?? '');
         $name = trim($_POST['name'] ?? '');
         $price = trim($_POST['price'] ?? '0');
-        $supplier = trim($_POST['supplier'] ?? '');
+        $unit = trim($_POST['unit'] ?? '');
 
         $errors = [];
         if ($code === '') $errors[] = "Kode produk wajib diisi.";
@@ -152,7 +152,7 @@ class ProductsController extends Controller
             $this->view('products/form', [
                 'action' => 'update',
                 'errors' => $errors,
-                'product'=> ['id'=>$id,'code'=>$code,'name'=>$name,'price'=>$price,'supplier'=>$supplier,'image'=>$uploadedFilename],
+                'product'=> ['id'=>$id,'code'=>$code,'name'=>$name,'price'=>$price,'unit'=>$unit,'image'=>$uploadedFilename],
                 'csrf'   => $csrf
             ]);
             return;
@@ -163,7 +163,7 @@ class ProductsController extends Controller
             'name'     => $name,
             'price'    => $price,
             'image'    => $uploadedFilename,
-            'supplier' => $supplier
+            'unit' => $unit
         ];
 
         $this->model->update($id, $data);

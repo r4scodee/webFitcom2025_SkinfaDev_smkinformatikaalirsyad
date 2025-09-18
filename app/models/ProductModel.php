@@ -33,15 +33,15 @@ class ProductModel
     // Masukkan data produk baru (return inserted id)
     public function create($data)
     {
-        $sql = "INSERT INTO products (code, name, price, image, supplier) 
-                VALUES (:code, :name, :price, :image, :supplier)";
+        $sql = "INSERT INTO products (code, name, price, image, unit) 
+                VALUES (:code, :name, :price, :image, :unit)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             ':code' => $data['code'],
             ':name' => $data['name'],
             ':price' => $data['price'],
             ':image' => $data['image'],
-            ':supplier' => $data['supplier'],
+            ':unit' => $data['unit'],
         ]);
         return $this->db->lastInsertId();
     }
@@ -49,14 +49,14 @@ class ProductModel
     // Update produk berdasarkan id
     public function update($id, $data)
     {
-        $sql = "UPDATE products SET code = :code, name = :name, price = :price, image = :image, supplier = :supplier WHERE id = :id";
+        $sql = "UPDATE products SET code = :code, name = :name, price = :price, image = :image, unit = :unit WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':code' => $data['code'],
             ':name' => $data['name'],
             ':price' => $data['price'],
             ':image' => $data['image'],
-            ':supplier' => $data['supplier'],
+            ':unit' => $data['unit'],
             ':id' => $id,
         ]);
     }

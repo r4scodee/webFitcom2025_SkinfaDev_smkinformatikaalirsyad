@@ -35,9 +35,8 @@ class Controller
     }
 
     // Escape output untuk mencegah XSS
-    protected function e($string)
-    {
-        return htmlspecialchars($string, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    public function e($string) {
+        return htmlspecialchars($string ?? '', ENT_QUOTES, 'UTF-8');
     }
 
     // ===== CSRF helpers =====

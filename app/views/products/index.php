@@ -1,93 +1,145 @@
 <?php ob_start(); ?>
-<h3 class="mb-4">Table Produk</h3>
+<!-- Header -->
+<header class="header">
+  <div class="header-content">
+    <div class="d-flex align-items-center">
+      <button class="btn btn-link d-md-none me-3" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <h1 class="page-title" id="pageTitle">Tabel Manajemen Produk</h1>
+    </div>
+    <div class="user-info">
+      <span class="text-muted me-2">Admin</span>
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </div>
+</header>
 
-<div class="row mb-3">
-  <div class="col-md-4">
-    <input type="text" id="searchProduct" class="form-control" placeholder="Cari produk...">
-  </div>
-  <div class="col-md-3">
-    <select id="filterSupplier" class="form-select">
-      <option value="">Semua Supplier</option>
-      <?php
-      $suppliers = array_unique(array_column($products, 'supplier'));
-      foreach ($suppliers as $s): ?>
-        <option value="<?= strtolower($s) ?>"><?= htmlspecialchars($s) ?></option>
-      <?php endforeach; ?>
-    </select>
-  </div>
-  <div class="col-md-2 ms-auto text-end">
-    <a href="<?= BASE_URL ?>products/create" class="btn btn-success">
-      <i class="bi bi-plus-circle"></i> Tambah
-    </a>
-  </div>
-</div>
+<!-- Content Area -->
+<main class="container-fluid px-4 py-4">
+  <!-- Controls Section -->
+  <div class="card mb-4 fade-in">
+    <div class="card-body">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-3">
+          <div class="position-relative">
+            <input
+              type="text"
+              id="searchProduct"
+              class="form-control ps-5 rounded-5"
+              placeholder="Cari Produk..."
+            />
+            <span
+              class="position-absolute top-50 start-0 translate-middle-y ms-3"
+              ><i class="fi fi-tr-search"></i></span
+            >
+          </div>
+        </div>
 
-<?php if (empty($products)): ?>
-  <div class="alert alert-info">Belum ada produk.</div>
-<?php else: ?>
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered align-middle">
-      <thead class="table-success">
-        <tr>
-          <th>#</th>
-          <th>Kode</th>
-          <th>Nama</th>
-          <th>Harga</th>
-          <th>Supplier</th>
-          <th>Gambar</th>
-          <th>Aksi</th>
-        </tr>
-      </thead>
-      <tbody id="productTable">
-        <?php $no = 1;
-        foreach ($products as $p): ?>
-          <tr>
-            <td><?= $no++ ?></td>
-            <td><?= $this->e($p['code']) ?></td>
-            <td><?= $this->e($p['name']) ?></td>
-            <td>Rp <?= number_format($p['price'], 0, ',', '.') ?></td>
-            <td><?= $this->e($p['supplier']) ?></td>
-            <td>
-              <?php if (!empty($p['image'])): ?>
-                <img src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>" alt="img" class="thumb img-thumbnail" width="60">
-              <?php else: ?>
+        <div class="col-md-2">
+          <select id="filterUnit" class="form-select rounded-5">
+            <option value="" class="">Semua Satuan</option>
+            <?php
+                  $unit = array_unique(array_column($products, 'unit'));
+                    foreach ($unit as $s): ?>
+            <option value="<?= strtolower($s) ?>" class="r">
+              <?= htmlspecialchars($s) ?>
+            </option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+
+        <div class="col-md-auto ms-auto">
+          <a href="<?= BASE_URL ?>products/create" class="btn btn-farm rounded-5">
+            <span class="fs-sm">Tambah Produk</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Table -->
+  <div class="card fade-in shadow-sm border-0">
+    <div class="card-body p-0">
+      <?php if (empty($products)): ?>
+      <div class="alert alert-info">Belum ada produk.</div>
+      <?php else: ?>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th class="px-4 py-3">No</th>
+              <th class="px-4 py-3">Kode</th>
+              <th class="px-4 py-3">Nama</th>
+              <th class="px-4 py-3">Harga</th>
+              <th class="px-4 py-3">Satuan</th>
+              <th class="px-4 py-3">Gambar</th>
+              <th class="px-4 py-3">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="producttable">
+            <?php $no = 1;
+              foreach ($products as $p): ?>
+            <tr>
+              <td class="px-4 py-3 fw-medium"><?= $no++ ?></td>
+              <td class="px-4 py-3 fw-medium"><?= $this->e($p['code']) ?></td>
+              <td class="px-4 py-3 fw-medium"><?= $this->e($p['name']) ?></td>
+              <td class="px-4 py-3 fw-medium">
+                Rp
+                <?= number_format($p['price'], 0, ',', '.') ?>
+              </td>
+              <td class="px-4 py-3 fw-medium"><?= $this->e($p['unit']) ?></td>
+              <td class="px-4 py-3 fw-medium">
+                <?php if (!empty($p['image'])): ?>
+                <img
+                  src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>"
+                  alt="img"
+                  class="thumb img-thumbnail"
+                  width="60"
+                />
+                <?php else: ?>
                 <span class="text-muted">-</span>
-              <?php endif; ?>
-            </td>
-            <td style="white-space:nowrap">
-              <a href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>" class="btn btn-sm btn-warning me-1">
-                <i class="bi bi-pencil"></i>
-              </a>
-              <form method="post" action="<?= BASE_URL ?>products/delete/<?= htmlspecialchars($p['id']) ?>"
-                style="display:inline" onsubmit="return confirm('Yakin hapus produk ini?')">
-                <input type="hidden" name="_csrf" value="<?= $this->generateCSRFToken() ?>">
-                <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-              </form>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      </tbody>
+                <?php endif; ?>
+              </td>
+              <td
+                class="px-4 py-3"
+              >
+                <a
+                  href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>"
+                  class="btn btn-sm btn-outline-success me-2"
+                >
+                  <i class="fi fi-tr-pen-field"></i>
+                </a>
+                <form
+                  method="post"
+                  action="<?= BASE_URL ?>products/delete/<?= htmlspecialchars($p['id']) ?>"
+                  style="display: inline"
+                  onsubmit="return confirm('Yakin hapus produk ini?')"
+                >
+                  <input
+                    type="hidden"
+                    name="_csrf"
+                    value="<?= $this->generateCSRFToken() ?>"
+                  />
+                  <button class="btn btn-sm btn-outline-danger">
+                    <i class="fi fi-tr-trash-xmark"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+      <?php endif; ?>
 
-    </table>
+      <div id="noResults" class="text-center py-5 d-none">
+        <div class="display-1 text-muted mb-3">🔍</div>
+        <h5 class="text-muted mb-2">No products found</h5>
+        <p class="text-muted">Try adjusting your search or filter criteria</p>
+      </div>
+    </div>
   </div>
-<?php endif; ?>
-
-<script>
-  function filterTable() {
-    var searchVal = $("#searchProduct").val().toLowerCase();
-    var supplierVal = $("#filterSupplier").val().toLowerCase();
-
-    $("#productTable tr").filter(function () {
-      var text = $(this).text().toLowerCase();
-      var supplier = $(this).find("td:nth-child(5)").text().toLowerCase(); // kolom ke-5 supplier
-
-      var matchSearch = text.indexOf(searchVal) > -1;
-      var matchSupplier = !supplierVal || supplier === supplierVal;
-
-      $(this).toggle(matchSearch && matchSupplier);
-    });
-  }
-
-  $("#searchProduct").on("keyup", filterTable);
-  $("#filterSupplier").on("change", filterTable);
-</script>
+</main>

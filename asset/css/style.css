@@ -39,8 +39,13 @@ body {
 }
 
 .sidebar-header {
-  padding: 2rem 1.5rem !important;
+  padding: 2rem 1rem !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+}
+
+.sidebar-header span {
+  font-size: 22px !important;
 }
 
 .sidebar-brand {
@@ -55,7 +60,7 @@ body {
 
 .sidebar-brand i {
   color: var(--farm-gold);
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .sidebar-nav {

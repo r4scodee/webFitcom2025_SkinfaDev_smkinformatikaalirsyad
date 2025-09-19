@@ -96,21 +96,3 @@ $("#logoutBtn").on("click", (e) => {
   e.preventDefault();
   this.logout();
 });
-
-// Cari dan Filter Produk
-function filterTable() {
-  var searchVal = $("#searchProduct").val().toLowerCase();
-  var unitVal = $("#filterUnit").val().toLowerCase();
-
-  $("#productTable tr").filter(function () {
-    var text = $(this).text().toLowerCase();
-    var unit = $(this).find("td:nth-child(5)").text().toLowerCase(); // kolom ke-5 unit
-
-    var matchSearch = text.indexOf(searchVal) > -1;
-    var matchUnit = !unitVal || unit === unitVal;
-
-    $(this).toggle(matchSearch && matchUnit);
-  });
-}
-$("#searchProduct").on("keyup", filterTable);
-$("#filterUnit").on("change", filterTable);

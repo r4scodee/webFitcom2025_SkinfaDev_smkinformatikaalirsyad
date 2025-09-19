@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?= $title ?? "Smart Farm" ?></title>
+    <title><?= $title ?? "Skinfa Bertani" ?></title>
     <link rel="stylesheet" href="<?= BASE_URL ?>asset/css/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -26,7 +26,7 @@
       <div class="sidebar-header">
         <a href="<?= BASE_URL ?>dashboard" class="sidebar-brand">
           <i class="fas fa-seedling"></i>
-          <span>Digital Farm</span>
+          <span>Skinfa Bertani</span>
         </a>
       </div>
       <ul class="sidebar-nav">

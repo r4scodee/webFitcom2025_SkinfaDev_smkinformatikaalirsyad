@@ -96,3 +96,10 @@
     </div>
   </div>
 </div>
+
+<!-- Footer -->
+<footer class="bg-light text-dark py-4 mt-5">
+  <div class="container ps-5">
+    <p class="mb-1">Copyrights &copy; <?= date('Y') ?> Skinfa Bertani. All rights reserved.</p>
+  </div>
+</footer>

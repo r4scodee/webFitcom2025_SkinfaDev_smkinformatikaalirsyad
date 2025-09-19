@@ -17,7 +17,7 @@ class ProductsController extends Controller
         $products = $this->model->all();
         // panggil view dengan data products
         $this->view('products/index', [
-        'title' => 'Table Produk - Smart Farm',
+        'title' => 'Table Produk - Skinfa Bertani',
         'active' => 'products',
         'products' => $products
         ]);

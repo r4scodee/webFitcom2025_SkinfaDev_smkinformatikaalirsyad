@@ -61,13 +61,13 @@
   </div>
 
   <!-- Products Table -->
-  <div class="card fade-in shadow-sm border-0">
-    <div class="card-body p-0">
+  <div class="card fade-in shadow-sm border-1">
+    <div class="card-body">
       <?php if (empty($products)): ?>
       <div class="alert alert-info">Belum ada produk.</div>
       <?php else: ?>
       <div class="table-responsive">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 rounded-3 overflow-hidden">
           <thead>
             <tr>
               <th class="px-4 py-3">No</th>
@@ -143,3 +143,31 @@
     </div>
   </div>
 </main>
+
+<!-- Footer -->
+<footer class="bg-light text-dark py-4 mt-5 fixed-bottom" style="margin-left: 260px">
+  <div class="container ps-5">
+    <p class="mb-1">Copyrights &copy; <?= date('Y') ?> Skinfa Bertani. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  function filterTable() {
+    var searchVal    = $("#searchProduct").val().toLowerCase(); 
+    var unitVal      = $("#filterUnit").val().toLowerCase();     
+
+    $("#productTable tr").filter(function () {
+      var text     = $(this).text().toLowerCase();
+      var unit     = $(this).find("td:nth-child(5)").text().toLowerCase(); 
+
+      var matchSearch   = text.indexOf(searchVal) > -1;
+      var matchUnit     = !unitVal || unit === unitVal;
+
+      $(this).toggle(matchSearch && matchUnit);
+    });
+  }
+
+  // Event listener
+  $("#searchProduct").on("keyup", filterTable);
+  $("#filterUnit").on("change", filterTable);
+</script>

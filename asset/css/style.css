@@ -340,7 +340,6 @@ body {
 }
 
 .footer-dashboard {
-  width: calc(100% - 260px);
   padding-left: 2.3rem;
 }
 

@@ -102,21 +102,35 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
     </div>
 </main>
 <script>
-    // Fungsi format angka ke ribuan
-    function formatRupiah(angka) {
-        return angka.replace(/\D/g, "")        // hapus semua non-digit
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    // Fungsi format ke Rupiah
+    function formatRupiah(angka, prefix = "Rp ") {
+        let number_string = angka.replace(/[^,\d]/g, ""), // hapus non-digit
+            split = number_string.split(","),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+        // tambahkan titik jika ribuan ada
+        if (ribuan) {
+            let separator = sisa ? "." : "";
+            rupiah += separator + ribuan.join(".");
+        }
+
+        // tambahkan koma jika ada pecahan
+        rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+        return prefix + rupiah;
     }
 
     $(document).ready(function () {
+        // Format input saat user ketik
         $("#price").on("input", function () {
             let nilai = $(this).val();
             $(this).val(formatRupiah(nilai));
         });
 
-        // Saat form disubmit, hapus titik biar ke DB nyimpen angka bersih
+        // Bersihkan "Rp" & titik sebelum ke DB
         $("form").on("submit", function () {
-            let harga = $("#price").val().replace(/\./g, "");
+            let harga = $("#price").val().replace(/[^0-9]/g, "");
             $("#price").val(harga);
         });
     });

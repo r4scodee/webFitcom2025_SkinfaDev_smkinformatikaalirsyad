@@ -21,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <!-- Sidebar -->
     <nav class="sidebar" id="sidebarbtn">
       <div class="sidebar-header">

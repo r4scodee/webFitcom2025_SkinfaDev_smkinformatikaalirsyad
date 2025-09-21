@@ -72,7 +72,7 @@
       <div class="alert alert-info">Belum ada produk.</div>
       <?php else: ?>
       <div class="table-responsive">
-        <table class="table table-hover mb-0 rounded-3 overflow-hidden">
+        <table class="table table-hover mb-0 rounded-3 overflow-hidden" id="productTable">
           <thead>
             <tr>
               <th class="px-4 py-3">No</th>
@@ -84,7 +84,7 @@
               <th class="px-4 py-3">Aksi</th>
             </tr>
           </thead>
-          <tbody id="producttable">
+          <tbody>
             <?php $no = 1;
               foreach ($products as $p): ?>
             <tr>
@@ -95,7 +95,7 @@
                 Rp
                 <?= number_format($p['price'], 0, ',', '.') ?>
               </td>
-              <td class="px-4 py-3 fw-medium"><?= $this->e($p['unit']) ?></td>
+              <td class="px-4 py-3 fw-medium unit-col"><?= $this->e($p['unit']) ?></td>
               <td class="px-4 py-3 fw-medium">
                 <?php if (!empty($p['image'])): ?>
                 <img
@@ -159,22 +159,27 @@
 </footer>
 
 <script>
-  function filterTable() {
-    var searchVal    = $("#searchProduct").val().toLowerCase(); 
-    var unitVal      = $("#filterUnit").val().toLowerCase();     
+function filterTable() {
+  var searchVal = $("#searchProduct").val().toLowerCase().trim();
+  var unitVal   = $("#filterUnit").val().toLowerCase().trim();
 
-    $("#productTable tr").filter(function () {
-      var text     = $(this).text().toLowerCase();
-      var unit     = $(this).find("td:nth-child(5)").text().toLowerCase(); 
+  $("#productTable tbody tr").each(function () {
+    var rowText = $(this).text().toLowerCase();
+    var unit    = $(this).find("td.unit-col").text().toLowerCase().trim(); 
 
-      var matchSearch   = text.indexOf(searchVal) > -1;
-      var matchUnit     = !unitVal || unit === unitVal;
+    var matchSearch = rowText.indexOf(searchVal) > -1;
+    var matchUnit   = !unitVal || unit === unitVal;
 
-      $(this).toggle(matchSearch && matchUnit);
-    });
-  }
+    if (matchSearch && matchUnit) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+}
 
-  // Event listener
+$(document).ready(function () {
   $("#searchProduct").on("keyup", filterTable);
   $("#filterUnit").on("change", filterTable);
+});
 </script>

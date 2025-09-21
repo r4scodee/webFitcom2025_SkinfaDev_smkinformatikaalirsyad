@@ -19,10 +19,11 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   </head>
   <body>
     <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar">
+    <nav class="sidebar" id="sidebarbtn">
       <div class="sidebar-header">
         <a href="<?= BASE_URL ?>dashboard" class="sidebar-brand">
           <i class="fas fa-seedling"></i>
@@ -80,7 +81,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="<?= BASE_URL ?>asset/js/script.js"></script>
   </body>
 </html>

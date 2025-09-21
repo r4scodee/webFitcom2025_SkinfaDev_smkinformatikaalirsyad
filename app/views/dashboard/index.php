@@ -1,17 +1,22 @@
 <?php ob_start(); ?>
 <!-- Header -->
-<header class="header">
-  <div class="header-content">
-    <div class="d-flex align-items-center">
-      <button class="btn btn-link d-md-none me-3" id="sidebarToggle">
-        <i class="fas fa-bars"></i>
+<header class="header bg-light py-3">
+  <div class="header-content d-flex align-items-center">
+    <div class="d-flex justify-content-start">
+
+      <button class="btn btn-farm d-md-none me-2 ms-2" id="sidebarToggle">
+        <i class="fas fa-bars fa-lg"></i>
       </button>
-      <h1 class="page-title" id="pageTitle">Dashboard Overview</h1>
+
+      <h1 class="page-title d-none d-md-block m-0" id="pageTitle">
+        Dashboard Overview
+      </h1>
     </div>
-    <div class="user-info">
+
+    <div class="user-info d-none d-md-flex align-items-center">
       <span class="text-muted me-2">Admin</span>
       <div class="user-avatar">
-        <i class="fas fa-user"></i>
+        <img src="<?= BASE_URL ?>asset/img/admin.jpeg" alt="Admin Photo">
       </div>
     </div>
   </div>
@@ -98,8 +103,8 @@
 </div>
 
 <!-- Footer -->
-<footer class="bg-light text-dark py-4 mt-5">
-  <div class="container ps-5">
+<footer class="bg-light text-dark py-4 mt-5 footer-dashboard">
+  <div class="container">
     <p class="mb-1">Copyrights &copy; <?= date('Y') ?> Skinfa Bertani. All rights reserved.</p>
   </div>
 </footer>

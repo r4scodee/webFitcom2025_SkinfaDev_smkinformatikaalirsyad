@@ -1,17 +1,11 @@
 <?php
-// Controller.php - base controller dengan helper render, redirect, escape, CSRF
 class Controller
 {
-    // Render view: otomatis include header & footer layout
     protected function view($viewPath, $data = [])
     {
-    // ekstrak data jadi variabel di view (misal $products, $title, $active)
     extract($data);
-
-    // Mulai buffer
     ob_start();
 
-    // file view utama
     $viewFile = __DIR__ . '/../views/' . $viewPath . '.php';
     if (is_file($viewFile)) {
         require $viewFile;
@@ -19,14 +13,11 @@ class Controller
         echo "<div class='alert alert-danger'>View $viewPath tidak ditemukan.</div>";
     }
 
-    // Ambil hasil render view dan simpan ke $content
     $content = ob_get_clean();
 
-    // Sekarang panggil layout utama
     require __DIR__ . '/../views/layouts/layout.php';
     }
 
-    // Redirect helper
     protected function redirect($path)
     {
         $url = BASE_URL . ltrim($path, '/');
@@ -34,7 +25,6 @@ class Controller
         exit;
     }
 
-    // Escape output untuk mencegah XSS
     public function e($string) {
         return htmlspecialchars($string ?? '', ENT_QUOTES, 'UTF-8');
     }

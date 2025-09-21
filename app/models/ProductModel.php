@@ -1,19 +1,13 @@
 <?php
-// ProductModel.php
-// Model untuk tabel products. Berisi method CRUD menggunakan PDO prepared statements.
-// Semua query menggunakan prepared statements untuk mencegah SQL injection.
-
 class ProductModel
 {
-    private $db; // instance PDO
+    private $db; 
 
     public function __construct()
     {
-        // Dapatkan koneksi PDO dari Database singleton
         $this->db = Database::getInstance()->getConnection();
     }
 
-    // Ambil semua produk (optionally paginated nanti)
     public function all()
     {
         $stmt = $this->db->prepare("SELECT * FROM products ORDER BY id ASC
@@ -22,7 +16,6 @@ class ProductModel
         return $stmt->fetchAll();
     }
 
-    // Ambil satu produk berdasarkan id
     public function find($id)
     {
         $stmt = $this->db->prepare("SELECT * FROM products WHERE id = :id LIMIT 1");

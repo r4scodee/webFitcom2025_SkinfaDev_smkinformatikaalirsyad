@@ -70,29 +70,24 @@ new Chart(weatherCtx, {
 });
 
 // Navigation
-$(".nav-link[data-page]").on("click", (e) => {
+$(".nav-link[data-page]").on("click", function (e) {
   e.preventDefault();
-  const page = $(e.currentTarget).data("page");
-  this.navigateToPage(page);
+  const page = $(this).data("page"); 
+  navigateToPage(page); 
 });
+
 
 // Sidebar toggle for mobile
 $("#sidebarToggle").on("click", () => {
-  $("#sidebar").toggleClass("show");
+  $("#sidebarbtn").toggleClass("show");
 });
 
 // Close sidebar on mobile when clicking outside
 $(document).on("click", (e) => {
   if (
     $(window).width() <= 768 &&
-    !$(e.target).closest(".sidebar, #sidebarToggle").length
+    !$(e.target).closest("#sidebarbtn, #sidebarToggle").length
   ) {
-    $("#sidebar").removeClass("show");
+    $("#sidebarbtn").removeClass("show");
   }
-});
-
-// Logout
-$("#logoutBtn").on("click", (e) => {
-  e.preventDefault();
-  this.logout();
 });

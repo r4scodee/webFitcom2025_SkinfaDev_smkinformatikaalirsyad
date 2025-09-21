@@ -1,26 +1,32 @@
 <?php ob_start(); ?>
 <!-- Header -->
-<header class="header">
-  <div class="header-content">
-    <div class="d-flex align-items-center">
-      <button class="btn btn-link d-md-none me-3" id="sidebarToggle">
-        <i class="fas fa-bars"></i>
+<header class="header bg-light py-3">
+  <div class="header-content d-flex align-items-center">
+    <div class="d-flex">
+      
+      <button class="btn btn-farm d-md-none me-2 ms-2" id="sidebarToggle">
+        <i class="fas fa-bars fa-lg"></i>
       </button>
-      <h1 class="page-title" id="pageTitle">Tabel Manajemen Produk</h1>
+
+      <h1 class="page-title d-none d-md-block m-0" id="pageTitle">
+        Products Overview
+      </h1>
     </div>
-    <div class="user-info">
+
+    <div class="user-info d-none d-md-flex align-items-center">
       <span class="text-muted me-2">Admin</span>
       <div class="user-avatar">
-        <i class="fas fa-user"></i>
+        <img src="<?= BASE_URL ?>asset/img/admin.jpeg" alt="Admin Photo">
       </div>
     </div>
   </div>
 </header>
 
+
 <!-- Content Area -->
 <main class="container-fluid px-4 py-4">
   <!-- Controls Section -->
-  <div class="card mb-4 fade-in">
+  <div class="card mb-4 fade-in border-0">
     <div class="card-body">
       <div class="row g-3 align-items-end">
         <div class="col-md-3">
@@ -31,10 +37,9 @@
               class="form-control ps-5 rounded-5"
               placeholder="Cari Produk..."
             />
-            <span
-              class="position-absolute top-50 start-0 translate-middle-y ms-3"
-              ><i class="fi fi-tr-search"></i></span
-            >
+            <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
+              <i class="fi fi-tr-search"></i>
+            </span>
           </div>
         </div>
 
@@ -61,8 +66,8 @@
   </div>
 
   <!-- Products Table -->
-  <div class="card fade-in shadow-sm border-1">
-    <div class="card-body">
+  <div class="card fade-in shadow-sm border-0">
+    <div class="card-body pt-0 pb-4">
       <?php if (empty($products)): ?>
       <div class="alert alert-info">Belum ada produk.</div>
       <?php else: ?>
@@ -145,9 +150,11 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-light text-dark py-4 mt-5 fixed-bottom" style="margin-left: 260px">
-  <div class="container ps-5">
-    <p class="mb-1">Copyrights &copy; <?= date('Y') ?> Skinfa Bertani. All rights reserved.</p>
+<footer class="bg-light text-dark py-4 mt-5 footer-products">
+  <div class="container">
+    <p class="mb-1">
+      Copyrights &copy; <?= date('Y') ?> Skinfa Bertani. All rights reserved.
+    </p>
   </div>
 </footer>
 

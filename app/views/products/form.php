@@ -1,12 +1,4 @@
 <?php
-// products/form.php
-// Variables available:
-// - action: 'store' or 'update'
-// - csrf: token
-// - errors: array errors (optional)
-// - old: old input (optional) when validation failed
-// - product: product data when edit
-
 // Safety defaults biar tidak muncul warning
 $product = $product ?? [];
 $old = $old ?? [];
@@ -40,98 +32,77 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
 };
 ?>
 <main class="container-fluid px-4 py-4">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title"><?= $isEdit ? 'Edit Produk' : 'Tambah Produk' ?></h5>
-    
-            <?php if (!empty($errors)): ?>
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        <?php foreach ($errors as $err): ?>
-                            <li><?= $this->e($err) ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
-    
-            <form action="<?= $formAction ?>" method="post" enctype="multipart/form-data" novalidate>
-                <input type="hidden" name="_csrf" value="<?= $this->e($csrf) ?>">
-                <div class="mb-3">
-                    <label class="form-label">Kode Produk <span class="text-danger">*</span></label>
-                    <input type="text" name="code" class="form-control" required value="<?= $this->e($val('code')) ?>">
-                    <div class="form-text">Gunakan kode unik, misal PRD-001</div>
-                </div>
-    
-                <div class="mb-3">
-                    <label class="form-label">Nama Produk <span class="text-danger">*</span></label>
-                    <input type="text" name="name" class="form-control" required value="<?= $this->e($val('name')) ?>">
-                </div>
-    
-                <div class="mb-3">
-                    <label class="form-label">Harga (angka)</label>
-                    <input type="text" name="price" id="price" class="form-control" placeholder="0">
-                </div>
-    
-                <div class="mb-3">
-                    <label class="form-label">Satuan</label>
-                    <select name="unit" class="form-control">
-                        <option value="pcs" <?= $val('unit') == 'pcs' ? 'selected' : '' ?>>pcs</option>
-                        <option value="g" <?= $val('unit') == 'g' ? 'selected' : '' ?>>g</option>
-                        <option value="kg" <?= $val('unit') == 'kg' ? 'selected' : '' ?>>kg</option>
-                        <option value="ton" <?= $val('unit') == 'ton' ? 'selected' : '' ?>>ton</option>
-                    </select>
-                </div>
-    
-                <div class="mb-3">
-                    <label class="form-label">Gambar (jpg/png/webp, max 2MB)</label>
-                    <input type="file" name="image" id="image" accept="image/*" class="form-control">
-                    <div class="mt-2">
-                        <?php $img = $val('image'); ?>
-                        <img id="preview" src="<?= $img ? UPLOAD_URL . $this->e($img) : '#' ?>" alt="preview"
-                            class="img-thumbnail"
-                            style="<?= $img ? 'max-width:220px;' : 'display:none; max-width:220px;' ?>">
-                    </div>
-                </div>
-    
-                <div>
-                    <button class="btn btn-farm"><?= $isEdit ? 'Update' : 'Simpan' ?></button>
-                    <a href="<?= BASE_URL ?>products" class="btn btn-secondary">Batal</a>
-                </div>
-            </form>
-        </div>
+    <div class="card-header bg-white border-0 pb-3">
+        <h4 class="fw-bold text-success d-flex align-items-center mb-0">
+            <i class="fas <?= $isEdit ? 'fa-edit' : 'fa-plus-circle' ?> me-2"></i>
+            <?= $isEdit ? 'Edit Produk' : 'Tambah Produk' ?>
+        </h4>
+        <div class="border-bottom mt-4"></div>
     </div>
+
+    <div class="card-body">
+      <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger rounded-3">
+          <ul class="mb-0">
+            <?php foreach ($errors as $err): ?>
+              <li><?= $this->e($err) ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
+
+      <form action="<?= $formAction ?>" method="post" enctype="multipart/form-data" novalidate class="row g-3">
+        <input type="hidden" name="_csrf" value="<?= $this->e($csrf) ?>">
+
+        <!-- Kode Produk -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Kode Produk <span class="text-danger">*</span></label>
+          <input type="text" name="code" class="form-control" required value="<?= $this->e($val('code')) ?>">
+          <div class="form-text">Gunakan kode unik, misal <b>PRD-001</b></div>
+        </div>
+
+        <!-- Nama Produk -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Nama Produk <span class="text-danger">*</span></label>
+          <input type="text" name="name" class="form-control" required value="<?= $this->e($val('name')) ?>">
+        </div>
+
+        <!-- Harga -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Harga (angka)</label>
+          <input type="text" name="price" id="price" class="form-control" placeholder="0" value="<?= $this->e($val('price')) ?>">
+        </div>
+
+        <!-- Satuan -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Satuan</label>
+          <select name="unit" class="form-select">
+            <option value="pcs" <?= $val('unit') == 'pcs' ? 'selected' : '' ?>>pcs</option>
+            <option value="g" <?= $val('unit') == 'g' ? 'selected' : '' ?>>g</option>
+            <option value="kg" <?= $val('unit') == 'kg' ? 'selected' : '' ?>>kg</option>
+            <option value="ton" <?= $val('unit') == 'ton' ? 'selected' : '' ?>>ton</option>
+          </select>
+        </div>
+
+        <!-- Upload Gambar -->
+        <div class="col-12">
+          <label class="form-label fw-semibold">Gambar Produk (jpg/png/webp, max 2MB)</label>
+          <input type="file" name="image" id="image" accept="image/*" class="form-control">
+          <div class="mt-3">
+            <?php $img = $val('image'); ?>
+            <img id="preview" src="<?= $img ? UPLOAD_URL . $this->e($img) : '#' ?>"
+                 alt="preview"
+                 class="img-thumbnail shadow-sm"
+                 style="<?= $img ? 'max-width:220px;' : 'display:none; max-width:220px;' ?>">
+          </div>
+        </div>
+
+        <!-- Tombol -->
+        <div class="col-12 d-flex gap-2 justify-content-end mt-4">
+          <a href="<?= BASE_URL ?>products" class="btn btn-secondary px-4 rounded-5">Batal</a>
+          <button class="btn btn-farm px-4 rounded-5"><?= $isEdit ? 'Update' : 'Simpan' ?></button>
+        </div>
+      </form>
+    </div>
+  </div>
 </main>
-<script>
-    // Fungsi format ke Rupiah
-    function formatRupiah(angka, prefix = "Rp ") {
-        let number_string = angka.replace(/[^,\d]/g, ""), // hapus non-digit
-            split = number_string.split(","),
-            sisa = split[0].length % 3,
-            rupiah = split[0].substr(0, sisa),
-            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-        // tambahkan titik jika ribuan ada
-        if (ribuan) {
-            let separator = sisa ? "." : "";
-            rupiah += separator + ribuan.join(".");
-        }
-
-        // tambahkan koma jika ada pecahan
-        rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
-        return prefix + rupiah;
-    }
-
-    $(document).ready(function () {
-        // Format input saat user ketik
-        $("#price").on("input", function () {
-            let nilai = $(this).val();
-            $(this).val(formatRupiah(nilai));
-        });
-
-        // Bersihkan "Rp" & titik sebelum ke DB
-        $("form").on("submit", function () {
-            let harga = $("#price").val().replace(/[^0-9]/g, "");
-            $("#price").val(harga);
-        });
-    });
-</script>

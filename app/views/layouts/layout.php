@@ -21,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   </head>
-  <body class="d-flex flex-column min-vh-100">
+  <body class="d-flex flex-column">
     <!-- Sidebar -->
     <nav class="sidebar" id="sidebarbtn">
       <div class="sidebar-header">
@@ -50,7 +50,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#sensors" class="nav-link">
+          <a href="<?= BASE_URL ?>sensors"
+            class="nav-link sidebar-link <?= ($active ?? '') === 'sensors' ? 'active' : '' ?>">
             <i class="fas fa-thermometer-half"></i>
             <span>Sensors</span>
           </a>
@@ -67,20 +68,14 @@
             <span>Settings</span>
           </a>
         </li>
-        <li class="nav-item mt-4">
-          <a href="#" class="nav-link" id="logoutBtn">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
-          </a>
-        </li>
       </ul>
     </nav>
 
-    <div class="main-content">
+    <div class="main-content min-vh-100">
       <?= $content ?>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= BASE_URL ?>asset/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

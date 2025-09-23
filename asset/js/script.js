@@ -174,6 +174,20 @@ document.getElementById("image").addEventListener("change", function () {
   }
 });
 
+// Icon Siang dan Malam Otomatis
+document.addEventListener("DOMContentLoaded", () => {
+  const icon = document.getElementById("weather-icon");
+  const hour = new Date().getHours(); 
+  if (hour >= 6 && hour < 18) {
+    icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+  } else {
+    icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+  }
+});
+
+updateWeatherIcon();
+setInterval(updateWeatherIcon, 60 * 60 * 1000);
+
 // Sensors Cuaca
 document.addEventListener("DOMContentLoaded", () => {
   const API_KEY = "209fb00e78eb360bfc293ef18b2596a5"; // API Key valid

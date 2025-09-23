@@ -24,7 +24,10 @@
         <!-- Weather Widget (desktop only) -->
         <div class="weather-widget d-none d-lg-flex align-items-center me-2">
           <i class="fas fa-sun text-warning me-1"></i>
-          <span class="fw-semibold">24°C</span>
+          <div class="weather">
+            <span id="weather-icon" class="me-2"></span>
+            <span class="fw-semibold">24°C</span>
+          </div>
         </div>
 
         <!-- Notifications -->

@@ -1,27 +1,22 @@
 <?php ob_start(); ?>
-<!-- Header -->
 <div class="top-header border-bottom bg-white shadow-sm">
   <div class="container-fluid">
     <div class="d-flex align-items-center justify-content-between py-2 flex-wrap gap-2">
 
-      <!-- Sidebar Toggle (mobile only) -->
       <div class="d-md-none">
         <button class="btn btn-toggle" id="sidebarToggle" aria-label="Toggle sidebar" aria-expanded="false">
           <i class="fas fa-bars fa-lg" aria-hidden="true"></i>
         </button>
       </div>
 
-      <!-- Page Title -->
       <div class="ms-2 order-3 order-md-1 page-title">
         <h3 class="fw-bold text-success d-flex align-items-center">
           <i class="fas fa-tags me-2"></i> Products Management
         </h3>
       </div>
 
-      <!-- Actions (right side) -->
       <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0 order-1 order-md-2">
 
-        <!-- Weather Widget (desktop only) -->
         <div class="weather-widget d-none d-lg-flex align-items-center me-2">
           <i class="fas fa-sun text-warning me-1"></i>
           <div class="weather">
@@ -30,23 +25,14 @@
           </div>
         </div>
 
-        <!-- Notifications -->
         <div class="dropdown me-2">
-          <button
-            class="btn btn-light position-relative"
-            type="button"
-          >
+          <button class="btn btn-light position-relative" type="button">
             <i class="fas fa-bell"></i>
           </button>
         </div>
 
-        <!-- Profile -->
         <div class="dropdown">
-          <button
-            class="btn btn-light d-flex align-items-center"
-            type="button"
-            data-bs-toggle="dropdown"
-          >
+          <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
             <img src="<?= BASE_URL ?>asset/img/admin.jpeg" alt="admin" class="profile-avatar">
             <div class="text-start d-none d-md-block me-2">
               <div class="fw-medium" style="font-size: 14px">Super Admin</div>
@@ -70,12 +56,15 @@
                 <i class="fas fa-chart-bar me-2 text-muted"></i>Analytics
               </a>
             </li>
-            <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item text-danger" href="#">
-                <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item text-danger" href="/webFitcom2025_SkinfaDev_smkinformatikaalirsyad/logout.php">
+                <i class="fas fa-sign-out-alt me-2"></i>Log Out
               </a>
             </li>
+
           </ul>
         </div>
 
@@ -84,43 +73,33 @@
   </div>
 </div>
 
-<!-- Content Area -->
 <main class="container-fluid px-4 py-4">
-  <!-- Controls Section -->
   <div class="dashboard-header p-4 mb-4 position-relative fade-in">
     <div class="row align-items-center position-relative g-3" style="z-index: 1;">
       <div class="row g-3 align-items-end">
         <div class="col-md-3">
           <div class="position-relative">
-            <input
-              type="text"
-              id="searchProduct"
-              class="form-control ps-5 rounded-5"
-              placeholder="Cari Produk..."
-            />
-            <span
-              class="position-absolute top-50 start-0 translate-middle-y ms-3"
-            >
+            <input type="text" id="searchProduct" class="form-control ps-5 rounded-5" placeholder="Cari Produk..." />
+            <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
               <i class="fas fa-search text-muted"></i>
             </span>
           </div>
         </div>
-        
+
         <div class="col-md-2">
           <select id="filterUnit" class="form-select rounded-5">
             <option value="" class="">Semua Satuan</option>
             <?php
-                  $unit = array_unique(array_column($products, 'unit'));
-                  foreach ($unit as $s): ?>
-            <option value="<?= strtolower($s) ?>" class="r">
-              <?= htmlspecialchars($s) ?>
-            </option>
+            $unit = array_unique(array_column($products, 'unit'));
+            foreach ($unit as $s): ?>
+              <option value="<?= strtolower($s) ?>" class="r">
+                <?= htmlspecialchars($s) ?>
+              </option>
             <?php endforeach; ?>
           </select>
         </div>
-        
+
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
-          <!-- Info Stats -->
           <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
             <div class="d-flex align-items-center">
               <i class="fas fa-box text-info me-2"></i>
@@ -131,10 +110,8 @@
               <span>Last Updated: Today</span>
             </div>
           </div>
-          <!-- Add Product Button -->
           <div class="text-center text-md-end">
-            <a href="<?= BASE_URL ?>products/create"
-              class="btn rounded-5 w-100 w-md-auto btn-add-product">
+            <a href="<?= BASE_URL ?>products/create" class="btn rounded-5 w-100 w-md-auto btn-add-product">
               <i class="fas fa-plus me-2 text-light"></i>
               <span class="fs-sm text-light">Tambah Produk</span>
             </a>
@@ -144,88 +121,70 @@
     </div>
   </div>
 
-  <!-- Products Table -->
   <div class="card fade-in shadow-sm border-0">
     <div class="card-body pt-0 pb-4">
       <?php if (empty($products)): ?>
-      <div class="alert alert-info">Belum ada produk.</div>
+        <div class="alert alert-info">Belum ada produk.</div>
       <?php else: ?>
-      <div class="table-responsive">
-        <table
-          class="table table-hover mb-0 rounded-3 overflow-hidden"
-          id="productTable"
-        >
-          <thead>
-            <tr>
-              <th class="px-4 py-3">ID</th>
-              <th class="px-4 py-3">Kode</th>
-              <th class="px-4 py-3">Nama</th>
-              <th class="px-4 py-3">Harga</th>
-              <th class="px-4 py-3">Satuan</th>
-              <th class="px-4 py-3">Gambar</th>
-              <th class="px-4 py-3">Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php $no = 1;
+        <div class="table-responsive">
+          <table class="table table-hover mb-0 rounded-3 overflow-hidden" id="productTable">
+            <thead>
+              <tr>
+                <th class="px-4 py-3">ID</th>
+                <th class="px-4 py-3">Kode</th>
+                <th class="px-4 py-3">Nama</th>
+                <th class="px-4 py-3">Harga</th>
+                <th class="px-4 py-3">Satuan</th>
+                <th class="px-4 py-3">Gambar</th>
+                <th class="px-4 py-3">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $no = 1;
               foreach ($products as $p): ?>
-            <tr>
-              <td class="px-4 py-3 fw-medium"><?= $no++ ?></td>
-              <td class="px-4 py-3 fw-medium">
-                <span class="badge bg-primary badge-custom">
-                  <?= $this->e($p['code']) ?>
-                </span>
-              </td>
-              <td class="px-4 py-3 fw-medium"><?= $this->e($p['name']) ?></td>
-              <td class="px-4 py-3 fw-medium">
-                Rp
-                <?= number_format($p['price'], 0, ',', '.') ?>
-              </td>
-              <td class="px-4 py-3 fw-medium unit-col">
-                <span class="badge bg-success badge-custom">
-                  <?= $this->e($p['unit']) ?>
-                </span>
-              </td>
-              <td class="px-4 py-3 fw-medium">
-                <?php if (!empty($p['image'])): ?>
-                <img
-                  src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>"
-                  alt="img"
-                  class="thumb img-thumbnail"
-                  width="60"
-                />
-                <?php else: ?>
-                <span class="text-muted">-</span>
-                <?php endif; ?>
-              </td>
-              <td class="px-4 py-4">
-                <a
-                  href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>"
-                  class="btn btn-sm btn-outline-success"
-                >
-                  <i class="fi fi-tr-pen-field"></i>
-                </a>
-                <form
-                  method="post"
-                  action="<?= BASE_URL ?>products/delete/<?= htmlspecialchars($p['id']) ?>"
-                  style="display: inline"
-                  onsubmit="return confirm('Yakin hapus produk ini?')"
-                >
-                  <input
-                    type="hidden"
-                    name="_csrf"
-                    value="<?= $this->generateCSRFToken() ?>"
-                  />
-                  <button class="btn btn-sm btn-outline-danger">
-                    <i class="fi fi-tr-trash-xmark"></i>
-                  </button>
-                </form>
-              </td>
-            </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-      </div>
+                <tr>
+                  <td class="px-4 py-3 fw-medium"><?= $no++ ?></td>
+                  <td class="px-4 py-3 fw-medium">
+                    <span class="badge bg-primary badge-custom">
+                      <?= $this->e($p['code']) ?>
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['name']) ?></td>
+                  <td class="px-4 py-3 fw-medium">
+                    Rp
+                    <?= number_format($p['price'], 0, ',', '.') ?>
+                  </td>
+                  <td class="px-4 py-3 fw-medium unit-col">
+                    <span class="badge bg-success badge-custom">
+                      <?= $this->e($p['unit']) ?>
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 fw-medium">
+                    <?php if (!empty($p['image'])): ?>
+                      <img src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>" alt="img" class="thumb img-thumbnail"
+                        width="60" />
+                    <?php else: ?>
+                      <span class="text-muted">-</span>
+                    <?php endif; ?>
+                  </td>
+                  <td class="px-4 py-4">
+                    <a href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>"
+                      class="btn btn-sm btn-outline-success">
+                      <i class="fi fi-tr-pen-field"></i>
+                    </a>
+                    <form method="post" action="<?= BASE_URL ?>products/delete/<?= htmlspecialchars($p['id']) ?>"
+                      style="display: inline" onsubmit="return confirm('Yakin hapus produk ini?')">
+                      <input type="hidden" name="_csrf" value="<?= $this->generateCSRFToken() ?>" />
+                      <button class="btn btn-sm btn-outline-danger">
+                        <i class="fi fi-tr-trash-xmark"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>
       <?php endif; ?>
 
       <div id="noResults" class="text-center py-5 d-none">
@@ -237,13 +196,12 @@
   </div>
 </main>
 
-<!-- Footer -->
 <footer class="bg-light text-dark py-4 mt-5 footer-products">
   <div class="container">
     <p class="mb-1">
       Copyrights &copy;
       <?= date('Y') ?>
-      Skinfa Bertani. All rights reserved.
+      Tani Digital. All rights reserved.
     </p>
   </div>
 </footer>

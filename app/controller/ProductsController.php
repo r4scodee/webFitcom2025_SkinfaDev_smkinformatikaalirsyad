@@ -7,17 +7,26 @@ class ProductsController extends Controller
 
     public function __construct()
     {
+        // Proteksi login
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /webFitcom2025_SkinfaDev_smkinformatikaalirsyad/login");
+            exit;
+        }
+
         $this->model = new ProductModel();
     }
-
     // GET /products (list semua produk)
     public function index()
     {
         $products = $this->model->all();
         $this->view('products/index', [
-        'title' => 'Table Produk - Skinfa Bertani',
-        'active' => 'products',
-        'products' => $products
+            'title' => 'Table Produk - Skinfa Bertani',
+            'active' => 'products',
+            'products' => $products
         ]);
     }
 
@@ -42,11 +51,15 @@ class ProductsController extends Controller
 
         $errors = [];
 
-        if ($code === '') $errors[] = "Kode produk wajib diisi.";
-        if ($name === '') $errors[] = "Nama produk wajib diisi.";
-        if (!is_numeric($price) || $price < 0) $errors[] = "Harga harus angka >= 0.";
+        if ($code === '')
+            $errors[] = "Kode produk wajib diisi.";
+        if ($name === '')
+            $errors[] = "Nama produk wajib diisi.";
+        if (!is_numeric($price) || $price < 0)
+            $errors[] = "Harga harus angka >= 0.";
 
-        if ($this->model->existsByCode($code)) $errors[] = "Kode produk sudah digunakan.";
+        if ($this->model->existsByCode($code))
+            $errors[] = "Kode produk sudah digunakan.";
 
         $uploadedFilename = null;
         if (!empty($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
@@ -63,18 +76,18 @@ class ProductsController extends Controller
             $this->view('products/form', [
                 'action' => 'store',
                 'errors' => $errors,
-                'old'    => ['code'=>$code,'name'=>$name,'price'=>$price,'unit'=>$unit],
-                'csrf'   => $csrf
+                'old' => ['code' => $code, 'name' => $name, 'price' => $price, 'unit' => $unit],
+                'csrf' => $csrf
             ]);
             return;
         }
 
         $data = [
-            'code'     => $code,
-            'name'     => $name,
-            'price'    => $price,
-            'image'    => $uploadedFilename,
-            'unit'     => $unit,
+            'code' => $code,
+            'name' => $name,
+            'price' => $price,
+            'image' => $uploadedFilename,
+            'unit' => $unit,
         ];
 
         $id = $this->model->create($data);
@@ -113,13 +126,17 @@ class ProductsController extends Controller
         $unit = trim($_POST['unit'] ?? '');
 
         $errors = [];
-        if ($code === '') $errors[] = "Kode produk wajib diisi.";
-        if ($name === '') $errors[] = "Nama produk wajib diisi.";
-        if (!is_numeric($price) || $price < 0) $errors[] = "Harga harus angka >= 0.";
+        if ($code === '')
+            $errors[] = "Kode produk wajib diisi.";
+        if ($name === '')
+            $errors[] = "Nama produk wajib diisi.";
+        if (!is_numeric($price) || $price < 0)
+            $errors[] = "Harga harus angka >= 0.";
 
-        if ($this->model->existsByCode($code, $id)) $errors[] = "Kode produk sudah digunakan oleh produk lain.";
+        if ($this->model->existsByCode($code, $id))
+            $errors[] = "Kode produk sudah digunakan oleh produk lain.";
 
-        $uploadedFilename = $product['image']; 
+        $uploadedFilename = $product['image'];
         if (!empty($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
             $uploadResult = $this->handleUpload($_FILES['image']);
             if ($uploadResult['success']) {
@@ -137,17 +154,17 @@ class ProductsController extends Controller
             $this->view('products/form', [
                 'action' => 'update',
                 'errors' => $errors,
-                'product'=> ['id'=>$id,'code'=>$code,'name'=>$name,'price'=>$price,'unit'=>$unit,'image'=>$uploadedFilename],
-                'csrf'   => $csrf
+                'product' => ['id' => $id, 'code' => $code, 'name' => $name, 'price' => $price, 'unit' => $unit, 'image' => $uploadedFilename],
+                'csrf' => $csrf
             ]);
             return;
         }
 
         $data = [
-            'code'     => $code,
-            'name'     => $name,
-            'price'    => $price,
-            'image'    => $uploadedFilename,
+            'code' => $code,
+            'name' => $name,
+            'price' => $price,
+            'image' => $uploadedFilename,
             'unit' => $unit
         ];
 
@@ -189,19 +206,19 @@ class ProductsController extends Controller
         $allowedExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            return ['success'=>false, 'error'=>'Upload error kode: ' . $file['error']];
+            return ['success' => false, 'error' => 'Upload error kode: ' . $file['error']];
         }
 
         if ($file['size'] > $maxSize) {
-            return ['success'=>false, 'error'=>'Ukuran file terlalu besar (max 2MB).'];
+            return ['success' => false, 'error' => 'Ukuran file terlalu besar (max 2MB).'];
         }
 
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $mime = $finfo->file($file['tmp_name']);
-        $validMimes = ['image/jpeg'=>'jpg','image/png'=>'png','image/gif'=>'gif','image/webp'=>'webp'];
+        $validMimes = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/gif' => 'gif', 'image/webp' => 'webp'];
 
         if (!isset($validMimes[$mime])) {
-            return ['success'=>false, 'error'=>'Tipe file tidak diizinkan.'];
+            return ['success' => false, 'error' => 'Tipe file tidak diizinkan.'];
         }
 
         $ext = $validMimes[$mime];
@@ -210,18 +227,18 @@ class ProductsController extends Controller
 
         if (!is_dir(UPLOAD_DIR)) {
             if (!mkdir(UPLOAD_DIR, 0755, true)) {
-                return ['success'=>false, 'error'=>'Gagal membuat folder upload.'];
+                return ['success' => false, 'error' => 'Gagal membuat folder upload.'];
             }
         }
 
         $target = UPLOAD_DIR . $newName;
         if (!move_uploaded_file($file['tmp_name'], $target)) {
-            return ['success'=>false, 'error'=>'Gagal menyimpan file.'];
+            return ['success' => false, 'error' => 'Gagal menyimpan file.'];
         }
 
         @chmod($target, 0644);
 
-        return ['success'=>true, 'filename'=>$newName];
+        return ['success' => true, 'filename' => $newName];
     }
 }
 

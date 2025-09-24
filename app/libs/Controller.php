@@ -1,21 +1,26 @@
 <?php
 class Controller
 {
-    protected function view($viewPath, $data = [])
+    protected function view($viewPath, $data = [], $useLayout = true)
     {
-    extract($data);
-    ob_start();
+        extract($data);
 
-    $viewFile = __DIR__ . '/../views/' . $viewPath . '.php';
-    if (is_file($viewFile)) {
-        require $viewFile;
-    } else {
-        echo "<div class='alert alert-danger'>View $viewPath tidak ditemukan.</div>";
-    }
+        ob_start();
+        $viewFile = __DIR__ . '/../views/' . $viewPath . '.php';
+        if (is_file($viewFile)) {
+            require $viewFile;
+        } else {
+            echo "<div class='alert alert-danger'>View $viewPath tidak ditemukan.</div>";
+        }
+        $content = ob_get_clean();
 
-    $content = ob_get_clean();
-
-    require __DIR__ . '/../views/layouts/layout.php';
+        if ($useLayout) {
+            // render dengan layout
+            require __DIR__ . '/../views/layouts/layout.php';
+        } else {
+            // render langsung tanpa layout
+            echo $content;
+        }
     }
 
     protected function redirect($path)
@@ -25,7 +30,8 @@ class Controller
         exit;
     }
 
-    public function e($string) {
+    public function e($string)
+    {
         return htmlspecialchars($string ?? '', ENT_QUOTES, 'UTF-8');
     }
 
@@ -40,7 +46,8 @@ class Controller
 
     protected function verifyCSRFToken($token)
     {
-        if (empty($token) || empty($_SESSION['_csrf_token'])) return false;
+        if (empty($token) || empty($_SESSION['_csrf_token']))
+            return false;
         return hash_equals($_SESSION['_csrf_token'], $token);
     }
 }

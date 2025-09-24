@@ -1,17 +1,14 @@
 <?php ob_start(); ?>
-<!-- Header -->
 <div class="top-header border-bottom bg-white shadow-sm">
   <div class="container-fluid">
     <div class="d-flex align-items-center justify-content-between py-2 flex-wrap gap-2">
 
-      <!-- Sidebar Toggle (mobile only) -->
       <div class="d-md-none">
         <button class="btn btn-toggle" id="sidebarToggle" aria-label="Toggle sidebar" aria-expanded="false">
           <i class="fas fa-bars fa-lg" aria-hidden="true"></i>
         </button>
       </div>
 
-      <!-- Page Title -->
       <div class="ms-2 order-3 order-md-1 page-title">
         <h3 class="fw-bold text-success d-flex align-items-center">
           <i class="fas fa-tachometer-alt me-2"></i> Dashboard Overview
@@ -19,10 +16,8 @@
       </div>
 
 
-      <!-- Actions (right side) -->
       <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0 order-1 order-md-2">
 
-        <!-- Weather Widget (desktop only) -->
         <div class="weather-widget d-none d-lg-flex align-items-center me-2">
           <i class="fas fa-sun text-warning me-1"></i>
           <div class="weather">
@@ -31,23 +26,14 @@
           </div>
         </div>
 
-        <!-- Notifications -->
         <div class="dropdown me-2">
-          <button
-            class="btn btn-light position-relative"
-            type="button"
-          >
+          <button class="btn btn-light position-relative" type="button">
             <i class="fas fa-bell"></i>
           </button>
         </div>
 
-        <!-- Profile -->
         <div class="dropdown">
-          <button
-            class="btn btn-light d-flex align-items-center"
-            type="button"
-            data-bs-toggle="dropdown"
-          >
+          <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
             <img src="<?= BASE_URL ?>asset/img/admin.jpeg" alt="admin" class="profile-avatar">
             <div class="text-start d-none d-md-block me-2">
               <div class="fw-medium" style="font-size: 14px">Super Admin</div>
@@ -71,12 +57,15 @@
                 <i class="fas fa-chart-bar me-2 text-muted"></i>Analytics
               </a>
             </li>
-            <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item text-danger" href="#">
-                <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item text-danger" href="/webFitcom2025_SkinfaDev_smkinformatikaalirsyad/logout.php">
+                <i class="fas fa-sign-out-alt me-2"></i>Log Out
               </a>
             </li>
+
           </ul>
         </div>
 
@@ -85,11 +74,8 @@
   </div>
 </div>
 
-<!-- Dashboard Content -->
 <main class="container-fluid px-4 py-4">
-  <!-- Dashboard Page -->
   <div id="dashboardPage" class="page-content">
-    <!-- Welcome Card -->
     <div class="welcome-card fade-in">
       <div class="welcome-section">
         <h1 class="welcome-title">🌱 Halo, Admin!</h1>
@@ -101,7 +87,6 @@
       </div>
     </div>
 
-    <!-- Stats Cards -->
     <div class="row mb-4">
       <div class="col-lg-3 col-md-6 mb-3">
         <div class="stats-card fade-in">
@@ -141,7 +126,6 @@
       </div>
     </div>
 
-    <!-- Charts Row -->
     <div class="row">
       <div class="col-lg-8 mb-4">
         <div class="chart-card fade-in">
@@ -165,9 +149,8 @@
   </div>
 </main>
 
-<!-- Footer -->
 <footer class="bg-light text-dark py-4 mt-5 footer-dashboard">
   <div class="container">
-    <p class="mb-1">Copyrights &copy; <?= date('Y') ?> Skinfa Bertani. All rights reserved.</p>
+    <p class="mb-1">Copyrights &copy; <?= date('Y') ?> Tani Digital. All rights reserved.</p>
   </div>
 </footer>

@@ -24,19 +24,41 @@ require_once __DIR__ . '/app/config/config.php';
 $url = $_GET['url'] ?? '';
 $segments = explode('/', trim($url, '/'));
 
-// default controller = dashboard
-$controllerName = ucfirst($segments[0] ?: 'dashboard') . 'Controller';
+// default controller & method
+$controllerName = ucfirst($segments[0] ?: 'home') . 'Controller';
 $method = $segments[1] ?? 'index';
 $params = array_slice($segments, 2);
+
+// fungsi helper untuk 404
+function show404()
+{
+    http_response_code(404);
+    require_once __DIR__ . '/app/controller/ErrorController.php';
+    $controller = new ErrorController();
+    $controller->index();
+    exit;
+}
+
+// --- Routing khusus untuk dashboard child pages ---
+if (!empty($segments[0]) && $segments[0] === 'dashboard') {
+    $controllerName = 'DashboardController';
+    // kalau cuma /dashboard -> index
+    if (empty($segments[1])) {
+        $method = 'index';
+        $params = [];
+    } else {
+        // /dashboard/products -> products(), dll.
+        $method = $segments[1];
+        $params = array_slice($segments, 2);
+    }
+}
 
 // cek file controller
 $controllerFile = __DIR__ . '/app/controller/' . $controllerName . '.php';
 if (file_exists($controllerFile)) {
     require $controllerFile;
     if (!class_exists($controllerName)) {
-        http_response_code(500);
-        echo "Controller class $controllerName not found.";
-        exit;
+        show404();
     }
 
     $controller = new $controllerName();
@@ -44,10 +66,8 @@ if (file_exists($controllerFile)) {
     if (method_exists($controller, $method)) {
         call_user_func_array([$controller, $method], $params);
     } else {
-        http_response_code(404);
-        echo "Method not found: $method";
+        show404();
     }
 } else {
-    http_response_code(404);
-    echo "Controller not found: $controllerName";
+    show404();
 }

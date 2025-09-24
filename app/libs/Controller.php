@@ -30,7 +30,6 @@ class Controller
     }
 
     // ===== CSRF helpers =====
-    // Buat token CSRF dan simpan di session
     protected function generateCSRFToken()
     {
         if (empty($_SESSION['_csrf_token'])) {
@@ -39,7 +38,6 @@ class Controller
         return $_SESSION['_csrf_token'];
     }
 
-    // Validasi token CSRF dari form (kembalikan bool)
     protected function verifyCSRFToken($token)
     {
         if (empty($token) || empty($_SESSION['_csrf_token'])) return false;

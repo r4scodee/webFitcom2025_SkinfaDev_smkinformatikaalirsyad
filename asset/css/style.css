@@ -374,7 +374,6 @@ body {
 }
 
 .table th {
-  background-color: var(--farm-cream);
   border-bottom: 1px solid #dee2e6;
   font-weight: 600;
   color: #495057;

@@ -58,6 +58,11 @@
               </a>
             </li>
             <li>
+              <a class="dropdown-item" href="<?= BASE_URL?>products/exportPdf">
+                <i class="fas fa-download me-2 text-muted"></i>Download Reports
+              </a>
+            </li>
+            <li>
               <hr class="dropdown-divider" />
             </li>
             <li>
@@ -131,7 +136,7 @@
         <div class="chart-card fade-in">
           <h3 class="chart-title">
             <i class="fas fa-chart-line me-2"></i>
-            Weekly Growth Progress
+            Weekly Progress
           </h3>
           <canvas id="growthChart" height="100"></canvas>
         </div>

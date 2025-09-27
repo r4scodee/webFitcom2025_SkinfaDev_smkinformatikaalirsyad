@@ -1,41 +1,44 @@
-// Growth Chart
-const growthEl = document.getElementById("growthChart");
-if (growthEl) {
-  const growthCtx = growthEl.getContext("2d");
-  new Chart(growthCtx, {
-    type: "line",
-    data: {
-      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      datasets: [
-        {
-          label: "Plant Growth (cm)",
-          data: [12, 15, 18, 22, 25, 28, 32],
-          borderColor: "#4a7c59",
-          backgroundColor: "rgba(74, 124, 89, 0.1)",
-          borderWidth: 3,
-          fill: true,
-          tension: 0.4,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
+// Chart Daftar Produk Mingguan
+document.addEventListener("DOMContentLoaded", function () {
+  const growthEl = document.getElementById("growthChart");
+  if (growthEl) {
+    const growthCtx = growthEl.getContext("2d");
+    new Chart(growthCtx, {
+      type: "line",
+      data: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        datasets: [
+          {
+            label: "Products Sold",
+            data: [1, 4, 0, 3, 0, 2, 0], 
+            borderColor: "#4a7c59",
+            backgroundColor: "rgba(74, 124, 89, 0.1)",
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+          },
+        ],
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: { color: "rgba(0,0,0,0.05)" },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true },
         },
-        x: {
-          grid: { display: false },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: "rgba(0,0,0,0.05)" },
+          },
+          x: {
+            grid: { display: false },
+          },
         },
       },
-    },
-  });
-}
+    });
+  }
+});
+
 
 // Weather Chart
 const weatherEl = document.getElementById("weatherChart");
@@ -177,7 +180,7 @@ document.getElementById("image").addEventListener("change", function () {
 // Icon Siang dan Malam Otomatis
 document.addEventListener("DOMContentLoaded", () => {
   const icon = document.getElementById("weather-icon");
-  const hour = new Date().getHours(); 
+  const hour = new Date().getHours();
   if (hour >= 6 && hour < 18) {
     icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
   } else {

@@ -10,8 +10,7 @@ class ProductModel
 
     public function all()
     {
-        $stmt = $this->db->prepare("SELECT * FROM products ORDER BY id ASC
-");
+        $stmt = $this->db->prepare("SELECT * FROM products ORDER BY id ASC");
         $stmt->execute();
         return $stmt->fetchAll();
     }

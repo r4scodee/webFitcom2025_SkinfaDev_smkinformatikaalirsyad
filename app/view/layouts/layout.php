@@ -19,8 +19,8 @@
   <nav class="sidebar" id="sidebarbtn">
     <div class="sidebar-header">
       <a href="<?= BASE_URL ?>dashboard" class="sidebar-brand">
-        <i class="fas fa-seedling"></i>
-        <span>Skinfa Bertani</span>
+        <img src="<?= BASE_URL ?>assets/img/logo/logo-dashboard-img.png" alt="Logo" width="35" height="35" class="ms-3">
+        <span>TANI DIGITAL</span>
       </a>
     </div>
     <ul class="sidebar-nav">
@@ -39,7 +39,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>reports" class="nav-link">
+        <a href="<?= BASE_URL ?>errors" class="nav-link">
           <i class="fas fa-chart-line"></i>
           <span>Reports</span>
         </a>

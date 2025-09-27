@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../library/Controller.php';
+require_once __DIR__ . '/../library/fpdf.php';
 
 class ProductsController extends Controller
 {
@@ -240,5 +241,43 @@ class ProductsController extends Controller
 
         return ['success' => true, 'filename' => $newName];
     }
-}
 
+    public function exportPdf()
+    {
+        // ambil semua produk
+        $products = $this->model->all();
+
+        // buat PDF baru
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 16);
+
+        // Judul laporan
+        $pdf->Cell(0, 10, 'Laporan Produk Skinfa Bertani', 0, 1, 'C');
+        $pdf->Ln(5);
+
+        // Header tabel
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(10, 10, 'No', 1);
+        $pdf->Cell(40, 10, 'Kode', 1);
+        $pdf->Cell(60, 10, 'Nama Produk', 1);
+        $pdf->Cell(30, 10, 'Harga', 1);
+        $pdf->Cell(30, 10, 'Satuan', 1);
+        $pdf->Ln();
+
+        // Isi tabel
+        $pdf->SetFont('Arial', '', 11);
+        $no = 1;
+        foreach ($products as $row) {
+            $pdf->Cell(10, 8, $no++, 1);
+            $pdf->Cell(40, 8, $row['code'], 1);
+            $pdf->Cell(60, 8, $row['name'], 1);
+            $pdf->Cell(30, 8, number_format($row['price']), 1, 0, 'R');
+            $pdf->Cell(30, 8, $row['unit'], 1);
+            $pdf->Ln();
+        }
+
+        // Output PDF ke browser
+        $pdf->Output('D', 'laporan_produk.pdf'); // D = force download
+    }
+}

@@ -35,7 +35,7 @@ body {
 }
 
 .sidebar-header {
-  padding: 2rem 1rem !important;
+  padding: 1.3rem 1rem !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   text-transform: uppercase;
 }

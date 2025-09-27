@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-6 align-self-center">
                     <div class="logo">
-                        <a href="<?= BASE_URL?>"><img src="assets/img/logo.png" alt=""></a>
+                        <a href="<?= BASE_URL?>"><img src="assets/img/logo/logo.png" alt="logo"></a>
                     </div>
                 </div>
 

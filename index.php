@@ -4,9 +4,9 @@ session_start();
 // Autoload sederhana
 spl_autoload_register(function ($class) {
     $paths = [
-        __DIR__ . '/app/libs/',
+        __DIR__ . '/app/library/',
         __DIR__ . '/app/controller/',
-        __DIR__ . '/app/models/',
+        __DIR__ . '/app/model/',
     ];
     foreach ($paths as $p) {
         $file = $p . $class . '.php';

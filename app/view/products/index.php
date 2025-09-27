@@ -33,7 +33,7 @@
 
         <div class="dropdown">
           <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
-            <img src="<?= BASE_URL ?>asset/img/admin.jpeg" alt="admin" class="profile-avatar">
+            <img src="<?= BASE_URL ?>assets/img/dashboard-profile/admin.jpeg" alt="admin" class="profile-avatar">
             <div class="text-start d-none d-md-block me-2">
               <div class="fw-medium" style="font-size: 14px">Super Admin</div>
               <small class="text-muted">Farm Manager</small>

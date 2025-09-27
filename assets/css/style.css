@@ -886,8 +886,6 @@ p {
     display: inline-block;
 }
 
-.ht-right .d-submenu a img {}
-
 .ht-right .d-submenu li:after {
     background: var(--white);
 }
@@ -1000,8 +998,6 @@ p {
     right: 5px;
     color: var(--white);
 }
-
-.whit_cart {}
 
 .whit_cart_item {
     -webkit-box-align: center;
@@ -1306,7 +1302,6 @@ p {
     color: var(--white);
     opacity: .9;
 }
-
 
 /* End Header Middle */
 

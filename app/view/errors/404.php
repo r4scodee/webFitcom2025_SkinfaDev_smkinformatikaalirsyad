@@ -226,14 +226,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.meanmenu.min.js"></script>
     <script src="assets/js/jquery.appear.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/mixitup.min.js"></script>
-    <script src="assets/js/nicesellect.js"></script>
-    <script src="assets/js/scroll-top.js"></script>
-    <script src="assets/js/wow.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 

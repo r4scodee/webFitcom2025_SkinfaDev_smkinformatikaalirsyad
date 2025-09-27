@@ -37,33 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $error = "Username atau password salah!";
     }
 }
-
-
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin Dashboard TaniDigital</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="assets/css/meanmenu.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/fonts/satoshi/satoshi.css">
-    <link rel="stylesheet" href="assets/icons/fontawesome/css/all.css">
-    <link rel="stylesheet" href="assets/icons/remixicon/remixicon.css">
-    <link rel="stylesheet" href="assets/icons/themify/themify-icons.css">
     <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/niceselect.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
@@ -152,13 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.meanmenu.min.js"></script>
     <script src="assets/js/jquery.appear.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/mixitup.min.js"></script>
-    <script src="assets/js/nicesellect.js"></script>
-    <script src="assets/js/scroll-top.js"></script>
     <script src="assets/js/wow.js"></script>
     <script src="assets/js/script.js"></script>
     <script>

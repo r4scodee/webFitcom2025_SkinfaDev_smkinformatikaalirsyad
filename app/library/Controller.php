@@ -6,7 +6,7 @@ class Controller
         extract($data);
 
         ob_start();
-        $viewFile = __DIR__ . '/../views/' . $viewPath . '.php';
+        $viewFile = __DIR__ . '/../view/' . $viewPath . '.php';
         if (is_file($viewFile)) {
             require $viewFile;
         } else {
@@ -16,7 +16,7 @@ class Controller
 
         if ($useLayout) {
             // render dengan layout
-            require __DIR__ . '/../views/layouts/layout.php';
+            require __DIR__ . '/../view/layouts/layout.php';
         } else {
             // render langsung tanpa layout
             echo $content;

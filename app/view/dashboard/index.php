@@ -11,9 +11,10 @@
 
       <div class="ms-2 order-3 order-md-1 page-title">
         <h3 class="fw-bold text-success d-flex align-items-center">
-          <i class="fas fa-broadcast-tower me-2"></i> Sensors Monitoring
+          <i class="fas fa-tachometer-alt me-2"></i> Dashboard Overview
         </h3>
       </div>
+
 
       <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0 order-1 order-md-2">
 
@@ -33,7 +34,7 @@
 
         <div class="dropdown">
           <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
-            <img src="<?= BASE_URL ?>asset/img/admin.jpeg" alt="admin" class="profile-avatar">
+            <img src="<?= BASE_URL ?>assets/img/dashboard-profile/admin.jpeg" alt="admin" class="profile-avatar">
             <div class="text-start d-none d-md-block me-2">
               <div class="fw-medium" style="font-size: 14px">Super Admin</div>
               <small class="text-muted">Farm Manager</small>
@@ -74,66 +75,82 @@
 </div>
 
 <main class="container-fluid px-4 py-4">
-  <div class="row g-4">
-    <div class="col-lg-3 col-md-6">
-      <div class="stats-card fade-in">
-        <div class="stats-icon sensors">
-          <i class="fas fa-thermometer-half"></i>
-        </div>
-        <div class="stats-value" id="temp">-- °C</div>
-        <div class="stats-label">Temperature</div>
+  <div id="dashboardPage" class="page-content">
+    <div class="welcome-card fade-in">
+      <div class="welcome-section">
+        <h1 class="welcome-title">🌱 Halo, Admin!</h1>
+        <p class="welcome-subtitle">
+          Pertanian digital Anda berkembang dengan baik! Berikut gambaran
+          singkat kondisi hari ini.
+        </p>
+        <span class="celebration-badge">🎉 Kinerja Luar Biasa Hari Ini!</span>
       </div>
     </div>
 
-    <div class="col-lg-3 col-md-6">
-      <div class="stats-card fade-in">
-        <div class="stats-icon sensors">
-          <i class="fas fa-tint"></i>
+    <div class="row mb-4">
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stats-card fade-in">
+          <div class="stats-icon plants">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <div class="stats-value">1,247</div>
+          <div class="stats-label">Active Plants</div>
         </div>
-        <div class="stats-value" id="humidity">-- %</div>
-        <div class="stats-label">Humidity</div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stats-card fade-in">
+          <div class="stats-icon harvest">
+            <i class="fas fa-apple-alt"></i>
+          </div>
+          <div class="stats-value">89.2kg</div>
+          <div class="stats-label">Today's Harvest</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stats-card fade-in">
+          <div class="stats-icon sensors">
+            <i class="fas fa-thermometer-half"></i>
+          </div>
+          <div class="stats-value">24°C</div>
+          <div class="stats-label">Avg Temperature</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stats-card fade-in">
+          <div class="stats-icon alerts">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="stats-value">3</div>
+          <div class="stats-label">Active Alerts</div>
+        </div>
       </div>
     </div>
 
-    <div class="col-lg-3 col-md-6">
-      <div class="stats-card fade-in">
-        <div class="stats-icon sensors">
-          <i class="fas fa-wind"></i>
+    <div class="row">
+      <div class="col-lg-8 mb-4">
+        <div class="chart-card fade-in">
+          <h3 class="chart-title">
+            <i class="fas fa-chart-line me-2"></i>
+            Weekly Growth Progress
+          </h3>
+          <canvas id="growthChart" height="100"></canvas>
         </div>
-        <div class="stats-value" id="wind">-- km/h</div>
-        <div class="stats-label">Wind Speed</div>
       </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6">
-      <div class="stats-card fade-in">
-        <div class="stats-icon sensors">
-          <i class="fas fa-cloud-sun"></i>
+      <div class="col-lg-4 mb-4">
+        <div class="chart-card fade-in">
+          <h3 class="chart-title">
+            <i class="fas fa-cloud-sun me-2"></i>
+            Weather Conditions
+          </h3>
+          <canvas id="weatherChart" height="200"></canvas>
         </div>
-        <div class="stats-value" id="condition">--</div>
-        <div class="stats-label">Condition</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-5">
-    <div class="col-lg-6 mb-4">
-      <div class="chart-card fade-in">
-        <h4 class="chart-title">
-          <i class="fas fa-chart-line me-2"></i>
-          Temperature Trend
-        </h4>
-        <canvas id="tempChart" height="120"></canvas>
-      </div>
-    </div>
-    <div class="col-lg-6 mb-4">
-      <div class="chart-card fade-in">
-        <h4 class="chart-title">
-          <i class="fas fa-tint me-2"></i>
-          Humidity Trend
-        </h4>
-        <canvas id="humidityChart" height="120"></canvas>
       </div>
     </div>
   </div>
 </main>
+
+<footer class="bg-light text-dark py-4 mt-5 footer-dashboard">
+  <div class="container">
+    <p class="mb-1">Copyrights &copy; <?= date('Y') ?> Tani Digital. All rights reserved.</p>
+  </div>
+</footer>

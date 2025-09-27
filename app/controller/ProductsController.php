@@ -278,6 +278,6 @@ class ProductsController extends Controller
         }
 
         // Output PDF ke browser
-        $pdf->Output('D', 'laporan_produk.pdf'); // D = force download
+        $pdf->Output('D', 'laporan_produk_' . date('Y-m-d_H-i-s') . '.pdf');
     }
 }

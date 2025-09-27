@@ -250,14 +250,14 @@ class ProductsController extends Controller
         // buat PDF baru
         $pdf = new FPDF();
         $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->SetFont('Helvetica', 'B', 16);
 
         // Judul laporan
         $pdf->Cell(0, 10, 'Laporan Produk Skinfa Bertani', 0, 1, 'C');
         $pdf->Ln(5);
 
         // Header tabel
-        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->SetFont('Helvetica', 'B', 12);
         $pdf->Cell(10, 10, 'No', 1);
         $pdf->Cell(40, 10, 'Kode', 1);
         $pdf->Cell(60, 10, 'Nama Produk', 1);
@@ -266,7 +266,7 @@ class ProductsController extends Controller
         $pdf->Ln();
 
         // Isi tabel
-        $pdf->SetFont('Arial', '', 11);
+        $pdf->SetFont('Helvetica', '', 11);
         $no = 1;
         foreach ($products as $row) {
             $pdf->Cell(10, 8, $no++, 1);

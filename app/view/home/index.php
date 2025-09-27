@@ -31,37 +31,12 @@
         <div class="preloader"></div>
     </div>
 
-    <div class="fix-area">
-        <div class="offcanvas__info">
-            <div class="offcanvas__wrapper">
-                <div class="offcanvas__content">
-                    <div class="offcanvas__top d-flex justify-content-between align-items-center">
-                        <div class="offcanvas__logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo.png" alt="edutec">
-                            </a>
-                        </div>
-                        <div class="offcanvas__close">
-                            <button>
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="mobile-menu fix mb-3"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="offcanvas__overlay"></div>
-
-
     <div class="header_middle">
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-6 align-self-center">
                     <div class="logo">
-                        <a href="index.html"><img src="assets/img/logo.png" alt=""></a>
+                        <a href="<?= BASE_URL?>"><img src="assets/img/logo.png" alt=""></a>
                     </div>
                 </div>
 
@@ -234,7 +209,7 @@
                 <nav class="main-menu position-relative">
                     <ul>
                         <li>
-                            <a href="index.php">Beranda</a>
+                            <a href="<?= BASE_URLv?>">Beranda</a>
                         </li>
                         <li>
                             <a href="#tentangkami">Tentang Kami</a>

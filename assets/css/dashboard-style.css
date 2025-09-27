@@ -1,5 +1,5 @@
 :root {
-  --farm-green: #2d5016;
+  --farm-green: #01693A;
   --farm-light-green: #4a7c59;
   --farm-gold: #d4af37;
   --farm-light-gold: #f4e4a6;
@@ -28,11 +28,7 @@ body {
   left: 0;
   height: 100vh;
   width: 260px;
-  background: linear-gradient(
-    135deg,
-    var(--farm-green) 0%,
-    var(--farm-dark) 100%
-  );
+  background: var(--farm-green);
   z-index: 1000;
   transition: all 0.3s ease !important;
   box-shadow: 4px 0 15px rgba(45, 80, 22, 0.1);
@@ -360,17 +356,10 @@ body {
 
 /* Tombol Tambah Produk */
 .btn-add-product {
-  background: transparent;
+  background: var(--farm-green) !important;
   padding: 0.5rem 1.25rem;
   font-size: 0.9rem;
   font-weight: 600;
-  border: #fff !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
 .table th {

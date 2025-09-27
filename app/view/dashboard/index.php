@@ -43,17 +43,17 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?= BASE_URL?>errors">
                 <i class="fas fa-user me-2 text-muted"></i>Profile Settings
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?= BASE_URL?>errors">
                 <i class="fas fa-cog me-2 text-muted"></i>Preferences
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?= BASE_URL?>errors">
                 <i class="fas fa-chart-bar me-2 text-muted"></i>Analytics
               </a>
             </li>

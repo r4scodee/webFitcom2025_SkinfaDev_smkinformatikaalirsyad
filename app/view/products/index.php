@@ -42,17 +42,17 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?= BASE_URL?>errors">
                 <i class="fas fa-user me-2 text-muted"></i>Profile Settings
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?= BASE_URL?>errors">
                 <i class="fas fa-cog me-2 text-muted"></i>Preferences
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?= BASE_URL?>errors">
                 <i class="fas fa-chart-bar me-2 text-muted"></i>Analytics
               </a>
             </li>
@@ -111,8 +111,7 @@
             </div>
           </div>
           <div class="text-center text-md-end">
-            <a href="<?= BASE_URL ?>products/create" class="btn rounded-5 w-100 w-md-auto btn-add-product">
-              <i class="fas fa-plus me-2 text-light"></i>
+            <a href="<?= BASE_URL ?>products/create" class="btn rounded-5 w-100 w-md-auto btn-add-product px-3">
               <span class="fs-sm text-light">Tambah Produk</span>
             </a>
           </div>

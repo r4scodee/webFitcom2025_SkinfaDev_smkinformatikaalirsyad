@@ -39,22 +39,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>sensors"
-          class="nav-link sidebar-link <?= ($active ?? '') === 'sensors' ? 'active' : '' ?>">
-          <i class="fas fa-thermometer-half"></i>
-          <span>Sensors</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#reports" class="nav-link">
+        <a href="<?= BASE_URL ?>errors" class="nav-link">
           <i class="fas fa-chart-line"></i>
           <span>Reports</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#settings" class="nav-link">
-          <i class="fas fa-cog"></i>
-          <span>Settings</span>
         </a>
       </li>
     </ul>

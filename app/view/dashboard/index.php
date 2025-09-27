@@ -70,10 +70,8 @@
                 <i class="fas fa-sign-out-alt me-2"></i>Log Out
               </a>
             </li>
-
           </ul>
         </div>
-
       </div>
     </div>
   </div>

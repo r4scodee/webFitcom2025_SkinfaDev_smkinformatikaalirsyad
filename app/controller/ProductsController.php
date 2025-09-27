@@ -279,6 +279,6 @@ class ProductsController extends Controller
 
         // Output PDF ke browser
         date_default_timezone_set('Asia/Jakarta');
-        $pdf->Output('D', 'laporan_produk_' . date('Y-m-d_H-i-s') . '.pdf');
+        $pdf->Output('D', 'laporan_produk_' . date('Y-m-d_H.i') . '.pdf');
     }
 }

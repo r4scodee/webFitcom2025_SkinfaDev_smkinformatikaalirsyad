@@ -209,7 +209,7 @@
                 <nav class="main-menu position-relative">
                     <ul>
                         <li>
-                            <a href="<?= BASE_URLv?>">Beranda</a>
+                            <a href="<?= BASE_URL?>">Beranda</a>
                         </li>
                         <li>
                             <a href="#tentangkami">Tentang Kami</a>

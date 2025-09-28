@@ -244,41 +244,99 @@ class ProductsController extends Controller
 
     public function exportPdf()
     {
-        // ambil semua produk
+        // Set timezone di awal fungsi
+        date_default_timezone_set('Asia/Jakarta');
+
         $products = $this->model->all();
 
-        // buat PDF baru
         $pdf = new FPDF();
         $pdf->AddPage();
-        $pdf->SetFont('Helvetica', 'B', 16);
 
-        // Judul laporan
-        $pdf->Cell(0, 10, 'Laporan Produk Skinfa Bertani', 0, 1, 'C');
+        // ==== HEADER ====
+        $pdf->Image(__DIR__ . '/../../assets/img/logo/logo-dashboard-img.png', 10, 8, 20); // logo
+        $pdf->SetFont('Helvetica', 'B', 14);
+        $pdf->Cell(0, 10, 'Tani Digital', 0, 1, 'C');
+        $pdf->SetFont('Helvetica', '', 10);
+        $pdf->Cell(0, 5, 'Jl. Pertanian No. 123, Cirebon | 0812-3456-7890', 0, 1, 'C');
         $pdf->Ln(5);
 
-        // Header tabel
+        // Garis pemisah
+        $pdf->SetDrawColor(0, 0, 0);
+        $pdf->Line(10, 35, 200, 35);
+        $pdf->Ln(15);
+
+        // ==== JUDUL ====
         $pdf->SetFont('Helvetica', 'B', 12);
-        $pdf->Cell(10, 10, 'No', 1);
-        $pdf->Cell(40, 10, 'Kode', 1);
-        $pdf->Cell(60, 10, 'Nama Produk', 1);
-        $pdf->Cell(30, 10, 'Harga', 1);
-        $pdf->Cell(30, 10, 'Satuan', 1);
+        $pdf->Cell(0, 10, 'Laporan Data Produk', 0, 1, 'C');
+        $pdf->Ln(5);
+
+        // ==== TABEL ====
+        $pdf->SetFont('Helvetica', 'B', 11);
+        $pdf->SetFillColor(200, 220, 255);
+
+        $w = [10, 30, 70, 40, 30];
+        $header = ['No', 'Kode', 'Nama Produk', 'Harga', 'Satuan'];
+
+        for ($i = 0; $i < count($header); $i++) {
+            $pdf->Cell($w[$i], 10, $header[$i], 1, 0, 'C', true);
+        }
         $pdf->Ln();
 
-        // Isi tabel
-        $pdf->SetFont('Helvetica', '', 11);
+        $pdf->SetFont('Helvetica', '', 10);
+        $fill = false;
         $no = 1;
         foreach ($products as $row) {
-            $pdf->Cell(10, 8, $no++, 1);
-            $pdf->Cell(40, 8, $row['code'], 1);
-            $pdf->Cell(60, 8, $row['name'], 1);
-            $pdf->Cell(30, 8, number_format($row['price']), 1, 0, 'R');
-            $pdf->Cell(30, 8, $row['unit'], 1);
+            $pdf->SetFillColor(245, 245, 245);
+            $pdf->Cell($w[0], 8, $no++, 1, 0, 'C', $fill);
+            $pdf->Cell($w[1], 8, $row['code'], 1, 0, 'C', $fill);
+            $pdf->Cell($w[2], 8, $row['name'], 1, 0, 'L', $fill);
+            $pdf->Cell($w[3], 8, number_format($row['price']), 1, 0, 'R', $fill);
+            $pdf->Cell($w[4], 8, $row['unit'], 1, 0, 'C', $fill);
             $pdf->Ln();
+            $fill = !$fill;
         }
 
-        // Output PDF ke browser
-        date_default_timezone_set('Asia/Jakarta');
+        // ==== FOOTER ====
+        $pdf->Ln(5);
+        $pdf->SetFont('Helvetica', 'I', 9);
+
+        // Format waktu: Minggu, 28 September 2025 14:32:10
+        $tanggalCetak = date('l, d F Y H:i:s');
+        // Terjemahkan hari & bulan ke bahasa Indonesia (opsional)
+        $indonesianDays = [
+            'Sunday' => 'Minggu',
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat',
+            'Saturday' => 'Sabtu'
+        ];
+        $indonesianMonths = [
+            'January' => 'Januari',
+            'February' => 'Februari',
+            'March' => 'Maret',
+            'April' => 'April',
+            'May' => 'Mei',
+            'June' => 'Juni',
+            'July' => 'Juli',
+            'August' => 'Agustus',
+            'September' => 'September',
+            'October' => 'Oktober',
+            'November' => 'November',
+            'December' => 'Desember'
+        ];
+
+        $tanggalCetak = strtr($tanggalCetak, $indonesianDays);
+        $tanggalCetak = strtr($tanggalCetak, $indonesianMonths);
+
+        $pdf->Cell(0, 10, 'Dicetak pada: ' . $tanggalCetak, 0, 0, 'L');
+        $pdf->Cell(0, 10, 'Halaman ' . $pdf->PageNo(), 0, 0, 'R');
+
+        // Output PDF
         $pdf->Output('D', 'laporan_produk_' . date('Y-m-d_H.i') . '.pdf');
     }
+
+
+
 }

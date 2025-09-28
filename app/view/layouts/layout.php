@@ -39,7 +39,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>errors" class="nav-link">
+        <a href="<?= BASE_URL ?>reports" class="nav-link">
           <i class="fas fa-chart-line"></i>
           <span>Reports</span>
         </a>

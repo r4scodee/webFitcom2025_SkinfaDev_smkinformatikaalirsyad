@@ -129,7 +129,7 @@
         <div class="alert alert-info">Belum ada produk.</div>
       <?php else: ?>
         <div class="table-responsive">
-          <table class="table table-hover mb-0 rounded-3 overflow-hidden" id="productTable">
+          <table class="table table-hover mb-0 rounded-3 align-middle" id="productTable">
             <thead>
               <tr>
                 <th class="px-4 py-3">ID</th>
@@ -144,7 +144,7 @@
             <tbody>
               <?php $no = 1;
               foreach ($products as $p): ?>
-                <tr>
+                <tr class="align-middle">
                   <td class="px-4 py-3 fw-medium"><?= $no++ ?></td>
                   <td class="px-4 py-3 fw-medium">
                     <span class="badge bg-primary badge-custom">
@@ -169,23 +169,65 @@
                       <span class="text-muted">-</span>
                     <?php endif; ?>
                   </td>
-                  <td class="px-4 py-4">
-                    <a href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>"
-                      class="btn btn-sm btn-outline-success">
-                      <i class="fi fi-tr-pen-field"></i>
-                    </a>
-                    <form method="post" action="<?= BASE_URL ?>products/delete/<?= htmlspecialchars($p['id']) ?>"
-                      style="display: inline" onsubmit="return confirm('Yakin hapus produk ini?')">
-                      <input type="hidden" name="_csrf" value="<?= $this->generateCSRFToken() ?>" />
-                      <button class="btn btn-sm btn-outline-danger">
+                  <td>
+                    <div class="d-flex h-100 justify-content-center align-items-center gap-2">
+                      <a href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>"
+                        class="btn btn-sm btn-outline-success">
+                        <i class="fi fi-tr-pen-field"></i>
+                      </a>
+                      <!-- Tombol delete -->
+                      <button type="button"
+                              class="btn btn-sm btn-outline-danger btn-delete"
+                              data-bs-toggle="modal"
+                              data-bs-target="#deleteModal"
+                              data-id="<?= htmlspecialchars($p['id']) ?>">
                         <i class="fi fi-tr-trash-xmark"></i>
                       </button>
-                    </form>
+                    </div>
                   </td>
                 </tr>
               <?php endforeach; ?>
             </tbody>
           </table>
+
+          <!-- Modal Konfirmasi Hapus -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-danger text-white">
+                  <h5 class="modal-title">
+                    Konfirmasi Hapus
+                  </h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                  <div class="delete-animation mb-3">
+                    <i class="fi fi-tr-trash-xmark text-danger fs-1"></i>
+                  </div>
+                  <p class="mb-0">Apakah Anda yakin ingin menghapus produk ini?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                  <form id="deleteForm" method="post" action="">
+                    <input type="hidden" name="_csrf" value="<?= $this->generateCSRFToken() ?>" />
+                    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overlay Animasi Checklist -->
+          <div id="successOverlay" class="success-overlay d-none">
+            <div class="checkmark-container">
+              <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
+              </svg>
+              <p class="mt-3 text-white fw-bold">Data berhasil dihapus</p>
+            </div>
+          </div>
+
         </div>
       <?php endif; ?>
 
@@ -207,3 +249,38 @@
     </p>
   </div>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const deleteButtons = document.querySelectorAll(".btn-delete");
+  const deleteForm   = document.getElementById("deleteForm");
+  const successOverlay = document.getElementById("successOverlay");
+
+  // isi action delete form sesuai id produk
+  deleteButtons.forEach(btn => {
+    btn.addEventListener("click", function() {
+      const productId = this.getAttribute("data-id");
+      deleteForm.action = `<?= BASE_URL ?>products/delete/` + productId;
+    });
+  });
+
+  // intercept submit
+  deleteForm.addEventListener("submit", function(e) {
+    e.preventDefault(); // tahan submit dulu
+    const form = this;
+
+    // tutup modal
+    const modalEl = document.getElementById("deleteModal");
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+
+    // tampilkan overlay + animasi
+    successOverlay.classList.remove("d-none");
+
+    // setelah 1.5 detik → submit beneran
+    setTimeout(() => {
+      form.submit();
+    }, 1500);
+  });
+});
+</script>

@@ -27,33 +27,9 @@ class DashboardController extends Controller
 
     public function products()
     {
-        $this->view('dashboard/products', [
+        $this->view('dashboard/products/index', [
             'title' => 'Products - Tani Digital',
             'active' => 'products'
-        ]);
-    }
-
-    public function sensors()
-    {
-        $this->view('dashboard/sensors', [
-            'title' => 'Sensors - Tani Digital',
-            'active' => 'sensors'
-        ]);
-    }
-
-    public function reports()
-    {
-        $this->view('dashboard/reports', [
-            'title' => 'Reports - Tani Digital',
-            'active' => 'reports'
-        ]);
-    }
-
-    public function settings()
-    {
-        $this->view('dashboard/settings', [
-            'title' => 'Settings - Tani Digital',
-            'active' => 'settings'
         ]);
     }
 }

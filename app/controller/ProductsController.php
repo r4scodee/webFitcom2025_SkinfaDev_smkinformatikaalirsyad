@@ -25,7 +25,7 @@ class ProductsController extends Controller
     {
         $products = $this->model->all();
         $this->view('products/index', [
-            'title' => 'Table Produk - Skinfa Bertani',
+            'title' => 'Tabel Manajemen Produk - Tani Digital',
             'active' => 'products',
             'products' => $products
         ]);

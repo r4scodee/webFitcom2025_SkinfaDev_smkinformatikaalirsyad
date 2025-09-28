@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><?= $title ?? "Skinfa Bertani" ?></title>
+  <title><?= $title ?? "Skinfa - Tani Digital" ?></title>
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/dashboard-style.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet" />
@@ -33,7 +33,7 @@
       </li>
       <li class="nav-item">
         <a href="<?= BASE_URL ?>products"
-          class="nav-link sidebar-link <?= ($active ?? '') === 'products' ? 'active' : '' ?>">
+          class="nav-link sidebar-link <?= ($active ?? '') === 'dashboard/products' ? 'active' : '' ?>">
           <i class="fas fa-boxes"></i>
           <span>Products</span>
         </a>

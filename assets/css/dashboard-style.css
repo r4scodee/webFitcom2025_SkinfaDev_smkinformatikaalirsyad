@@ -1,5 +1,5 @@
 :root {
-  --farm-green: #01693A;
+  --farm-green: #01693a;
   --farm-light-green: #4a7c59;
   --farm-gold: #d4af37;
   --farm-light-gold: #f4e4a6;
@@ -157,7 +157,8 @@ body {
   overflow: hidden;
 }
 
-.dashboard-header::before, .welcome-section::before {
+.dashboard-header::before,
+.welcome-section::before {
   content: "";
   position: absolute;
   top: -50px;
@@ -168,7 +169,8 @@ body {
   border-radius: 50%;
 }
 
-.dashboard-header::after, .welcome-section::after {
+.dashboard-header::after,
+.welcome-section::after {
   content: "";
   position: absolute;
   bottom: -40px;
@@ -330,14 +332,14 @@ body {
 }
 
 .btn-toggle {
-  background: transparent;    
-  border: none !important;              
-  color: #2b6e2b;            
-  padding: 6px 8px;          
+  background: transparent;
+  border: none !important;
+  color: #2b6e2b;
+  padding: 6px 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;      
+  border-radius: 8px;
   cursor: pointer;
   transition: background 0.15s ease, transform 0.08s ease, color 0.15s ease;
   line-height: 0;
@@ -345,7 +347,7 @@ body {
 }
 
 .btn-toggle:hover {
-  background: rgba(43, 110, 43, 0.06); 
+  background: rgba(43, 110, 43, 0.06);
   color: #1f5a1f;
   border: none;
 }
@@ -366,6 +368,8 @@ body {
   border-bottom: 1px solid #dee2e6;
   font-weight: 600;
   color: #495057;
+  white-space: nowrap;
+  vertical-align: middle !important;
 }
 
 .table td {
@@ -373,11 +377,36 @@ body {
   border-bottom: 1px solid #dee2e6;
   font-weight: 600;
   color: #495057;
-  vertical-align: middle;
+  vertical-align: middle !important;
+  white-space: nowrap;
+}
+
+.table td .d-flex form {
+  margin: 0;
 }
 
 .table tbody tr:hover {
   background-color: #f8f9fa;
+}
+
+.form-control:focus {
+  outline: none !important;
+  box-shadow: none;
+  border-color: var(--farm-green);
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .form-control {
+        transition: none
+    }
+}
+
+.form-control[type=file] {
+    overflow: hidden
+}
+
+.form-control[type=file]:not(:disabled):not([readonly]) {
+    cursor: pointer
 }
 
 .badge-custom {
@@ -405,6 +434,69 @@ body {
   display: none;
 }
 
+.delete-animation {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+.success-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.41);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.checkmark-container {
+  text-align: center;
+}
+
+.checkmark {
+  width: 80px;
+  height: 80px;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px #fff;
+  animation: scale .3s ease-in-out .9s both;
+}
+
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #3ae040;
+  fill: none;
+  animation: stroke .6s cubic-bezier(.65,.0,.45,1) forwards;
+}
+
+.checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke: #3ae040;
+  animation: stroke .3s cubic-bezier(.65,.0,.45,1) .6s forwards;
+}
+
+@keyframes stroke {
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes scale {
+  0%, 100% { transform: none; }
+  50% { transform: scale3d(1.1, 1.1, 1); }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -416,7 +508,6 @@ body {
   }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -433,14 +524,6 @@ body {
 
   .main-content {
     margin-left: 0;
-  }
-
-  .table td:nth-child(7) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 !important;
   }
 
   .footer-products {
@@ -462,12 +545,9 @@ body {
   }
 }
 
-@media (max-width: 1200px) {
-  .table td:nth-child(7) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 !important;
+@media (max-width: 576px) {
+  .table td,
+  .table th {
+    white-space: normal;
   }
 }

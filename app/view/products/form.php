@@ -23,7 +23,6 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
 $isEdit = ($action === 'update');
 $formAction = $isEdit ? BASE_URL . 'products/update/' . ($product['id'] ?? '') : BASE_URL . 'products/store';
 $val = function ($key, $default = '') use ($product, $old, $isEdit) {
-  // Prioritas: $old (ketika validasi gagal) > $product (edit) > default
   if (!empty($old) && isset($old[$key]))
     return $old[$key];
   if ($isEdit && !empty($product) && isset($product[$key]))
@@ -66,7 +65,7 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
       </div>
 
       <div class="col-md-6">
-        <label class="form-label fw-semibold">Harga (angka)</label>
+        <label class="form-label fw-semibold">Harga</label>
         <input type="text" name="price" id="price" class="form-control" placeholder="0"
           value="<?= $this->e($val('price')) ?>">
       </div>
@@ -84,7 +83,7 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
       <div class="col-12">
         <label class="form-label fw-semibold">Gambar Produk (jpg/png/webp, max 2MB)</label>
         <input type="file" name="image" id="image" accept="image/*" class="form-control">
-        <div class="mt-3">
+        <div class="mt-0">
           <?php $img = $val('image'); ?>
           <img id="preview" src="<?= $img ? UPLOAD_URL . $this->e($img) : '#' ?>" alt="preview"
             class="img-thumbnail shadow-sm" style="<?= $img ? 'max-width:220px;' : 'display:none; max-width:220px;' ?>">
@@ -93,7 +92,7 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
 
       <div class="col-12 d-flex gap-2 justify-content-end mt-4">
         <a href="<?= BASE_URL ?>products" class="btn btn-secondary px-4 rounded-5">Batal</a>
-        <button class="btn btn-farm px-4 rounded-5"><?= $isEdit ? 'Update' : 'Simpan' ?></button>
+        <button class="btn btn-farm px-4 rounded-5"><?= $isEdit ? 'Ubah' : 'Simpan' ?></button>
       </div>
     </form>
   </div>

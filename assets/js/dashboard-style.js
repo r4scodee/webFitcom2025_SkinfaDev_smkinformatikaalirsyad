@@ -149,15 +149,19 @@ function formatRupiah(angka, prefix = "Rp ") {
 }
 
 $(document).ready(function () {
+  let initialPrice = $("#price").val();
+  if (initialPrice) {
+    initialPrice = parseFloat(initialPrice).toString();
+    $("#price").val(formatRupiah(initialPrice));
+  }
+
   $("#price").on("input", function () {
     let nilai = $(this).val();
     $(this).val(formatRupiah(nilai));
   });
 
   $("form").on("submit", function () {
-    let harga = $("#price")
-      .val()
-      .replace(/[^0-9]/g, "");
+    let harga = $("#price").val().replace(/[^0-9]/g, "");
     $("#price").val(harga);
   });
 });

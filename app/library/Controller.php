@@ -7,6 +7,7 @@ class Controller
 
         ob_start();
         $viewFile = __DIR__ . '/../view/' . $viewPath . '.php';
+
         if (is_file($viewFile)) {
             require $viewFile;
         } else {

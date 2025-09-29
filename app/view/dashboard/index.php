@@ -1,7 +1,4 @@
 <?php ob_start(); ?>
-
-
-
 <div class="top-header border-bottom bg-white shadow-sm">
   <div class="container-fluid">
     <div class="d-flex align-items-center justify-content-between py-2 flex-wrap gap-2">
@@ -83,40 +80,40 @@
       </div>
     </div>
 
-    <div class="row mb-4">
-      <div class="col-lg-3 col-md-6 mb-3">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-4 mb-4">
         <div class="stats-card fade-in">
-          <div class="stats-icon plants">
+          <div class="stats-icon bg-gray-200">
             <i class="fas fa-seedling"></i>
           </div>
-          <div class="stats-value">192</div>
+          <div class="stats-value text-dark">152</div>
           <div class="stats-label">Produk Terjual Minggu Ini</div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-3 col-md-6 mb-4">
         <div class="stats-card fade-in">
-          <div class="stats-icon harvest">
+          <div class="stats-icon bg-gray-200 ">
             <i class="fas fa-apple-alt"></i>
           </div>
-          <div class="stats-value">72kg</div>
+          <div class="stats-value text-dark">172kg</div>
           <div class="stats-label">Total Panen Bulan Ini</div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-3 col-md-6 mb-4">
         <div class="stats-card fade-in">
-          <div class="stats-icon sensors">
+          <div class="stats-icon bg-gray-200 ">
             <i class="fas fa-balance-scale"></i>
           </div>
-          <div class="stats-value">128</div>
+          <div class="stats-value text-dark">128</div>
           <div class="stats-label">Pesanan Diproses</div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-3 col-md-6 mb-4">
         <div class="stats-card fade-in">
-          <div class="stats-icon alerts">
+          <div class="stats-icon bg-gray-200">
             <i class="fas fa-users"></i>
           </div>
-          <div class="stats-value">56</div>
+          <div class="stats-value text-dark">56</div>
           <div class="stats-label">Pelanggan Baru</div>
         </div>
       </div>
@@ -189,7 +186,7 @@
         </div>
       </div>
 
-      <div class="col-xxl-3 col-md-6">
+      <div class="col-xxl-3 col-md-6">  
         <div class="card stretch stretch-full">
           <div class="card-body">
             <div class="d-flex align-items-start justify-content-between mb-4">
@@ -259,9 +256,8 @@
 
       <div class="col-xxl-8">
         <div class="card stretch stretch-full">
-          <div class="card-header">
+          <div class="card-header border-0 pb-4 pt-3">
             <h5 class="card-title">Penjualan Bulanan</h5>
-
           </div>
           <div class="card-body custom-card-action p-0">
             <div id="chart-penjualan"></div>
@@ -269,7 +265,7 @@
           <div class="card-footer">
             <div class="row g-4">
               <div class="col-lg-3">
-                <div class="p-3 border border-dashed rounded">
+                <div class="p-3 border border-1 rounded">
                   <div class="fs-12 text-muted mb-1">Menunggu Pembayaran</div>
                   <h6 class="fw-bold text-dark">Rp5.486.000</h6>
                   <div class="progress mt-2 ht-3">
@@ -278,7 +274,7 @@
                 </div>
               </div>
               <div class="col-lg-3">
-                <div class="p-3 border border-dashed rounded">
+                <div class="p-3 border border-1 rounded">
                   <div class="fs-12 text-muted mb-1">Berhasil</div>
                   <h6 class="fw-bold text-dark">Rp9.275.000</h6>
                   <div class="progress mt-2 ht-3">
@@ -287,7 +283,7 @@
                 </div>
               </div>
               <div class="col-lg-3">
-                <div class="p-3 border border-dashed rounded">
+                <div class="p-3 border border-1 rounded">
                   <div class="fs-12 text-muted mb-1">Ditolak</div>
                   <h6 class="fw-bold text-dark">Rp3.868.000</h6>
                   <div class="progress mt-2 ht-3">
@@ -296,7 +292,7 @@
                 </div>
               </div>
               <div class="col-lg-3">
-                <div class="p-3 border border-dashed rounded">
+                <div class="p-3 border border-1 rounded">
                   <div class="fs-12 text-muted mb-1">Pendapatan</div>
                   <h6 class="fw-bold text-dark">Rp50.668.000</h6>
                   <div class="progress mt-2 ht-3">
@@ -311,63 +307,44 @@
 
       <div class="col-xxl-4">
         <div class="card stretch stretch-full">
-          <div class="card-header">
+          <div class="card-header border-0 pb-4 pt-3">
             <h5 class="card-title">Cuaca Hari ini</h5>
-
           </div>
           <div class="card-body custom-card-action">
             <div id="weather-overview-donut"></div>
             <div class="row g-2">
               <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
+                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-1 border-gray-5">
                   <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #FFD700"></span>
                   <span>Cerah</span>
                 </a>
               </div>
               <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
-                  <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #1E90FF"></span>
+                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-1 border-gray-5">
+                  <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #0042d1ff"></span>
                   <span>Hujan</span>
                 </a>
               </div>
               <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
+                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-1 border-gray-5">
                   <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #7F8C8D"></span>
                   <span>Mendung</span>
                 </a>
               </div>
               <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
+                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-1 border-gray-5">
                   <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #2ECC71"></span>
                   <span>Berawan</span>
                 </a>
               </div>
               <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
-                  <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #FF7F50"></span>
-                  <span>Angin</span>
+                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-1 border-gray-5">
+                  <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #1E90FF"></span>
+                  <span>Gerimis</span>
                 </a>
               </div>
               <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
-                  <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #00CED1"></span>
-                  <span>Kelembapan</span>
-                </a>
-              </div>
-              <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
-                  <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #9B59B6"></span>
-                  <span>UV index</span>
-                </a>
-              </div>
-              <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
-                  <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #E74C3C"></span>
-                  <span>Peringatan</span>
-                </a>
-              </div>
-              <div class="col-4">
-                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-dashed border-gray-5">
+                <a href="javascript:void(0);" class="p-2 hstack gap-2 rounded border border-1 border-gray-5">
                   <span class="wd-7 ht-7 rounded-circle d-inline-block" style="background-color: #34495E"></span>
                   <span>Lainnya</span>
                 </a>
@@ -380,7 +357,7 @@
 
     </div>
   </div>
-
+</main>
 
   <footer class="bg-light text-dark py-4 mt-5 footer-dashboard">
     <div class="container">

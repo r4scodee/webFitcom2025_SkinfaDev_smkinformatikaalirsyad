@@ -72,18 +72,15 @@
       <div class="row g-3 align-items-end">
         <div class="col-md-3">
           <div class="position-relative">
-            <input type="text" id="searchProduct" class="form-control ps-5 rounded-5" placeholder="Cari Produk..." />
+            <input type="text" id="searchProduct" class="form-control ps-5 rounded-5 border-0" placeholder="Cari Produk..." />
             <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
               <i class="fas fa-search text-muted"></i>
             </span>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="input-group">
-            <span class="input-group-text bg-success text-white rounded-start-4">
-              <i class="fas fa-balance-scale"></i>
-            </span>
-            <select id="filterUnit" class="form-select rounded-end-4 shadow-sm border-0">
+          <div class="position-relative">
+            <select id="filterUnit" class="form-select bg-white ps-5 rounded-5 border-0">
               <option value="">Semua Satuan</option>
               <?php
               $unit = array_unique(array_column($products, 'unit'));
@@ -91,8 +88,11 @@
                 <option value="<?= strtolower($s) ?>">
                   <?= htmlspecialchars($s) ?>
                 </option>
-              <?php endforeach; ?>
-            </select>
+                <?php endforeach; ?>
+              </select>
+              <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
+                <i class="fas fa-balance-scale text-muted"></i>
+              </span>
           </div>
         </div>
 
@@ -127,13 +127,13 @@
           <table class="table table-hover mb-0 rounded-3 align-middle" id="productTable">
             <thead>
               <tr>
-                <th class="px-4 py-3">ID</th>
-                <th class="px-4 py-3">Kode</th>
-                <th class="px-4 py-3">Nama</th>
-                <th class="px-4 py-3">Harga</th>
-                <th class="px-4 py-3">Satuan</th>
-                <th class="px-4 py-3">Gambar</th>
-                <th class="px-4 py-3">Aksi</th>
+                <th class="px-4 py-3 fs-lg">ID</th>
+                <th class="px-4 py-3 fs-lg">Kode</th>
+                <th class="px-4 py-3 fs-lg">Nama</th>
+                <th class="px-4 py-3 fs-lg">Harga</th>
+                <th class="px-4 py-3 fs-lg">Satuan</th>
+                <th class="px-4 py-3 fs-lg">Gambar</th>
+                <th class="px-4 py-3 fs-lg">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -165,6 +165,7 @@
                     <?php endif; ?>
                   </td>
                   <td>
+                    <!-- Tombol edit -->
                     <div class="d-flex h-100 justify-content-center align-items-center gap-2">
                       <a href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>"
                         class="btn btn-sm btn-outline-success">

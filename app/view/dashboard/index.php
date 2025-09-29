@@ -137,7 +137,7 @@
                 <i class="feather-more-vertical"></i>
               </a>
             </div>
-            <div class="pt-4">
+            <div class="pt-0">
               <div class="d-flex align-items-center justify-content-between">
                 <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Stok Rendah</a>
                 <div class="w-100 text-end">
@@ -170,7 +170,7 @@
                 <i class="feather-more-vertical"></i>
               </a>
             </div>
-            <div class="pt-4">
+            <div class="pt-0">
               <div class="d-flex align-items-center justify-content-between">
                 <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Hari Ini</a>
                 <div class="w-100 text-end">
@@ -203,7 +203,7 @@
                 <i class="feather-more-vertical"></i>
               </a>
             </div>
-            <div class="pt-4">
+            <div class="pt-0">
               <div class="d-flex align-items-center justify-content-between">
                 <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Hari Ini</a>
                 <div class="w-100 text-end">
@@ -237,7 +237,7 @@
                 <i class="feather-more-vertical"></i>
               </a>
             </div>
-            <div class="pt-4">
+            <div class="pt-0">
               <div class="d-flex align-items-center justify-content-between">
                 <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Dari Ulasan</a>
                 <div class="w-100 text-end">

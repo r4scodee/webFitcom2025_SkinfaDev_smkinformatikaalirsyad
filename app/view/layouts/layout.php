@@ -33,13 +33,14 @@
       </li>
       <li class="nav-item">
         <a href="<?= BASE_URL ?>products"
-          class="nav-link sidebar-link <?= ($active ?? '') === 'dashboard/products' ? 'active' : '' ?>">
+          class="nav-link sidebar-link <?= ($active ?? '') === 'products' ? 'active' : '' ?>">
           <i class="fas fa-boxes"></i>
           <span>Products</span>
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>reports" class="nav-link">
+        <a href="<?= BASE_URL ?>reports" 
+        class="nav-link sidebar-link <?= ($active ?? '') === 'reports' ? 'active' : '' ?>">
           <i class="fas fa-chart-line"></i>
           <span>Reports</span>
         </a>

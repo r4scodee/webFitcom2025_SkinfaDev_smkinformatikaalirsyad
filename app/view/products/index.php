@@ -42,22 +42,22 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="<?= BASE_URL?>errors">
+              <a class="dropdown-item" href="<?= BASE_URL ?>errors">
                 <i class="fas fa-user me-2 text-muted"></i>Profile Settings
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="<?= BASE_URL?>errors">
+              <a class="dropdown-item" href="<?= BASE_URL ?>errors">
                 <i class="fas fa-cog me-2 text-muted"></i>Preferences
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="<?= BASE_URL?>errors">
+              <a class="dropdown-item" href="<?= BASE_URL ?>errors">
                 <i class="fas fa-chart-bar me-2 text-muted"></i>Analytics
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="<?= BASE_URL?>products/exportPdf">
+              <a class="dropdown-item" href="<?= BASE_URL ?>products/exportPdf">
                 <i class="fas fa-download me-2 text-muted"></i>Download Reports
               </a>
             </li>
@@ -88,19 +88,24 @@
             </span>
           </div>
         </div>
-
-        <div class="col-md-2">
-          <select id="filterUnit" class="form-select rounded-5">
-            <option value="" class="">Semua Satuan</option>
-            <?php
-            $unit = array_unique(array_column($products, 'unit'));
-            foreach ($unit as $s): ?>
-              <option value="<?= strtolower($s) ?>" class="r">
-                <?= htmlspecialchars($s) ?>
-              </option>
-            <?php endforeach; ?>
-          </select>
+        <div class="col-md-3">
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white rounded-start-4">
+              <i class="fas fa-balance-scale"></i>
+            </span>
+            <select id="filterUnit" class="form-select rounded-end-4 shadow-sm border-0">
+              <option value="">Semua Satuan</option>
+              <?php
+              $unit = array_unique(array_column($products, 'unit'));
+              foreach ($unit as $s): ?>
+                <option value="<?= strtolower($s) ?>">
+                  <?= htmlspecialchars($s) ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
         </div>
+
 
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
           <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
@@ -176,11 +181,8 @@
                         <i class="fi fi-tr-pen-field"></i>
                       </a>
                       <!-- Tombol delete -->
-                      <button type="button"
-                              class="btn btn-sm btn-outline-danger btn-delete"
-                              data-bs-toggle="modal"
-                              data-bs-target="#deleteModal"
-                              data-id="<?= htmlspecialchars($p['id']) ?>">
+                      <button type="button" class="btn btn-sm btn-outline-danger btn-delete" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal" data-id="<?= htmlspecialchars($p['id']) ?>">
                         <i class="fi fi-tr-trash-xmark"></i>
                       </button>
                     </div>
@@ -221,8 +223,8 @@
           <div id="successOverlay" class="success-overlay d-none">
             <div class="checkmark-container">
               <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-                <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16" />
               </svg>
               <p class="mt-3 text-white fw-bold">Data berhasil dihapus</p>
             </div>
@@ -251,36 +253,36 @@
 </footer>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const deleteButtons = document.querySelectorAll(".btn-delete");
-  const deleteForm   = document.getElementById("deleteForm");
-  const successOverlay = document.getElementById("successOverlay");
+  document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtons = document.querySelectorAll(".btn-delete");
+    const deleteForm = document.getElementById("deleteForm");
+    const successOverlay = document.getElementById("successOverlay");
 
-  // isi action delete form sesuai id produk
-  deleteButtons.forEach(btn => {
-    btn.addEventListener("click", function() {
-      const productId = this.getAttribute("data-id");
-      deleteForm.action = `<?= BASE_URL ?>products/delete/` + productId;
+    // isi action delete form sesuai id produk
+    deleteButtons.forEach(btn => {
+      btn.addEventListener("click", function () {
+        const productId = this.getAttribute("data-id");
+        deleteForm.action = `<?= BASE_URL ?>products/delete/` + productId;
+      });
+    });
+
+    // intercept submit
+    deleteForm.addEventListener("submit", function (e) {
+      e.preventDefault(); // tahan submit dulu
+      const form = this;
+
+      // tutup modal
+      const modalEl = document.getElementById("deleteModal");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      modal.hide();
+
+      // tampilkan overlay + animasi
+      successOverlay.classList.remove("d-none");
+
+      // setelah 1.5 detik → submit beneran
+      setTimeout(() => {
+        form.submit();
+      }, 1500);
     });
   });
-
-  // intercept submit
-  deleteForm.addEventListener("submit", function(e) {
-    e.preventDefault(); // tahan submit dulu
-    const form = this;
-
-    // tutup modal
-    const modalEl = document.getElementById("deleteModal");
-    const modal = bootstrap.Modal.getInstance(modalEl);
-    modal.hide();
-
-    // tampilkan overlay + animasi
-    successOverlay.classList.remove("d-none");
-
-    // setelah 1.5 detik → submit beneran
-    setTimeout(() => {
-      form.submit();
-    }, 1500);
-  });
-});
 </script>

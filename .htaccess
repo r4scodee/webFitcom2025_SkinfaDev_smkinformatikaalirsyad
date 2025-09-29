@@ -1,7 +1,3 @@
-############################################
-# .htaccess Universal (Portable, aman di banyak server)
-############################################
-
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
@@ -16,7 +12,6 @@
     # Semua request non-file => masuk ke index.php
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
-    # Blokir folder sensitif
     RewriteRule ^(app|config|vendor|logs|tests)/ - [F,L]
 </IfModule>
 
@@ -50,10 +45,4 @@ Options -Indexes
     AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css application/javascript application/json
 </IfModule>
 
-# Error handling
-
 ErrorDocument 404 /error/404.php
-
-############################################
-# END
-############################################

@@ -38,10 +38,14 @@
 </div>
 
 <main class="container-fluid px-4 py-4">
-    <div class="mb-3">
-        <a href="<?= BASE_URL ?>report/generate" class="btn btn-primary">Generate Report</a>
-        <a href="<?= BASE_URL ?>product/exportPdf" class="btn btn-danger">Export PDF</a>
-    </div>
+  <div class="d-flex gap-2 mb-3">
+    <a href="<?= BASE_URL ?>report/generate" class="btn btn-primary d-flex align-items-center">
+      <i class="fas fa-file-alt me-2"></i> Generate Report
+    </a>
+    <a href="<?= BASE_URL ?>product/exportPdf" class="btn btn-danger d-flex align-items-center">
+      <i class="fas fa-file-pdf me-2"></i> Export PDF
+    </a>
+  </div>
 
     <!-- Tabel Generate Data -->
        <div class="card fade-in shadow-sm border-0">

@@ -25,11 +25,225 @@
           </div>
         </div>
 
-        <div class="dropdown me-2">
-          <button class="btn btn-light position-relative" type="button">
+        <div class="dropdown nxl-h-item">
+          <a id="notifBtn" class="nxl-head-link me-3" href="javascript:void(0);">
             <i class="fas fa-bell"></i>
-          </button>
+            <span id="notifBadge" class="badge bg-danger nxl-h-badge">3</span>
+          </a>
+
+          <div id="notifDropdown" class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-notifications-menu">
+            <div class="d-flex justify-content-between align-items-center notifications-head">
+              <h6 class="fw-bold text-dark mb-0">Notifikasi</h6>
+
+            </div>
+
+            <div class="notifications-item">
+              <div class="notif-icon me-3 bg-warning text-white">
+                <i class="fas fa-thermometer-half"></i>
+              </div>
+              <div class="notifications-desc">
+                <span class="font-body text-truncate-2-line">
+                  <span class="fw-semibold text-dark">Sensor Suhu</span> Suhu greenhouse naik jadi <b>32°C</b>.
+                </span>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="notifications-date text-muted">2 menit yang lalu</div>
+                  <div class="d-flex align-items-center gap-2">
+
+                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
+                      <i class="fas fa-times fs-12"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="notifications-item">
+              <div class="notif-icon me-3 bg-info text-white">
+                <i class="fas fa-tint"></i>
+              </div>
+              <div class="notifications-desc">
+                <span class="font-body text-truncate-2-line">
+                  <span class="fw-semibold text-dark">Irigasi</span> Penyiraman otomatis selesai di <b>lahan sayur</b>.
+                </span>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="notifications-date text-muted">20 menit yang lalu</div>
+                  <div class="d-flex align-items-center gap-2">
+
+                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
+                      <i class="fas fa-times fs-12"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="notifications-item">
+              <div class="notif-icon me-3 bg-success text-white">
+                <i class="fas fa-apple-alt"></i>
+              </div>
+              <div class="notifications-desc">
+                <span class="font-body text-truncate-2-line">
+                  <span class="fw-semibold text-dark">Panen Buah</span> 25kg <b>tomat segar</b> siap dipanen hari ini.
+                </span>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="notifications-date text-muted">1 jam yang lalu</div>
+                  <div class="d-flex align-items-center gap-2">
+
+                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
+                      <i class="fas fa-times fs-12"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
+
+        <style>
+          .nxl-h-item {
+            position: relative;
+          }
+
+          .nxl-head-link {
+            display: flex;
+            align-items: center;
+            position: relative;
+            font-size: 20px;
+            color: #444;
+            text-decoration: none;
+            cursor: pointer;
+          }
+
+          .nxl-h-badge {
+            font-size: 11px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            padding: 3px 6px;
+            border-radius: 50%;
+          }
+
+          .nxl-h-dropdown {
+            width: 350px !important;
+            max-height: 400px !important;
+            overflow-y: auto;
+            border-radius: 14px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.11);
+            background: #fff;
+            border: 1px solid #e0e0e0;
+          }
+
+          .notifications-head {
+            border-bottom: 1px solid #eee;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .notifications-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.7rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+
+          }
+
+          .notifications-item:hover {
+            background: #f8f9fa;
+          }
+
+          .notif-icon {
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+          }
+
+          .notifications-desc {
+            flex: 1;
+            font-size: 13px;
+          }
+
+          .notifications-date {
+            font-size: 11px;
+          }
+
+          .mark-read {
+            cursor: pointer;
+          }
+
+          .remove {
+            cursor: pointer;
+          }
+        </style>
+
+
+        <!-- ========== JS ========== -->
+        <script>
+          const notifBtn = document.getElementById("notifBtn");
+          const notifDropdown = document.getElementById("notifDropdown");
+          const notifBadge = document.getElementById("notifBadge");
+          const markAllRead = document.getElementById("markAllRead");
+
+          // Toggle by click
+          notifBtn.addEventListener("click", () => {
+            notifDropdown.classList.toggle("show");
+            notifDropdown.style.position = "absolute";
+            notifDropdown.style.inset = "0 auto auto 0";
+            notifDropdown.style.transform = "translate3d(-250px, 40px, 0)";
+          });
+
+          // Hover open
+          notifBtn.addEventListener("mouseenter", () => {
+            notifDropdown.classList.add("show");
+            notifDropdown.style.position = "absolute";
+            notifDropdown.style.inset = "0 auto auto 0";
+            notifDropdown.style.transform = "translate3d(-250px, 40px, 0)";
+          });
+
+          // Close when leave
+          notifDropdown.addEventListener("mouseleave", () => {
+            notifDropdown.classList.remove("show");
+          });
+
+          // Remove notif item
+          document.querySelectorAll(".remove").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+              e.target.closest(".notifications-item").remove();
+              updateBadge();
+            });
+          });
+
+          // Mark single as read
+          document.querySelectorAll(".mark-read").forEach(btn => {
+            btn.addEventListener("click", () => {
+              btn.style.background = "#28a745";
+              updateBadge();
+            });
+          });
+
+          // Mark all as read
+          markAllRead.addEventListener("click", () => {
+            document.querySelectorAll(".mark-read").forEach(btn => {
+              btn.style.background = "#28a745";
+            });
+            notifBadge.style.display = "none";
+          });
+
+          // Update badge count
+          function updateBadge() {
+            const items = document.querySelectorAll(".notifications-item");
+            const count = items.length;
+            notifBadge.textContent = count;
+            if (count === 0) {
+              notifBadge.style.display = "none";
+            }
+          }
+        </script>
 
         <div class="dropdown">
           <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
@@ -72,7 +286,8 @@
       <div class="row g-3 align-items-end">
         <div class="col-md-3">
           <div class="position-relative">
-            <input type="text" id="searchProduct" class="form-control ps-5 rounded-5 border-0" placeholder="Cari Produk..." />
+            <input type="text" id="searchProduct" class="form-control ps-5 rounded-5 border-0"
+              placeholder="Cari Produk..." />
             <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
               <i class="fas fa-search text-muted"></i>
             </span>
@@ -88,11 +303,11 @@
                 <option value="<?= strtolower($s) ?>">
                   <?= htmlspecialchars($s) ?>
                 </option>
-                <?php endforeach; ?>
-              </select>
-              <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
-                <i class="fas fa-balance-scale text-muted"></i>
-              </span>
+              <?php endforeach; ?>
+            </select>
+            <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
+              <i class="fas fa-balance-scale text-muted"></i>
+            </span>
           </div>
         </div>
 

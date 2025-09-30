@@ -40,10 +40,10 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>reports" 
-        class="nav-link sidebar-link <?= ($active ?? '') === 'reports' ? 'active' : '' ?>">
+        <a href="<?= BASE_URL ?>report"
+          class="nav-link sidebar-link <?= ($active ?? '') === 'report' ? 'active' : '' ?>">
           <i class="fas fa-chart-line"></i>
-          <span>Reports</span>
+          <span>Report</span>
         </a>
       </li>
     </ul>

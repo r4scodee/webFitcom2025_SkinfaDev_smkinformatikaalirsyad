@@ -280,46 +280,63 @@
 </div>
 
 <main class="container-fluid px-4 py-4">
-    <div class="mb-3">
-        <a href="<?= BASE_URL ?>report/generate" class="btn btn-primary">Generate Report</a>
-        <a href="<?= BASE_URL ?>product/exportPdf" class="btn btn-danger">Export PDF</a>
-    </div>
+  <div class="d-flex gap-2 mb-3">
+    <a href="<?= BASE_URL ?>report/generate" class="btn btn-primary d-flex align-items-center">
+      <i class="fas fa-file-alt me-2"></i> Generate Report
+    </a>
+    <a href="<?= BASE_URL ?>product/exportPdf" class="btn btn-danger d-flex align-items-center">
+      <i class="fas fa-file-pdf me-2"></i> Export PDF
+    </a>
+  </div>
+  <style>
+    .btn {
+      border-radius: 10px;
+      padding: 10px 18px;
+      transition: all 0.2s ease-in-out;
+      font-weight: 500;
+    }
 
-    <!-- Tabel Generate Data -->
-       <div class="card fade-in shadow-sm border-0">
-           <div class="card-body pt-0 pb-4">
-               <div class="table-responsive">
-                   <table class="table table-hover mb-0 rounded-3 align-middle">
-                       <thead>
-                           <tr>
-                               <th class="px-4 py-3 fs-lg">ID</th>
-                               <th class="px-4 py-3 fs-lg">Code</th>
-                               <th class="px-4 py-3 fs-lg">Name</th>
-                               <th class="px-4 py-3 fs-lg">Price</th>
-                               <th class="px-4 py-3 fs-lg">Unit</th>
-                               <th class="px-4 py-3 fs-lg">Created At</th>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           <?php if (!empty($products)): ?>
-                               <?php foreach ($products as $p): ?>
-                                   <tr class="align-middle">
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['id']) ?></td>
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['code']) ?></td>
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['name']) ?></td>
-                                       <td class="px-4 py-3 fw-medium">Rp <?= number_format($p['price'], 0, ',', '.') ?></td>
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['unit']) ?></td>
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['created_at']) ?></td>
-                                   </tr>
-                               <?php endforeach ?>
-                           <?php else: ?>
-                               <tr>
-                                   <td colspan="6" class="text-center">No data available</td>
-                               </tr>
-                           <?php endif ?>
-                       </tbody>
-                   </table>
-               </div>
-           </div>
-        </div>
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+
+  <!-- Tabel Generate Data -->
+  <div class="card fade-in shadow-sm border-0">
+    <div class="card-body pt-0 pb-4">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 rounded-3 align-middle">
+          <thead>
+            <tr>
+              <th class="px-4 py-3 fs-lg">ID</th>
+              <th class="px-4 py-3 fs-lg">Code</th>
+              <th class="px-4 py-3 fs-lg">Name</th>
+              <th class="px-4 py-3 fs-lg">Price</th>
+              <th class="px-4 py-3 fs-lg">Unit</th>
+              <th class="px-4 py-3 fs-lg">Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (!empty($products)): ?>
+              <?php foreach ($products as $p): ?>
+                <tr class="align-middle">
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['id']) ?></td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['code']) ?></td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['name']) ?></td>
+                  <td class="px-4 py-3 fw-medium">Rp <?= number_format($p['price'], 0, ',', '.') ?></td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['unit']) ?></td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['created_at']) ?></td>
+                </tr>
+              <?php endforeach ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="6" class="text-center">No data available</td>
+              </tr>
+            <?php endif ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </main>

@@ -6,7 +6,7 @@ class ReportController extends Controller
     public function index()
     {
         $this->view('report/index', [
-            'title' => 'Reports - Tani Digital',
+            'title' => 'Generate Reports - Tani Digital',
             'products' => []
         ]);
     }

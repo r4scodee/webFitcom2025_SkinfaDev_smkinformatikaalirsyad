@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../library/Controller.php';
 require_once __DIR__ . '/../library/fpdf.php';
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     private $model;
 

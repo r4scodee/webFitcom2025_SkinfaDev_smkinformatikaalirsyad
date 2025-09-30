@@ -48,7 +48,7 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="<?= BASE_URL ?>products/exportPdf">
+              <a class="dropdown-item" href="<?= BASE_URL ?>product/exportPdf">
                 <i class="fas fa-download me-2 text-muted"></i>Download Reports
               </a>
             </li>

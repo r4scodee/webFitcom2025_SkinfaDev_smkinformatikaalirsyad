@@ -19,10 +19,10 @@
   <!-- Sidebar -->
   <nav class="sidebar" id="sidebarbtn">
     <div class="sidebar-header">
-      <a href="<?= BASE_URL ?>dashboard" class="sidebar-brand">
+      <div class="sidebar-brand">
         <img src="<?= BASE_URL ?>assets/img/logo/logo-dashboard-img.png" alt="Logo" width="35" height="35" class="ms-3">
         <span>TANI DIGITAL</span>
-      </a>
+      </div>
     </div>
     <ul class="sidebar-nav">
       <li class="nav-item">
@@ -33,15 +33,15 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>products"
-          class="nav-link sidebar-link <?= ($active ?? '') === 'products' ? 'active' : '' ?>">
+        <a href="<?= BASE_URL ?>product"
+          class="nav-link sidebar-link <?= ($active ?? '') === 'product' ? 'active' : '' ?>">
           <i class="fas fa-boxes"></i>
           <span>Products</span>
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>reports" 
-        class="nav-link sidebar-link <?= ($active ?? '') === 'reports' ? 'active' : '' ?>">
+        <a href="<?= BASE_URL ?>report" 
+        class="nav-link sidebar-link <?= ($active ?? '') === 'report' ? 'active' : '' ?>">
           <i class="fas fa-chart-line"></i>
           <span>Reports</span>
         </a>

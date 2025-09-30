@@ -3,25 +3,16 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// =========================
-// Konfigurasi login sederhana (tanpa hash)
-// =========================
 $valid_username = 'admintanidigital';
-$valid_password = 'cirebon2025-admin'; // password plain text untuk testing
+$valid_password = 'cirebon2025-admin'; 
 
 $error = '';
 
-// =========================
-// Kalau user sudah login, langsung ke dashboard
-// =========================
 if (isset($_SESSION['user_id'])) {
     header("Location: /webFitcom2025_SkinfaDev_smkinformatikaalirsyad/dashboard");
     exit;
 }
 
-// =========================
-// Proses login
-// =========================
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -30,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['user_id'] = 1;
         $_SESSION['username'] = $username;
 
-        // redirect ke dashboard via route MVC
         header("Location: /webFitcom2025_SkinfaDev_smkinformatikaalirsyad/dashboard");
         exit;
     } else {

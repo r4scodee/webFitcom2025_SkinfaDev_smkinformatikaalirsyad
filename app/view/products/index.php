@@ -25,10 +25,79 @@
           </div>
         </div>
 
-        <div class="dropdown me-2">
-          <button class="btn btn-light position-relative" type="button">
+        <div class="dropdown nxl-h-item">
+          <a id="notifBtn" class="nxl-head-link me-3" href="javascript:void(0);">
             <i class="fas fa-bell"></i>
-          </button>
+            <span id="notifBadge" class="badge bg-danger nxl-h-badge">3</span>
+          </a>
+
+          <div id="notifDropdown" class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-notifications-menu">
+            <div class="d-flex justify-content-between align-items-center notifications-head">
+              <h6 class="fw-bold text-dark mb-0">Notifikasi</h6>
+
+            </div>
+
+            <div class="notifications-item">
+              <div class="notif-icon me-3 bg-warning text-white">
+                <i class="fas fa-thermometer-half"></i>
+              </div>
+              <div class="notifications-desc">
+                <span class="font-body text-truncate-2-line">
+                  <span class="fw-semibold text-dark">Sensor Suhu</span> Suhu greenhouse naik jadi <b>32°C</b>.
+                </span>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="notifications-date text-muted">2 menit yang lalu</div>
+                  <div class="d-flex align-items-center gap-2">
+
+                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
+                      <i class="fas fa-times fs-12"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="notifications-item">
+              <div class="notif-icon me-3 bg-info text-white">
+                <i class="fas fa-tint"></i>
+              </div>
+              <div class="notifications-desc">
+                <span class="font-body text-truncate-2-line">
+                  <span class="fw-semibold text-dark">Irigasi</span> Penyiraman otomatis selesai di <b>lahan sayur</b>.
+                </span>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="notifications-date text-muted">20 menit yang lalu</div>
+                  <div class="d-flex align-items-center gap-2">
+
+                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
+                      <i class="fas fa-times fs-12"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="notifications-item">
+              <div class="notif-icon me-3 bg-success text-white">
+                <i class="fas fa-apple-alt"></i>
+              </div>
+              <div class="notifications-desc">
+                <span class="font-body text-truncate-2-line">
+                  <span class="fw-semibold text-dark">Panen Buah</span> 25kg <b>tomat segar</b> siap dipanen hari ini.
+                </span>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="notifications-date text-muted">1 jam yang lalu</div>
+                  <div class="d-flex align-items-center gap-2">
+
+                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
+                      <i class="fas fa-times fs-12"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
         <div class="dropdown">
@@ -72,7 +141,8 @@
       <div class="row g-3 align-items-end">
         <div class="col-md-3">
           <div class="position-relative">
-            <input type="text" id="searchProduct" class="form-control ps-5 rounded-5 border-0" placeholder="Cari Produk..." />
+            <input type="text" id="searchProduct" class="form-control ps-5 rounded-5 border-0"
+              placeholder="Cari Produk..." />
             <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
               <i class="fas fa-search text-muted"></i>
             </span>
@@ -88,11 +158,11 @@
                 <option value="<?= strtolower($s) ?>">
                   <?= htmlspecialchars($s) ?>
                 </option>
-                <?php endforeach; ?>
-              </select>
-              <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
-                <i class="fas fa-balance-scale text-muted"></i>
-              </span>
+              <?php endforeach; ?>
+            </select>
+            <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
+              <i class="fas fa-balance-scale text-muted"></i>
+            </span>
           </div>
         </div>
 

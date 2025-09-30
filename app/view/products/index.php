@@ -16,235 +16,6 @@
       </div>
 
       <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0 order-1 order-md-2">
-
-        <div class="weather-widget d-none d-lg-flex align-items-center me-2">
-          <i class="fas fa-sun text-warning me-1"></i>
-          <div class="weather">
-            <span id="weather-icon" class="me-2"></span>
-            <span class="fw-semibold">24°C</span>
-          </div>
-        </div>
-
-        <div class="dropdown nxl-h-item">
-          <a id="notifBtn" class="nxl-head-link me-3" href="javascript:void(0);">
-            <i class="fas fa-bell"></i>
-            <span id="notifBadge" class="badge bg-danger nxl-h-badge">3</span>
-          </a>
-
-          <div id="notifDropdown" class="dropdown-menu dropdown-menu-end nxl-h-dropdown nxl-notifications-menu">
-            <div class="d-flex justify-content-between align-items-center notifications-head">
-              <h6 class="fw-bold text-dark mb-0">Notifikasi</h6>
-
-            </div>
-
-            <div class="notifications-item">
-              <div class="notif-icon me-3 bg-warning text-white">
-                <i class="fas fa-thermometer-half"></i>
-              </div>
-              <div class="notifications-desc">
-                <span class="font-body text-truncate-2-line">
-                  <span class="fw-semibold text-dark">Sensor Suhu</span> Suhu greenhouse naik jadi <b>32°C</b>.
-                </span>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="notifications-date text-muted">2 menit yang lalu</div>
-                  <div class="d-flex align-items-center gap-2">
-
-                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
-                      <i class="fas fa-times fs-12"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="notifications-item">
-              <div class="notif-icon me-3 bg-info text-white">
-                <i class="fas fa-tint"></i>
-              </div>
-              <div class="notifications-desc">
-                <span class="font-body text-truncate-2-line">
-                  <span class="fw-semibold text-dark">Irigasi</span> Penyiraman otomatis selesai di <b>lahan sayur</b>.
-                </span>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="notifications-date text-muted">20 menit yang lalu</div>
-                  <div class="d-flex align-items-center gap-2">
-
-                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
-                      <i class="fas fa-times fs-12"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="notifications-item">
-              <div class="notif-icon me-3 bg-success text-white">
-                <i class="fas fa-apple-alt"></i>
-              </div>
-              <div class="notifications-desc">
-                <span class="font-body text-truncate-2-line">
-                  <span class="fw-semibold text-dark">Panen Buah</span> 25kg <b>tomat segar</b> siap dipanen hari ini.
-                </span>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="notifications-date text-muted">1 jam yang lalu</div>
-                  <div class="d-flex align-items-center gap-2">
-
-                    <a href="javascript:void(0);" class="remove text-danger" title="Hapus">
-                      <i class="fas fa-times fs-12"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <style>
-          .nxl-h-item {
-            position: relative;
-          }
-
-          .nxl-head-link {
-            display: flex;
-            align-items: center;
-            position: relative;
-            font-size: 20px;
-            color: #444;
-            text-decoration: none;
-            cursor: pointer;
-          }
-
-          .nxl-h-badge {
-            font-size: 11px;
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            padding: 3px 6px;
-            border-radius: 50%;
-          }
-
-          .nxl-h-dropdown {
-            width: 350px !important;
-            max-height: 400px !important;
-            overflow-y: auto;
-            border-radius: 14px;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.11);
-            background: #fff;
-            border: 1px solid #e0e0e0;
-          }
-
-          .notifications-head {
-            border-bottom: 1px solid #eee;
-            padding: 0.5rem 0.8rem;
-            margin-bottom: 0.5rem;
-          }
-
-          .notifications-item {
-            display: flex;
-            align-items: flex-start;
-            padding: 0.7rem;
-            border-radius: 8px;
-            transition: background 0.2s;
-
-          }
-
-          .notifications-item:hover {
-            background: #f8f9fa;
-          }
-
-          .notif-icon {
-            font-size: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-          }
-
-          .notifications-desc {
-            flex: 1;
-            font-size: 13px;
-          }
-
-          .notifications-date {
-            font-size: 11px;
-          }
-
-          .mark-read {
-            cursor: pointer;
-          }
-
-          .remove {
-            cursor: pointer;
-          }
-        </style>
-
-
-        <!-- ========== JS ========== -->
-        <script>
-          const notifBtn = document.getElementById("notifBtn");
-          const notifDropdown = document.getElementById("notifDropdown");
-          const notifBadge = document.getElementById("notifBadge");
-          const markAllRead = document.getElementById("markAllRead");
-
-          // Toggle by click
-          notifBtn.addEventListener("click", () => {
-            notifDropdown.classList.toggle("show");
-            notifDropdown.style.position = "absolute";
-            notifDropdown.style.inset = "0 auto auto 0";
-            notifDropdown.style.transform = "translate3d(-250px, 40px, 0)";
-          });
-
-          // Hover open
-          notifBtn.addEventListener("mouseenter", () => {
-            notifDropdown.classList.add("show");
-            notifDropdown.style.position = "absolute";
-            notifDropdown.style.inset = "0 auto auto 0";
-            notifDropdown.style.transform = "translate3d(-250px, 40px, 0)";
-          });
-
-          // Close when leave
-          notifDropdown.addEventListener("mouseleave", () => {
-            notifDropdown.classList.remove("show");
-          });
-
-          // Remove notif item
-          document.querySelectorAll(".remove").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-              e.target.closest(".notifications-item").remove();
-              updateBadge();
-            });
-          });
-
-          // Mark single as read
-          document.querySelectorAll(".mark-read").forEach(btn => {
-            btn.addEventListener("click", () => {
-              btn.style.background = "#28a745";
-              updateBadge();
-            });
-          });
-
-          // Mark all as read
-          markAllRead.addEventListener("click", () => {
-            document.querySelectorAll(".mark-read").forEach(btn => {
-              btn.style.background = "#28a745";
-            });
-            notifBadge.style.display = "none";
-          });
-
-          // Update badge count
-          function updateBadge() {
-            const items = document.querySelectorAll(".notifications-item");
-            const count = items.length;
-            notifBadge.textContent = count;
-            if (count === 0) {
-              notifBadge.style.display = "none";
-            }
-          }
-        </script>
-
         <div class="dropdown">
           <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
             <img src="<?= BASE_URL ?>assets/img/dashboard-profile/admin.jpeg" alt="admin" class="profile-avatar">
@@ -256,20 +27,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="<?= BASE_URL ?>errors">
-                <i class="fas fa-user me-2 text-muted"></i>Profile Settings
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="<?= BASE_URL ?>product/exportPdf">
-                <i class="fas fa-download me-2 text-muted"></i>Download Reports
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a class="dropdown-item text-danger" href="/webFitcom2025_SkinfaDev_smkinformatikaalirsyad/logout.php">
+              <a class="dropdown-item text-danger" href="<?= BASE_URL ?>logout.php">
                 <i class="fas fa-sign-out-alt me-2"></i>Log Out
               </a>
             </li>
@@ -324,7 +82,7 @@
             </div>
           </div>
           <div class="text-center text-md-end">
-            <a href="<?= BASE_URL ?>products/create" class="btn rounded-5 w-100 w-md-auto btn-add-product px-3">
+            <a href="<?= BASE_URL ?>product/create" class="btn rounded-5 w-100 w-md-auto btn-add-product px-3">
               <span class="fs-sm text-light">Tambah Produk</span>
             </a>
           </div>
@@ -382,7 +140,7 @@
                   <td>
                     <!-- Tombol edit -->
                     <div class="d-flex h-100 justify-content-center align-items-center gap-2">
-                      <a href="<?= BASE_URL ?>products/edit/<?= htmlspecialchars($p['id']) ?>"
+                      <a href="<?= BASE_URL ?>product/edit/<?= htmlspecialchars($p['id']) ?>"
                         class="btn btn-sm btn-outline-success">
                         <i class="fi fi-tr-pen-field"></i>
                       </a>
@@ -468,7 +226,7 @@
     deleteButtons.forEach(btn => {
       btn.addEventListener("click", function () {
         const productId = this.getAttribute("data-id");
-        deleteForm.action = `<?= BASE_URL ?>products/delete/` + productId;
+        deleteForm.action = `<?= BASE_URL ?>product/delete/` + productId;
       });
     });
 

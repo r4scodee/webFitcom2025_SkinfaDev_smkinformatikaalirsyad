@@ -546,7 +546,7 @@
         </div>
     </section>
 
-    <section class="popular_products">
+    <section class="popular_products" id="populer-produk">
         <div class="container">
             <div class="section-title wow fadeInUp">
                 <div class="row">
@@ -772,7 +772,7 @@
         </div>
     </section>
 
-    <section class="recommended_products pt_80" id="produk">
+    <section class="recommended_products pt_80" id="rekomendasi-produk">
         <div class="container" id="produk">
             <div class="row">
                 <div class="col-xl-5 col-lg-5 col-12 wow fadeInUp">
@@ -1258,7 +1258,7 @@
     <section class="contact-us section_padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 align-self-center wow fadeIn">
+                <div class="col-lg-6 align-self-center wow fadeIn" id="lokasi">
                     <div class="c_gmap">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31685.123456789!2d108.5500!3d-6.7167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e71f3c4b9cb14df%3A0xabcdef1234567890!2sCirebon%2C%20Jawa%20Barat%2C%20Indonesia!5e0!3m2!1sen!2sid!4v1234567890123"
@@ -1425,10 +1425,10 @@
                         <h4>Jelajahi</h4>
                         <ul>
                             <li><a href="#partnerpasok">Partner pasok Kami</a></li>
-                            <li><a href="#">Produk Populer</a></li>
-                            <li><a href="#">Rekomendasi Produk</a></li>
-                            <li><a href="#">Lokasi</a></li>
-                            <li><a href="#">Form Pesan</a></li>
+                            <li><a href="#populer-produk">Produk Populer</a></li>
+                            <li><a href="#rekomendasi-produk">Rekomendasi Produk</a></li>
+                            <li><a href="#lokasi">Lokasi</a></li>
+                            <li><a href="#form-order">Form Pesan</a></li>
                         </ul>
                     </div>
                 </div>

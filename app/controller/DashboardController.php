@@ -24,12 +24,4 @@ class DashboardController extends Controller
             'active' => 'dashboard'
         ]);
     }
-
-    public function products()
-    {
-        $this->view('dashboard/products/index', [
-            'title' => 'Products - Tani Digital',
-            'active' => 'products'
-        ]);
-    }
 }

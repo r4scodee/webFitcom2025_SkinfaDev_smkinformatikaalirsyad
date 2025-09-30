@@ -93,7 +93,7 @@ class ProductController extends Controller
 
         $id = $this->model->create($data);
 
-        $this->redirect('products');
+        $this->redirect('product');
     }
 
     // GET /products/edit/{id}
@@ -171,7 +171,7 @@ class ProductController extends Controller
 
         $this->model->update($id, $data);
 
-        $this->redirect('products');
+        $this->redirect('product');
     }
 
     // GET or POST /products/delete/{id}
@@ -196,7 +196,7 @@ class ProductController extends Controller
             @unlink(UPLOAD_DIR . $product['image']);
         }
 
-        $this->redirect('products');
+        $this->redirect('product');
     }
 
     // ===== helper untuk upload file image aman =====
@@ -244,65 +244,70 @@ class ProductController extends Controller
 
     public function exportPdf()
     {
-        // Set timezone di awal fungsi
         date_default_timezone_set('Asia/Jakarta');
 
         $products = $this->model->all();
 
         $pdf = new FPDF();
         $pdf->AddPage();
+        $pdf->SetMargins(10, 10, 10);
 
-        // ==== HEADER ====
-        $pdf->Image(__DIR__ . '/../../assets/img/logo/logo-dashboard-img.png', 10, 8, 20); // logo
+        // Header
+        $pdf->Image(__DIR__ . '/../../assets/img/logo/logo-dashboard-img.png', 10, 8, 20); 
         $pdf->SetFont('Helvetica', 'B', 14);
-        $pdf->Cell(0, 10, 'Tani Digital', 0, 1, 'C');
+        $pdf->Cell(0, 8, 'Tani Digital', 0, 1, 'C');
         $pdf->SetFont('Helvetica', '', 10);
         $pdf->Cell(0, 5, 'Jl. Pertanian No. 123, Cirebon | 0812-3456-7890', 0, 1, 'C');
         $pdf->Ln(5);
 
-        // Garis pemisah
+        // line
         $pdf->SetDrawColor(0, 0, 0);
+        $pdf->SetLineWidth(0.3);
         $pdf->Line(10, 35, 200, 35);
         $pdf->Ln(15);
 
-        // ==== JUDUL ====
+        // title
         $pdf->SetFont('Helvetica', 'B', 12);
         $pdf->Cell(0, 10, 'Laporan Data Produk', 0, 1, 'C');
-        $pdf->Ln(5);
+        $pdf->Ln(3);
 
-        // ==== TABEL ====
-        $pdf->SetFont('Helvetica', 'B', 11);
+        // table
+        $pdf->SetFont('Helvetica', 'B', 10);
         $pdf->SetFillColor(200, 220, 255);
 
-        $w = [10, 30, 70, 40, 30];
-        $header = ['No', 'Kode', 'Nama Produk', 'Harga', 'Satuan'];
+        // colomn width
+        $w = [10, 30, 60, 25, 30, 35];
+        $header = ['No', 'Kode', 'Nama Produk', 'Harga', 'Satuan', 'Tanggal'];
 
-        for ($i = 0; $i < count($header); $i++) {
-            $pdf->Cell($w[$i], 10, $header[$i], 1, 0, 'C', true);
+        // Table header
+        foreach ($header as $i => $col) {
+            $pdf->Cell($w[$i], 10, $col, 1, 0, 'C', true);
         }
         $pdf->Ln();
 
-        $pdf->SetFont('Helvetica', '', 10);
+        // Isi tabel
+        $pdf->SetFont('Helvetica', '', 9);
         $fill = false;
         $no = 1;
+
         foreach ($products as $row) {
             $pdf->SetFillColor(245, 245, 245);
             $pdf->Cell($w[0], 8, $no++, 1, 0, 'C', $fill);
             $pdf->Cell($w[1], 8, $row['code'], 1, 0, 'C', $fill);
-            $pdf->Cell($w[2], 8, $row['name'], 1, 0, 'L', $fill);
-            $pdf->Cell($w[3], 8, number_format($row['price']), 1, 0, 'R', $fill);
+            $pdf->Cell($w[2], 8, $row['name'], 1, 0, 'C', $fill);
+            $pdf->Cell($w[3], 8, number_format($row['price']), 1, 0, 'C', $fill);
             $pdf->Cell($w[4], 8, $row['unit'], 1, 0, 'C', $fill);
+            $pdf->Cell($w[5], 8, date('d-m-Y', strtotime($row['created_at'])), 1, 0, 'C', $fill);
             $pdf->Ln();
             $fill = !$fill;
         }
 
-        // ==== FOOTER ====
+        // Footer
         $pdf->Ln(5);
         $pdf->SetFont('Helvetica', 'I', 9);
 
-        // Format waktu: Minggu, 28 September 2025 14:32:10
+        // Tanggal print
         $tanggalCetak = date('l, d F Y H:i:s');
-        // Terjemahkan hari & bulan ke bahasa Indonesia (opsional)
         $indonesianDays = [
             'Sunday' => 'Minggu',
             'Monday' => 'Senin',
@@ -326,17 +331,15 @@ class ProductController extends Controller
             'November' => 'November',
             'December' => 'Desember'
         ];
-
         $tanggalCetak = strtr($tanggalCetak, $indonesianDays);
         $tanggalCetak = strtr($tanggalCetak, $indonesianMonths);
 
-        $pdf->Cell(0, 10, 'Dicetak pada: ' . $tanggalCetak, 0, 0, 'L');
-        $pdf->Cell(0, 10, 'Halaman ' . $pdf->PageNo(), 0, 0, 'R');
+        // Footer kiri & kanan
+        $pdf->Cell(95, 10, 'Dicetak pada: ' . $tanggalCetak, 0, 0, 'L');
+        $pdf->Cell(95, 10, 'Halaman ' . $pdf->PageNo(), 0, 0, 'R');
 
-        // Output PDF
+        // Output ke PDF
         $pdf->Output('D', 'laporan_produk_' . date('Y-m-d_H.i') . '.pdf');
     }
-
-
 
 }

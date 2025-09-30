@@ -5,7 +5,7 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $this->view('reports/index', [
+        $this->view('report/index', [
             'title' => 'Reports - Tani Digital',
             'products' => []
         ]);
@@ -16,7 +16,7 @@ class ReportController extends Controller
         $productModel = new ProductModel();
         $products = $productModel->all(); 
 
-        $this->view('reports/index', [
+        $this->view('report/index', [
             'title' => 'Generate Reports - Tani Digital',
             'products' => $products
         ]);

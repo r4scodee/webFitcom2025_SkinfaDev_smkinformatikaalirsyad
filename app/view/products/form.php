@@ -8,8 +8,8 @@ $csrf = $csrf ?? '';
 // Detect apakah edit atau create
 $isEdit = ($action === 'update');
 $formAction = $isEdit
-  ? BASE_URL . 'products/update/' . ($product['id'] ?? '')
-  : BASE_URL . 'products/store';
+  ? BASE_URL . 'product/update/' . ($product['id'] ?? '')
+  : BASE_URL . 'product/store';
 
 // Helper untuk ambil value lama
 $val = function ($key, $default = '') use ($product, $old, $isEdit) {
@@ -21,7 +21,7 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
 };
 
 $isEdit = ($action === 'update');
-$formAction = $isEdit ? BASE_URL . 'products/update/' . ($product['id'] ?? '') : BASE_URL . 'products/store';
+$formAction = $isEdit ? BASE_URL . 'product/update/' . ($product['id'] ?? '') : BASE_URL . 'product/store';
 $val = function ($key, $default = '') use ($product, $old, $isEdit) {
   if (!empty($old) && isset($old[$key]))
     return $old[$key];
@@ -91,7 +91,7 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
       </div>
 
       <div class="col-12 d-flex gap-2 justify-content-end mt-4">
-        <a href="<?= BASE_URL ?>products" class="btn btn-secondary px-4 rounded-5">Batal</a>
+        <a href="<?= BASE_URL ?>product" class="btn btn-secondary px-4 rounded-5">Batal</a>
         <button class="btn btn-farm px-4 rounded-5"><?= $isEdit ? 'Ubah' : 'Simpan' ?></button>
       </div>
     </form>

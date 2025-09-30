@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         datasets: [
           {
             label: "Products Sold",
-            data: [1, 4, 0, 3, 0, 2, 0],
+            data: [1, 4, 0, 3, 0, 2, 0], 
             borderColor: "#4a7c59",
             backgroundColor: "rgba(74, 124, 89, 0.1)",
             borderWidth: 3,
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
 
 // Weather Chart
 const weatherEl = document.getElementById("weatherChart");
@@ -160,9 +161,7 @@ $(document).ready(function () {
   });
 
   $("form").on("submit", function () {
-    let harga = $("#price")
-      .val()
-      .replace(/[^0-9]/g, "");
+    let harga = $("#price").val().replace(/[^0-9]/g, "");
     $("#price").val(harga);
   });
 });
@@ -195,136 +194,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 updateWeatherIcon();
 setInterval(updateWeatherIcon, 60 * 60 * 1000);
-
-// Sensors Cuaca
-document.addEventListener("DOMContentLoaded", () => {
-  const API_KEY = "209fb00e78eb360bfc293ef18b2596a5"; // API Key valid
-  const CITY = "Cirebon";
-  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric&lang=id`;
-
-  const tempEl = document.getElementById("temp");
-  const humidityEl = document.getElementById("humidity");
-  const windEl = document.getElementById("wind");
-  const conditionEl = document.getElementById("condition");
-
-  const tempChart = new Chart(document.getElementById("tempChart"), {
-    type: "line",
-    data: {
-      labels: [],
-      datasets: [
-        { label: "°C", data: [], borderColor: "#28a745", fill: false },
-      ],
-    },
-  });
-
-  const humidityChart = new Chart(document.getElementById("humidityChart"), {
-    type: "line",
-    data: {
-      labels: [],
-      datasets: [{ label: "%", data: [], borderColor: "#007bff", fill: false }],
-    },
-  });
-
-  function addChartData(chart, value) {
-    const time = new Date().toLocaleTimeString();
-    chart.data.labels.push(time);
-    chart.data.datasets[0].data.push(value);
-    if (chart.data.labels.length > 10) {
-      chart.data.labels.shift();
-      chart.data.datasets[0].data.shift();
-    }
-    chart.update();
-  }
-
-  async function fetchWeather() {
-    try {
-      const res = await fetch(URL);
-      const data = await res.json();
-
-      if (data.cod !== 200) {
-        console.error("API error:", data.message);
-        return;
-      }
-
-      const temp = data.main.temp.toFixed(1);
-      const humidity = data.main.humidity;
-      const wind = (data.wind.speed * 3.6).toFixed(1); // m/s -> km/h
-      const condition = data.weather[0].description;
-
-      tempEl.textContent = `${temp} °C`;
-      humidityEl.textContent = `${humidity} %`;
-      windEl.textContent = `${wind} km/h`;
-      conditionEl.textContent =
-        condition.charAt(0).toUpperCase() + condition.slice(1);
-
-      addChartData(tempChart, temp);
-      addChartData(humidityChart, humidity);
-    } catch (err) {
-      console.error("Weather fetch error:", err);
-    }
-  }
-
-  fetchWeather();
-  setInterval(fetchWeather, 300000); // update tiap 5 menit
-});
-
-// Notifikasi Toast
-const notifBtn = document.getElementById("notifBtn");
-const notifDropdown = document.getElementById("notifDropdown");
-const notifBadge = document.getElementById("notifBadge");
-const markAllRead = document.getElementById("markAllRead");
-
-// Toggle by click
-notifBtn.addEventListener("click", () => {
-  notifDropdown.classList.toggle("show");
-  notifDropdown.style.position = "absolute";
-  notifDropdown.style.inset = "0 auto auto 0";
-  notifDropdown.style.transform = "translate3d(-250px, 40px, 0)";
-});
-
-// Hover open
-notifBtn.addEventListener("mouseenter", () => {
-  notifDropdown.classList.add("show");
-  notifDropdown.style.position = "absolute";
-  notifDropdown.style.inset = "0 auto auto 0";
-  notifDropdown.style.transform = "translate3d(-250px, 40px, 0)";
-});
-
-// Close when leave
-notifDropdown.addEventListener("mouseleave", () => {
-  notifDropdown.classList.remove("show");
-});
-
-// Remove notif item
-document.querySelectorAll(".remove").forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    e.target.closest(".notifications-item").remove();
-    updateBadge();
-  });
-});
-
-// Mark single as read
-document.querySelectorAll(".mark-read").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    btn.style.background = "#28a745";
-    updateBadge();
-  });
-});
-
-// Mark all as read
-markAllRead.addEventListener("click", () => {
-  document.querySelectorAll(".mark-read").forEach((btn) => {
-    btn.style.background = "#28a745";
-  });
-  notifBadge.style.display = "none";
-});
-
-// Update badge count
-function updateBadge() {
-  const items = document.querySelectorAll(".notifications-item");
-  const count = items.length;
-  notifBadge.textContent = count;
-  if (count === 0) {
-    notifBadge.style.display = "none";
-  }
-}

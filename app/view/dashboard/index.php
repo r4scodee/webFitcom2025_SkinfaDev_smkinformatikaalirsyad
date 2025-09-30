@@ -101,6 +101,151 @@
           </div>
         </div>
 
+        <style>
+          .nxl-h-item {
+            position: relative;
+          }
+
+          .nxl-head-link {
+            display: flex;
+            align-items: center;
+            position: relative;
+            font-size: 20px;
+            color: #444;
+            text-decoration: none;
+            cursor: pointer;
+          }
+
+          .nxl-h-badge {
+            font-size: 11px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            padding: 3px 6px;
+            border-radius: 50%;
+          }
+
+          .nxl-h-dropdown {
+            width: 350px !important;
+            max-height: 400px !important;
+            overflow-y: auto;
+            border-radius: 14px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.11);
+            background: #fff;
+            border: 1px solid #e0e0e0;
+          }
+
+          .notifications-head {
+            border-bottom: 1px solid #eee;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .notifications-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.7rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+
+          }
+
+          .notifications-item:hover {
+            background: #f8f9fa;
+          }
+
+          .notif-icon {
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+          }
+
+          .notifications-desc {
+            flex: 1;
+            font-size: 13px;
+          }
+
+          .notifications-date {
+            font-size: 11px;
+          }
+
+          .mark-read {
+            cursor: pointer;
+          }
+
+          .remove {
+            cursor: pointer;
+          }
+        </style>
+
+
+        <!-- ========== JS ========== -->
+        <script>
+          const notifBtn = document.getElementById("notifBtn");
+          const notifDropdown = document.getElementById("notifDropdown");
+          const notifBadge = document.getElementById("notifBadge");
+          const markAllRead = document.getElementById("markAllRead");
+
+          // Toggle by click
+          notifBtn.addEventListener("click", () => {
+            notifDropdown.classList.toggle("show");
+            notifDropdown.style.position = "absolute";
+            notifDropdown.style.inset = "0 auto auto 0";
+            notifDropdown.style.transform = "translate3d(-250px, 40px, 0)";
+          });
+
+          // Hover open
+          notifBtn.addEventListener("mouseenter", () => {
+            notifDropdown.classList.add("show");
+            notifDropdown.style.position = "absolute";
+            notifDropdown.style.inset = "0 auto auto 0";
+            notifDropdown.style.transform = "translate3d(-250px, 40px, 0)";
+          });
+
+          // Close when leave
+          notifDropdown.addEventListener("mouseleave", () => {
+            notifDropdown.classList.remove("show");
+          });
+
+          // Remove notif item
+          document.querySelectorAll(".remove").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+              e.target.closest(".notifications-item").remove();
+              updateBadge();
+            });
+          });
+
+          // Mark single as read
+          document.querySelectorAll(".mark-read").forEach(btn => {
+            btn.addEventListener("click", () => {
+              btn.style.background = "#28a745";
+              updateBadge();
+            });
+          });
+
+          // Mark all as read
+          markAllRead.addEventListener("click", () => {
+            document.querySelectorAll(".mark-read").forEach(btn => {
+              btn.style.background = "#28a745";
+            });
+            notifBadge.style.display = "none";
+          });
+
+          // Update badge count
+          function updateBadge() {
+            const items = document.querySelectorAll(".notifications-item");
+            const count = items.length;
+            notifBadge.textContent = count;
+            if (count === 0) {
+              notifBadge.style.display = "none";
+            }
+          }
+        </script>
+
         <div class="dropdown">
           <button class="btn btn-light d-flex align-items-center" type="button" data-bs-toggle="dropdown">
             <img src="<?= BASE_URL ?>assets/img/dashboard-profile/admin.jpeg" alt="admin" class="profile-avatar">

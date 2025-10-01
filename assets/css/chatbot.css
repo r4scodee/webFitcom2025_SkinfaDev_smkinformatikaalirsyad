@@ -316,14 +316,11 @@
        
        @media (max-width: 768px) {
            .chat .contact.bar .name {
-               margin-right: 200px;
+               margin-right: 130px;
                white-space: nowrap;
            }
            .chat .contact.bar .seen {
                margin-right: 270px;
                color: #25D366;
            }
-           /* emoji-picker {
-                bottom: -400px !important;
-            } */
        }

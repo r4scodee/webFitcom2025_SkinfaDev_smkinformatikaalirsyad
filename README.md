@@ -20,7 +20,7 @@ Project ini dibuat untuk mempermudah manajemen data dalam dunia pertanian secara
 ---
 
 ## 📂 Struktur Project
-
+```
 webFitcom2025_SkinfaDev_smkinformatikaalirsyad/
 ├── app/
 │ ├── controllers/
@@ -64,7 +64,7 @@ webFitcom2025_SkinfaDev_smkinformatikaalirsyad/
 ├── index.php
 ├── logout.php
 ├── README.md
-
+```
 
 ---
 

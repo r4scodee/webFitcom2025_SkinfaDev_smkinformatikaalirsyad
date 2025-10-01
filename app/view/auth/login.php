@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $valid_username = 'admintanidigital';
-$valid_password = 'cirebon2025-admin'; 
+$valid_password = 'cirebon2025-admin';
 
 $error = '';
 
@@ -30,10 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin Dashboard TaniDigital</title>
+    <title>Login Admin Dashboard | Tani Digital</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/satoshi/satoshi.css">
@@ -74,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <section class="main-banner banner_style_2" style="background-image: url(assets/img/slider/bg.svg);">
         <div class="container text-center">
             <h2>Masuk</h2>
-            <p><a href="#">Beranda</a> / Masuk</p>
+            <p><a href="#">Home</a> / Masuk</p>
         </div>
     </section>
 

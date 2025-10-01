@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tani Digital</title>
+    <title>Tani Digital | Smart Farming Sayur & Buah Segar - Home</title>
     <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>assets/img/favicon.ico">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/owl.carousel.min.css">
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-6 align-self-center">
                     <div class="logo">
-                        <a href="<?= BASE_URL?>"><img src="assets/img/logo/logo.png" alt="logo"></a>
+                        <a href="<?= BASE_URL ?>"><img src="assets/img/logo/logo.png" alt="logo"></a>
                     </div>
                 </div>
 
@@ -79,14 +79,14 @@
                     <ul>
                         <li class="d-flex">
                             <div class="thumb_img_cartmini">
-                                <a href="https://id.shp.ee/FtAeJ5q" class="mc_img">
+                                <a href="https://wa.me/6287877566677" class="mc_img">
                                     <img src="assets/img/flash_sale/1.png" alt="">
                                 </a>
                             </div>
 
                             <div class="product-detail">
                                 <h3 class="product_name_mini">
-                                    <a href="https://id.shp.ee/FtAeJ5q">Jeruk Mandarin Fresh 1 KG</a>
+                                    <a href="https://wa.me/6287877566677">Jeruk Mandarin Fresh 1 KG</a>
                                 </h3>
                                 <div class="product_info">
                                     <div class="product_quanity"></div>
@@ -112,14 +112,14 @@
 
                         <li class="d-flex">
                             <div class="thumb_img_cartmini">
-                                <a href="https://id.shp.ee/FtAeJ5q" class="mc_img">
+                                <a href="https://wa.me/6287877566677" class="mc_img">
                                     <img src="assets/img/flash_sale/2.png" alt="">
                                 </a>
                             </div>
 
                             <div class="product-detail">
                                 <h3 class="product_name_mini">
-                                    <a href="https://id.shp.ee/FtAeJ5q">
+                                    <a href="https://wa.me/6287877566677">
                                         Stroberi - buah musim panas yang manis dan sehat
                                     </a>
                                 </h3>
@@ -144,14 +144,14 @@
 
                         <li class="d-flex">
                             <div class="thumb_img_cartmini">
-                                <a href="https://id.shp.ee/FtAeJ5q" class="mc_img">
+                                <a href="https://wa.me/6287877566677" class="mc_img">
                                     <img src="assets/img/flash_sale/3.png" alt="">
                                 </a>
                             </div>
 
                             <div class="product-detail">
                                 <h3 class="product_name_mini">
-                                    <a href="https://id.shp.ee/FtAeJ5q">
+                                    <a href="https://wa.me/6287877566677">
                                         Paprika - manfaat kesehatan luar biasa
                                     </a>
                                 </h3>
@@ -209,7 +209,7 @@
                 <nav class="main-menu position-relative">
                     <ul>
                         <li>
-                            <a href="<?= BASE_URL?>">Beranda</a>
+                            <a href="<?= BASE_URL ?>">Home</a>
                         </li>
                         <li>
                             <a href="#tentangkami">Tentang Kami</a>
@@ -247,7 +247,7 @@
                                         <h1>Sayur dan Buah Buahan <br> Segar & Sehat</h1>
                                         <p>Dipanen langsung dari kebun pilihan, penuh nutrisi dan bebas bahan kimia
                                             untuk hidup lebih sehat.</p>
-                                        <a href="https://id.shp.ee/FtAeJ5q" class="main_btn">Belanja Sekarang <i
+                                        <a href="https://wa.me/6287877566677" class="main_btn">Belanja Sekarang <i
                                                 class="ri-arrow-right-line"></i></a>
                                     </div>
                                 </div>
@@ -272,7 +272,7 @@
                                         <h1>Sayur & Buah <br> Berkualitas Tinggi</h1>
                                         <p>Kami menghadirkan produk segar pilihan terbaik dengan standar kualitas tinggi
                                             langsung ke meja Anda.</p>
-                                        <a href="https://id.shp.ee/FtAeJ5q" class="main_btn">Belanja Sekarang <i
+                                        <a href="https://wa.me/6287877566677" class="main_btn">Belanja Sekarang <i
                                                 class="ri-arrow-right-line"></i></a>
                                     </div>
                                 </div>
@@ -526,7 +526,7 @@
                             <h2><span>Murni & Organik</span> Jus Kiwi Fresh
                             </h2>
                             <p>Kesegaran murni, langsung dari perkebunan ke gelasmu</p>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="main_btn">Beli Sekarang <i
+                            <a href="https://wa.me/6287877566677" class="main_btn">Beli Sekarang <i
                                     class="ri-arrow-right-line"></i></a>
                         </div>
                     </div>
@@ -537,7 +537,7 @@
                         <div class="promo_content">
                             <h2><span>Makan Sehat </span> Dimulai dari Sini!</h2>
                             <p>Bangun hidup sehatmu yang segar</p>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="main_btn">Beli Sekarang <i
+                            <a href="https://wa.me/6287877566677" class="main_btn">Beli Sekarang <i
                                     class="ri-arrow-right-line"></i></a>
                         </div>
                     </div>
@@ -564,7 +564,7 @@
                                 <span><u>30%</u> Diskon</span> Produk Terlaris
                             </h2>
                             <p>Resep Jus Detox Untuk <br>Menurunkan Berat Badan</p>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="yellow-btn">Beli Sekarang <i
+                            <a href="https://wa.me/6287877566677" class="yellow-btn">Beli Sekarang <i
                                     class="ri-arrow-right-line"></i></a>
                         </div>
                     </div>
@@ -592,7 +592,7 @@
                                     <span class="current_price">Rp12.750</span>
                                     <del>Rp15.000</del>
                                 </div>
-                                <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                                <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                         class="ri-shopping-cart-line"></i></a>
                             </div>
                         </div>
@@ -616,7 +616,7 @@
                                     <span class="current_price">Rp16.065</span>
                                     <del>Rp18.900</del>
                                 </div>
-                                <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                                <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                         class="ri-shopping-cart-line"></i></a>
                             </div>
                         </div>
@@ -640,7 +640,7 @@
                                     <span class="current_price">Rp27.920</span>
                                     <del>Rp34.900</del>
                                 </div>
-                                <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                                <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                         class="ri-shopping-cart-line"></i></a>
                             </div>
                         </div>
@@ -664,7 +664,7 @@
                                     <span class="current_price">Rp29.925</span>
                                     <del>Rp39.900</del>
                                 </div>
-                                <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                                <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                         class="ri-shopping-cart-line"></i></a>
                             </div>
                         </div>
@@ -688,7 +688,7 @@
                                     <span class="current_price">Rp20.930</span>
                                     <del>Rp29.900</del>
                                 </div>
-                                <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                                <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                         class="ri-shopping-cart-line"></i></a>
                             </div>
                         </div>
@@ -712,7 +712,7 @@
                                     <span class="current_price">Rp24.210</span>
                                     <del>Rp26.900</del>
                                 </div>
-                                <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                                <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                         class="ri-shopping-cart-line"></i></a>
                             </div>
                         </div>
@@ -736,7 +736,7 @@
                                     <span class="current_price">Rp15.215</span>
                                     <del>Rp17.900</del>
                                 </div>
-                                <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                                <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                         class="ri-shopping-cart-line"></i></a>
                             </div>
                         </div>
@@ -760,7 +760,7 @@
                                     <span class="current_price">Rp34.320</span>
                                     <del>Rp42.900</del>
                                 </div>
-                                <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                                <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                         class="ri-shopping-cart-line"></i></a>
                             </div>
                         </div>
@@ -797,7 +797,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge">Diskon 15%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/1.png" alt="Jeruk Mandarin">
                             </a>
                         </div>
@@ -807,12 +807,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Jeruk Mandarin Fresh 1 KG</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Jeruk Mandarin Fresh 1 KG</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp32.980</span>
                             <del>Rp38.800</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -821,7 +821,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge bg_orange">Diskon 25%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/2.png" alt="Stroberi">
                             </a>
                         </div>
@@ -831,12 +831,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Stroberi Fresh 1 KG</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Stroberi Fresh 1 KG</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp90.000</span>
                             <del>Rp120.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -845,7 +845,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge">Diskon 10%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/3.png" alt="Paprika">
                             </a>
                         </div>
@@ -855,12 +855,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Paprika Fresh 1 KG</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Paprika Fresh 1 KG</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp45.000</span>
                             <del>Rp50.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -869,7 +869,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge bg_blue">Diskon 30%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/4.png" alt="Peterseli">
                             </a>
                         </div>
@@ -879,12 +879,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Peterseli Fresh 1 KG</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Peterseli Fresh 1 KG</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp105.000</span>
                             <del>Rp150.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -893,7 +893,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge">Diskon 20%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/5.png" alt="Jagung">
                             </a>
                         </div>
@@ -903,12 +903,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Jagung Fresh 1 KG</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Jagung Fresh 1 KG</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp18.000</span>
                             <del>Rp22.500</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -917,7 +917,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge">Diskon 15%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/6.png" alt="Kol Putih">
                             </a>
                         </div>
@@ -927,12 +927,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Kol Putih Fresh 1 KG</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Kol Putih Fresh 1 KG</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp12.750</span>
                             <del>Rp15.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -941,7 +941,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge bg_blue">Diskon 30%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/7.png" alt="Paket Buah">
                             </a>
                         </div>
@@ -951,12 +951,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Paket Sayur & Buah Fresh</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Paket Sayur & Buah Fresh</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp52.500</span>
                             <del>Rp75.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -965,7 +965,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge">Diskon 25%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/8.png" alt="Tomat">
                             </a>
                         </div>
@@ -975,12 +975,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Tomat Fresh 1 KG</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Tomat Fresh 1 KG</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp14.100</span>
                             <del>Rp18.750</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -989,7 +989,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge">Diskon 20%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/9.png" alt="Kacang Almond">
                             </a>
                         </div>
@@ -999,12 +999,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Kacang Almond Premium 500gr</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Kacang Almond Premium 500gr</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp80.000</span>
                             <del>Rp100.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -1013,7 +1013,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge bg_orange">Diskon 25%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/10.png" alt="Daun Teh Hijau">
                             </a>
                         </div>
@@ -1023,12 +1023,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Daun Teh Hijau Asli 200gr</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Daun Teh Hijau Asli 200gr</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp37.500</span>
                             <del>Rp50.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -1037,7 +1037,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge bg_blue">Diskon 30%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/11.png" alt="Jus Jeruk Botol">
                             </a>
                         </div>
@@ -1047,12 +1047,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Jus Jeruk Botol 1L</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Jus Jeruk Botol 1L</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp28.000</span>
                             <del>Rp40.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -1061,7 +1061,7 @@
                     <div class="single_flash">
                         <div class="flash-image">
                             <span class="off_badge">Diskon 10%</span>
-                            <a href="https://id.shp.ee/FtAeJ5q" class="d-block">
+                            <a href="https://wa.me/6287877566677" class="d-block">
                                 <img src="assets/img/flash_sale/12.png" alt="Jus Apel Botol">
                             </a>
                         </div>
@@ -1071,12 +1071,12 @@
                                     class="fa-solid fa-star"></i>
                                 <span class="frating_number">(5.0)</span></a>
                         </div>
-                        <h3><a href="https://id.shp.ee/FtAeJ5q">Jus Apel Botol 1L</a></h3>
+                        <h3><a href="https://wa.me/6287877566677">Jus Apel Botol 1L</a></h3>
                         <div class="flash_price">
                             <span class="current_price">Rp36.000</span>
                             <del>Rp40.000</del>
                         </div>
-                        <a href="https://id.shp.ee/FtAeJ5q" class="border-btn">Pesan Sekarang <i
+                        <a href="https://wa.me/6287877566677" class="border-btn">Pesan Sekarang <i
                                 class='ri-shopping-cart-line'></i></a>
                     </div>
                 </div>
@@ -1097,7 +1097,7 @@
                     <span>Murni & Organik</span> Buah, Sayur, dan Daging
                 </h2>
                 <p>Bangun hidup sehatmu yang segar</p>
-                <a href="https://id.shp.ee/FtAeJ5q" class="white-btn">Beli Sekarang <i
+                <a href="https://wa.me/6287877566677" class="white-btn">Beli Sekarang <i
                         class="ri-arrow-right-line"></i></a>
             </div>
         </div>

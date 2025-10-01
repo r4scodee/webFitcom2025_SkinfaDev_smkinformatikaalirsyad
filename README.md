@@ -13,9 +13,11 @@ Project ini dibuat untuk mempermudah manajemen data dalam dunia pertanian secara
 ## 🚀 Fitur Utama
 
 - Struktur project berbasis **PHP OOP** dengan **MVC Pattern**
-- CRUD (Create, Read, Update, Delete) data
+- CRUD (Create, Read, Update, Delete) data produk pertanian
 - Autoloading class & pemisahan logic (Controller, Model, View)
+- Export laporan dengan FPDF
 - Terhubung dengan database MySQL
+- Tampilan responsif menggunakan Bootstrap & CSS custom
 
 ---
 
@@ -23,47 +25,86 @@ Project ini dibuat untuk mempermudah manajemen data dalam dunia pertanian secara
 ```
 webFitcom2025_SkinfaDev_smkinformatikaalirsyad/
 ├── app/
-│ ├── controllers/
-│ │ ├── AuthController.php
-│ │ ├── DashboardController.php
-│ │ ├── ProductController.php
-│ │ └── UserController.php
-│ ├── models/
-│ │ ├── Product.php
-│ │ └── User.php
-│ ├── views/
-│ │ ├── auth/
-│ │ │ ├── login.php
-│ │ │ └── register.php
-│ │ ├── dashboard/
-│ │ │ ├── index.php
-│ │ │ └── stats.php
-│ │ ├── products/
-│ │ │ ├── create.php
-│ │ │ ├── edit.php
-│ │ │ └── index.php
-│ │ └── users/
-│ │ ├── edit.php
-│ │ └── profile.php
-│ └── libs/
-│ ├── Controller.php
-│ ├── Core.php
-│ └── Database.php
+│   ├── config/
+│   │   └── config.php
+│   ├── controller/
+│   │   ├── DashboardController.php
+│   │   ├── ErrorController.php
+│   │   ├── HomeController.php
+│   │   ├── LoginController.php
+│   │   ├── ProductController.php
+│   │   └── ReportController.php
+│   ├── library/
+│   │   ├── font/
+│   │   ├── Controller.php
+│   │   ├── Database.php
+│   │   └── fpdf.php
+│   ├── model/
+│   │   └── ProductModel.php
+│   └── view/
+│       ├── auth/
+│       │   └── login.php
+│       ├── dashboard/
+│       │   └── index.php
+│       ├── errors/
+│       │   └── 404.php
+│       ├── home/
+│       │   └── index.php
+│       ├── layouts/
+│       │   └── layout.php
+│       ├── products/
+│       │   ├── form.php
+│       │   └── index.php
+│       └── report/
+│           └── index.php
+│
 ├── assets/
-│ ├── css/
-│ │ └── style.css
-│ ├── js/
-│ │ └── script.js
-│ └── img/
-│ └── logo.png
-├── config/
-│ └── Database.php
-├── database/
-│ └── tanidigital.sql
+│   ├── css/
+│   │   ├── animate.css
+│   │   ├── bootstrap.min.css
+│   │   ├── chatbot.css
+│   │   ├── dashboard-style.css
+│   │   ├── meanmenu.css
+│   │   ├── niceSelect.css
+│   │   ├── owl.carousel.min.css
+│   │   ├── owl.theme.default.min.css
+│   │   ├── responsive.css
+│   │   ├── style.css
+│   │   ├── swiper-bundle.min.css
+│   │   └── theme.min.css
+│   ├── fonts/
+│   ├── icons/
+│   ├── img/
+│   └── js/
+│       ├── apexcharts.min.js
+│       ├── bootstrap.bundle.min.js
+│       ├── chatbot.js
+│       ├── dashboard-init.min.js
+│       ├── dashboard-style.js
+│       ├── jquery.appear.min.js
+│       ├── jquery.countdown.min.js
+│       ├── jquery.meanmenu.min.js
+│       ├── jquery.min.js
+│       ├── mixitup.min.js
+│       ├── newsletter.js
+│       ├── niceSelect.js
+│       ├── owl.carousel.min.js
+│       ├── script.js
+│       ├── scroll-top.js
+│       ├── swiper-bundle.min.js
+│       ├── theme-customizer-init.min.js
+│       └── wow.js
+│
+├── Database/
+│   └── db_fitcom.sql
+│
+├── uploads/
+│
 ├── .htaccess
 ├── index.php
 ├── logout.php
-├── README.md
+└── README.md
+
 ```
 
 ---
@@ -80,10 +121,26 @@ Jika project dalam bentuk `.zip`, extract ke folder:
 ### 2️⃣ Konfigurasi Database
 
 - Buka file: `database/db_fitcom.sql`
-- Silahkan load file .sql yang sudah disediakan ke phpMyAdmin/HeidiSQL untuk membuat database dan tabel project ini.
+- Import file db_fitcom.sql ke dalam phpMyAdmin/HeidiSQL
+- Database & tabel akan otomatis terbuat sesuai struktur project
+
+### 3️⃣ Jalankan Project
+
+1. Pastikan Apache & MySQL aktif di Laragon/XAMPP
+2. Akses project melalui browser:
+`http://localhost/webFitcom2025_SkinfaDev_smkinformatikaalirsyad/`
+
+3. Untuk masuk ke dashboard, gunakan URL:
+`http://localhost/webFitcom2025_SkinfaDev_smkinformatikaalirsyad/dashboard`
+
+### 4️⃣ Login Default
+
+- Gunakan akun berikut untuk login ke dashboard:
+ - Username: admintanidigital
+ - Password: cirebon2025-admin
 
 ### Catatan
 
 - Pastikan Apache & MySQL sudah aktif di Laragon/XAMPP
 - Jika routing tidak jalan, cek file .htaccess apakah sudah aktif di public/
-- Untuk login default, bisa dicek di tabel users pada database
+- Semua asset (CSS, JS, fonts, icons, img, DLL) sudah diletakkan di folder assets/

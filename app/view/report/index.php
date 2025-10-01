@@ -47,41 +47,70 @@
     </a>
   </div>
 
-    <!-- Tabel Generate Data -->
-       <div class="card fade-in shadow-sm border-0">
-           <div class="card-body pt-0 pb-4">
-               <div class="table-responsive">
-                   <table class="table table-hover mb-0 rounded-3 align-middle">
-                       <thead>
-                           <tr>
-                               <th class="px-4 py-3 fs-lg">ID</th>
-                               <th class="px-4 py-3 fs-lg">Kode</th>
-                               <th class="px-4 py-3 fs-lg">Nama</th>
-                               <th class="px-4 py-3 fs-lg">Harga</th>
-                               <th class="px-4 py-3 fs-lg">Satuan</th>
-                               <th class="px-4 py-3 fs-lg">Tanggal</th>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           <?php if (!empty($products)): ?>
-                               <?php foreach ($products as $p): ?>
-                                   <tr class="align-middle">
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['id']) ?></td>
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['code']) ?></td>
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['name']) ?></td>
-                                       <td class="px-4 py-3 fw-medium">Rp <?= number_format($p['price'], 0, ',', '.') ?></td>
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['unit']) ?></td>
-                                       <td class="px-4 py-3 fw-medium"><?= $this->e($p['created_at']) ?></td>
-                                   </tr>
-                               <?php endforeach ?>
-                           <?php else: ?>
-                               <tr>
-                                   <td colspan="6" class="text-center">Generate Data Untuk Melihat</td>
-                               </tr>
-                           <?php endif ?>
-                       </tbody>
-                   </table>
-               </div>
-           </div>
-        </div>
+  <!-- Tabel Generate Data -->
+  <div class="card fade-in shadow-sm border-0">
+    <div class="card-body pt-0 pb-4">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 rounded-3 align-middle">
+          <thead>
+            <tr>
+              <th class="px-4 py-3 fs-lg">ID</th>
+              <th class="px-4 py-3 fs-lg">Kode</th>
+              <th class="px-4 py-3 fs-lg">Nama</th>
+              <th class="px-4 py-3 fs-lg">Harga</th>
+              <th class="px-4 py-3 fs-lg">Satuan</th>
+              <th class="px-4 py-3 fs-lg">Tanggal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (!empty($products)): ?>
+              <?php foreach ($products as $p): ?>
+                <tr class="align-middle">
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['id']) ?></td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['code']) ?></td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['name']) ?></td>
+                  <td class="px-4 py-3 fw-medium">Rp <?= number_format($p['price'], 0, ',', '.') ?></td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['unit']) ?></td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['created_at']) ?></td>
+                </tr>
+              <?php endforeach ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="6" class="text-center">Generate Data Untuk Melihat</td>
+              </tr>
+            <?php endif ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </main>
+
+
+<button id="chat-toggle" aria-label="Buka chat"><i class="fas fa-comments"></i></button>
+<div id="chatbot">
+  <div class="center">
+    <div class="chat">
+      <div class="contact bar">
+        <div class="pic"><img src="assets/img/chatbot/chatbot.png" alt="Chat"></div>
+        <div class="name">Tanya Support Dashboard AI</div>
+        <div class="seen">Online</div>
+      </div>
+      <div class="messages" id="chat-messages">
+        <div class="time" id="time-display"></div>
+      </div>
+      <div class="suggested-chips-wrapper">
+        <div class="suggested-chips" id="suggested-chips"><span class="chip">📊 Bagaimana cara melihat
+            laporan?</span><span class="chip">➕ Bagaimana tambah data baru?</span><span class="chip">📝 Bagaimana cara
+            edit data?</span><span class="chip">🗑️ Bagaimana hapus data?</span><span class="chip">📊 Bagaimana cara
+            melihat chart?</span><span class="chip">🛒 Bagaimana cara membuat produk?</span><span
+            class="chip wa-chip"><a
+              href="https://wa.me/6287877566677?text=Halo%20Admin%20Support,%20saya%20mau%20bertanya%20karena%20chatbot%20belum%20menjawab"
+              target="_blank"><i class="fab fa-whatsapp"></i> Pertanyaanmu belum terjawab? Klik disini</a></span></div>
+      </div>
+      <div class="input"><i class="far fa-laugh-beam"></i><input type="text" id="input-field"
+          placeholder="Ketik Pertanyaan Disini..." /><button id="send-btn" aria-label="Kirim"><i
+            class="fas fa-paper-plane"></i></button><i class="fas fa-microphone"></i><emoji-picker></emoji-picker></div>
+    </div>
+  </div>
+</div>

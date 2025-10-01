@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Not Found - Tani Digital</title>
+    <title>404 Halaman tidak Ditemukan | Tani Digital</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/satoshi/satoshi.css">
@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-6 align-self-center">
                     <div class="logo">
-                        <a href="<?= BASE_URL?>"><img src="assets/img/logo.png" alt=""></a>
+                        <a href="<?= BASE_URL ?>"><img src="assets/img/logo.png" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     <img src="assets/img/404.jpg" alt="404">
                     <h2>Halaman tidak ditemukan</h2>
                     <p>Silakan coba cari halaman lain.</p>
-                    <a href="<?= BASE_URL?>" class="main_btn">Kembali ke Beranda</a>
+                    <a href="<?= BASE_URL ?>" class="main_btn">Kembali ke Home</a>
                 </div>
 
             </div>

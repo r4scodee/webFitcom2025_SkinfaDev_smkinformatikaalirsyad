@@ -20,7 +20,7 @@ class DashboardController extends Controller
     public function index()
     {
         $this->view('dashboard/index', [
-            'title' => 'Dashboard Overview - Tani Digital',
+            'title' => 'Admin Dashboard - Tani Digital',
             'active' => 'dashboard'
         ]);
     }

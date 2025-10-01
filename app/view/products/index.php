@@ -206,12 +206,41 @@
   </div>
 </main>
 
+
+<button id="chat-toggle" aria-label="Buka chat"><i class="fas fa-comments"></i></button>
+<div id="chatbot">
+  <div class="center">
+    <div class="chat">
+      <div class="contact bar">
+        <div class="pic"><img src="assets/img/chatbot/chatbot.png" alt="Chat"></div>
+        <div class="name">Tanya Support Dashboard AI</div>
+        <div class="seen">Online</div>
+      </div>
+      <div class="messages" id="chat-messages">
+        <div class="time" id="time-display"></div>
+      </div>
+      <div class="suggested-chips-wrapper">
+        <div class="suggested-chips" id="suggested-chips"><span class="chip">📊 Bagaimana cara melihat
+            laporan?</span><span class="chip">➕ Bagaimana tambah data baru?</span><span class="chip">📝 Bagaimana cara
+            edit data?</span><span class="chip">🗑️ Bagaimana hapus data?</span><span class="chip">📊 Bagaimana cara
+            melihat chart?</span><span class="chip">🛒 Bagaimana cara membuat produk?</span><span
+            class="chip wa-chip"><a
+              href="https://wa.me/6287877566677?text=Halo%20Admin%20Support,%20saya%20mau%20bertanya%20karena%20chatbot%20belum%20menjawab"
+              target="_blank"><i class="fab fa-whatsapp"></i> Pertanyaanmu belum terjawab? Klik disini</a></span></div>
+      </div>
+      <div class="input"><i class="far fa-laugh-beam"></i><input type="text" id="input-field"
+          placeholder="Ketik Pertanyaan Disini..." /><button id="send-btn" aria-label="Kirim"><i
+            class="fas fa-paper-plane"></i></button><i class="fas fa-microphone"></i><emoji-picker></emoji-picker></div>
+    </div>
+  </div>
+</div>
+
+
 <footer class="bg-light text-dark py-4 mt-5 footer-products">
   <div class="container">
     <p class="mb-1">
-      Copyrights &copy;
-      <?= date('Y') ?>
-      Tani Digital. All rights reserved.
+      &copy; <?= date('Y') ?> Tani Digital. Semua Hak Dilindungi.
+
     </p>
   </div>
 </footer>

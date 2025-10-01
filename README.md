@@ -1,6 +1,6 @@
 # 🌱 TaniDigital
 
-TaniDigital adalah sebuah aplikasi berbasis web yang dibuat dengan **PHP OOP** menggunakan konsep **Model-View-Controller (MVC)**.  
+TaniDigital adalah sebuah aplikasi berbasis web yang dibuat dengan **PHP OOP** menggunakan konsep **Model-View-Controller (MVC)** tanpa framework dan murni PHP OOP.  
 Project ini dibuat untuk mempermudah manajemen data dalam dunia pertanian secara digital.
 
 👨‍💻 **Dibuat oleh:**
@@ -12,7 +12,7 @@ Project ini dibuat untuk mempermudah manajemen data dalam dunia pertanian secara
 
 ## 🚀 Fitur Utama
 
-- Struktur project berbasis **PHP OOP** dengan **MVC Pattern**
+- Struktur project berbasis **PHP OOP** dengan **MVC Pattern** tanpa framework
 - CRUD (Create, Read, Update, Delete) data produk pertanian
 - Autoloading class & pemisahan logic (Controller, Model, View)
 - Export laporan dengan FPDF
@@ -60,40 +60,10 @@ webFitcom2025_SkinfaDev_smkinformatikaalirsyad/
 │
 ├── assets/
 │   ├── css/
-│   │   ├── animate.css
-│   │   ├── bootstrap.min.css
-│   │   ├── chatbot.css
-│   │   ├── dashboard-style.css
-│   │   ├── meanmenu.css
-│   │   ├── niceSelect.css
-│   │   ├── owl.carousel.min.css
-│   │   ├── owl.theme.default.min.css
-│   │   ├── responsive.css
-│   │   ├── style.css
-│   │   ├── swiper-bundle.min.css
-│   │   └── theme.min.css
 │   ├── fonts/
 │   ├── icons/
 │   ├── img/
 │   └── js/
-│       ├── apexcharts.min.js
-│       ├── bootstrap.bundle.min.js
-│       ├── chatbot.js
-│       ├── dashboard-init.min.js
-│       ├── dashboard-style.js
-│       ├── jquery.appear.min.js
-│       ├── jquery.countdown.min.js
-│       ├── jquery.meanmenu.min.js
-│       ├── jquery.min.js
-│       ├── mixitup.min.js
-│       ├── newsletter.js
-│       ├── niceSelect.js
-│       ├── owl.carousel.min.js
-│       ├── script.js
-│       ├── scroll-top.js
-│       ├── swiper-bundle.min.js
-│       ├── theme-customizer-init.min.js
-│       └── wow.js
 │
 ├── Database/
 │   └── db_fitcom.sql

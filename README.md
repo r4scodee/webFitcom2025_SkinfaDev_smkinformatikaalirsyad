@@ -112,5 +112,5 @@ Jika project dalam bentuk `.zip`, extract ke folder:
 ### Catatan
 
 - Pastikan Apache & MySQL sudah aktif di Laragon/XAMPP
-- Jika routing tidak jalan, cek file .htaccess apakah sudah aktif di public/
+- Jika routing tidak jalan, cek file .htaccess apakah sudah aktif di root
 - Semua asset (CSS, JS, fonts, icons, img, DLL) sudah diletakkan di folder assets/

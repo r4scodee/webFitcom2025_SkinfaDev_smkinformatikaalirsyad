@@ -269,10 +269,8 @@
       <?php endif; ?>
 
       <!-- Tampil jika hasil filter/search tidak menemukan produk -->
-      <div id="noResults" class="text-center py-5 d-none">
-        <div class="display-1 text-muted mb-3">🔍</div>
-        <h5 class="text-muted mb-2">No products found</h5>
-        <p class="text-muted">Try adjusting your search or filter criteria</p>
+      <div id="noResults" class="text-center d-none">
+        <p class="text-muted mt-4">Produk tidak ditemukan</p>
       </div>
     </div>
   </div>

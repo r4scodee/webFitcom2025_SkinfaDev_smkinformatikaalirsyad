@@ -13,21 +13,30 @@ document.addEventListener("DOMContentLoaded", updateProductCount);
 function filterTable() {
   var searchVal = $("#searchProduct").val().toLowerCase().trim();
   var unitVal = $("#filterUnit").val().toLowerCase().trim();
+  var anyVisible = false; 
 
   $("#productTable tbody tr").each(function () {
     var rowText = $(this).text().toLowerCase();
-    var unit = $(this).find("td.unit-col").text().toLowerCase().trim();
+    var unit = $(this).find(".unit-col").text().toLowerCase().trim() || "kosong";
 
-    var matchSearch = rowText.indexOf(searchVal) > -1;
+    var matchSearch = !searchVal || rowText.indexOf(searchVal) > -1;
     var matchUnit = !unitVal || unit === unitVal;
 
     if (matchSearch && matchUnit) {
       $(this).show();
+      anyVisible = true;
     } else {
       $(this).hide();
     }
   });
+
+  if (anyVisible) {
+    $("#noResults").addClass("d-none");
+  } else {
+    $("#noResults").removeClass("d-none");
+  }
 }
+
 
 $(document).ready(function () {
   $("#searchProduct").on("keyup", filterTable);

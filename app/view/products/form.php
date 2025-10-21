@@ -1,22 +1,27 @@
 <?php
 $product = $product ?? [];
-$old = $old ?? []; 
-$errors = $errors ?? []; 
-$csrf = $csrf ?? ''; 
+$old = $old ?? [];
+$errors = $errors ?? [];
+$csrf = $csrf ?? '';
 
 $isEdit = ($action === 'update');
 
 $formAction = $isEdit
   ? BASE_URL . 'product/update/' . ($product['id'] ?? '')
-  : BASE_URL . 'product/store'; 
+  : BASE_URL . 'product/store';
 
 $val = function ($key, $default = '') use ($product, $old, $isEdit) {
   if (!empty($old) && isset($old[$key]))
-    return $old[$key]; 
+    return $old[$key];
   if ($isEdit && !empty($product) && isset($product[$key]))
     return $product[$key];
   return $default;
 };
+
+$hargaValue = $val('harga');
+if (is_numeric($hargaValue)) {
+  $hargaValue = number_format((float) $hargaValue, 0, ',', '.');
+}
 ?>
 
 
@@ -217,8 +222,8 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
 
       <div class="col-lg-6 col-md-6">
         <label class="form-label">Harga</label>
-        <input type="number" name="harga" id="harga" class="form-control" placeholder="Rp 0"
-          value="<?= $this->e($val('harga')) ?>">
+        <input type="text" name="harga" id="harga" class="form-control" placeholder="0"
+          value="<?= $this->e($hargaValue ?? '') ?>">
       </div>
 
       <div class="col-lg-6 col-md-6">
@@ -258,12 +263,37 @@ $val = function ($key, $default = '') use ($product, $old, $isEdit) {
 <script>
   const imageInput = document.getElementById('image');
   const preview = document.getElementById('preview');
+  const hargaInput = document.getElementById('harga');
 
+  // preview image
   imageInput.addEventListener('change', function () {
     const file = this.files[0];
     if (file) {
       preview.style.display = 'block';
       preview.src = URL.createObjectURL(file);
     }
+  });
+
+  // fungsi format angka pake titik ribuan
+  function formatAngka(angka) {
+    return angka.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  // saat diketik di input harga
+  hargaInput.addEventListener('input', function (e) {
+    // ambil angka murni (hapus semua titik dan huruf)
+    let nilai = this.value.replace(/\D/g, '');
+    if (!nilai) {
+      this.value = '';
+      return;
+    }
+
+    // format pake titik
+    this.value = formatAngka(nilai);
+  });
+
+  // sebelum form dikirim, ubah ke angka murni
+  document.querySelector('form').addEventListener('submit', function () {
+    hargaInput.value = hargaInput.value.replace(/\D/g, '');
   });
 </script>

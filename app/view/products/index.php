@@ -341,7 +341,7 @@
 
         document.getElementById("weatherBox").innerHTML = `
           <i class="fas fa-cloud-sun me-2"></i>
-          <span>Cuaca Surabaya: ${kondisi}, ${suhu}°C</span>
+          <span>Cuaca hari ini: ${kondisi}, ${suhu}°C</span>
         `;
       } else {
         document.getElementById("weatherText").textContent = "Gagal memuat cuaca 😢";

@@ -16,10 +16,8 @@ class Controller
         $content = ob_get_clean();
 
         if ($useLayout) {
-            // render dengan layout
             require __DIR__ . '/../view/layouts/layout.php';
         } else {
-            // render langsung tanpa layout
             echo $content;
         }
     }
@@ -36,7 +34,7 @@ class Controller
         return htmlspecialchars($string ?? '', ENT_QUOTES, 'UTF-8');
     }
 
-    // ===== CSRF helpers =====
+    // csrf method
     protected function generateCSRFToken()
     {
         if (empty($_SESSION['_csrf_token'])) {

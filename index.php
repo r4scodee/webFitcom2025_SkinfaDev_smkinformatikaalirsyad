@@ -1,73 +1,58 @@
 <?php
-session_start();
+session_start(); // Mulai session, penting untuk manajemen user login, flash message, dll.
 
-// Autoload sederhana
+// Autoloader untuk class
 spl_autoload_register(function ($class) {
+    // Daftar folder tempat mencari class yang dipanggil
     $paths = [
-        __DIR__ . '/app/library/',
-        __DIR__ . '/app/controller/',
-        __DIR__ . '/app/model/',
+        __DIR__ . '/app/library/',    // Library umum
+        __DIR__ . '/app/controller/', // Controller MVC
+        __DIR__ . '/app/model/',      // Model MVC
     ];
     foreach ($paths as $p) {
-        $file = $p . $class . '.php';
+        $file = $p . $class . '.php'; // Nama file class sesuai nama class + .php
         if (is_file($file)) {
-            require_once $file;
-            return;
+            require_once $file; // Jika file ditemukan, langsung di-include
+            return; // Berhenti setelah ketemu
         }
     }
 });
 
-// Load config
-require_once __DIR__ . '/app/config/config.php';
+require_once __DIR__ . '/app/config/config.php'; // Load konfigurasi global (misal BASE_URL, DB, dll)
 
-// Router sederhana
-$url = $_GET['url'] ?? '';
+// Routing sederhana berdasarkan URL parameter 'url'
+// Jika tidak ada 'url', default ke 'product/index'1
+$url = $_GET['url'] ?? 'product/index';
+
+// Pisah URL menjadi segmen, contoh: product/edit/1 jadi ['product','edit','1']
 $segments = explode('/', trim($url, '/'));
 
-// default controller & method
-$controllerName = ucfirst($segments[0] ?: 'home') . 'Controller';
-$method = $segments[1] ?? 'index';
-$params = array_slice($segments, 2);
+// Tentukan controller dan method yang dipanggil
+$controllerName = ucfirst($segments[0]) . 'Controller'; // Contoh: 'product' -> 'ProductController'
+$method = $segments[1] ?? 'index'; // Method default: 'index'
+$params = array_slice($segments, 2); // Parameter tambahan (misal id produk)
 
-// fungsi helper untuk 404
-function show404()
-{
-    http_response_code(404);
-    require_once __DIR__ . '/app/controller/ErrorController.php';
-    $controller = new ErrorController();
-    $controller->index();
-    exit;
-}
-
-// --- Routing khusus untuk dashboard child pages ---
-if (!empty($segments[0]) && $segments[0] === 'dashboard') {
-    $controllerName = 'DashboardController';
-    // kalau cuma /dashboard -> index
-    if (empty($segments[1])) {
-        $method = 'index';
-        $params = [];
-    } else {
-        // /dashboard/products -> products(), dll.
-        $method = $segments[1];
-        $params = array_slice($segments, 2);
-    }
-}
-
-// cek file controller
+// Path file controller
 $controllerFile = __DIR__ . '/app/controller/' . $controllerName . '.php';
+
+// Cek apakah file controller ada
 if (file_exists($controllerFile)) {
-    require $controllerFile;
-    if (!class_exists($controllerName)) {
-        show404();
-    }
+    require_once $controllerFile; // Include controller
 
-    $controller = new $controllerName();
+    // Cek apakah class controller ada
+    if (class_exists($controllerName)) {
+        $controller = new $controllerName(); // Buat instance controller
 
-    if (method_exists($controller, $method)) {
-        call_user_func_array([$controller, $method], $params);
-    } else {
-        show404();
+        // Cek apakah method ada di controller
+        if (method_exists($controller, $method)) {
+            // Panggil method controller dengan parameter (jika ada)
+            call_user_func_array([$controller, $method], $params);
+            exit; // Berhenti setelah method dipanggil
+        }
     }
-} else {
-    show404();
 }
+
+http_response_code(404);
+echo "<h1>404 - Halaman tidak ditemukan</h1>";
+echo "<p>Controller atau method yang kamu akses tidak ada.</p>";
+echo "<a href='" . BASE_URL . "'>Kembali ke halaman utama</a>";

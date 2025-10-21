@@ -1,7 +1,7 @@
 <?php
 // Kondigurasi database
 define('DB_HOST', '127.0.0.1');      
-define('DB_NAME', 'tani_digital_db');       
+define('DB_NAME', 'tanidigital_db');       
 define('DB_USER', 'root');          
 define('DB_PASS', '');               
 
@@ -9,6 +9,6 @@ define('DB_PASS', '');
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 define('BASE_URL', $protocol . '://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/');
 
-// Uploads untuk gambar
+// directory untuk gambar
 define('UPLOAD_DIR', __DIR__ . '/../../uploads/'); 
 define('UPLOAD_URL', BASE_URL . 'uploads/');      

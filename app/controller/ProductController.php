@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../library/Controller.php';
-require_once __DIR__ . '/../library/fpdf.php';
 
 class ProductController extends Controller
 {
@@ -8,19 +7,10 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        // Proteksi login
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /webFitcom2025_SkinfaDev_smkinformatikaalirsyad/login");
-            exit;
-        }
-
         $this->model = new ProductModel();
     }
-    // GET /products (list semua produk)
+
+    // read
     public function index()
     {
         $products = $this->model->all();
@@ -31,24 +21,24 @@ class ProductController extends Controller
         ]);
     }
 
-    // GET /products/create (tampilkan form create)
+    // create
     public function create()
     {
         $csrf = $this->generateCSRFToken();
         $this->view('products/form', ['action' => 'store', 'csrf' => $csrf]);
     }
 
-    // POST /products/store (proses simpan)
+    // store
     public function store()
     {
         if (!$this->verifyCSRFToken($_POST['_csrf'] ?? '')) {
             die('CSRF token tidak valid.');
         }
 
-        $code = trim($_POST['code'] ?? '');
-        $name = trim($_POST['name'] ?? '');
-        $price = trim($_POST['price'] ?? '0');
-        $unit = trim($_POST['unit'] ?? '');
+        $code = trim($_POST['kode'] ?? '');
+        $name = trim($_POST['nama'] ?? '');
+        $price = trim($_POST['harga'] ?? '0');
+        $unit = trim($_POST['satuan'] ?? '');
 
         $errors = [];
 
@@ -77,26 +67,26 @@ class ProductController extends Controller
             $this->view('products/form', [
                 'action' => 'store',
                 'errors' => $errors,
-                'old' => ['code' => $code, 'name' => $name, 'price' => $price, 'unit' => $unit],
+                'old' => ['kode' => $code, 'nama' => $name, 'harga' => $price, 'satuan' => $unit],
                 'csrf' => $csrf
             ]);
             return;
         }
 
         $data = [
-            'code' => $code,
-            'name' => $name,
-            'price' => $price,
+            'kode' => $code,
+            'nama' => $name,
+            'harga' => $price,
             'image' => $uploadedFilename,
-            'unit' => $unit,
+            'satuan' => $unit,
         ];
 
         $id = $this->model->create($data);
 
-        $this->redirect('product');
+        $this->redirect('/');
     }
 
-    // GET /products/edit/{id}
+    // edit
     public function edit($id)
     {
         $product = $this->model->find($id);
@@ -108,7 +98,7 @@ class ProductController extends Controller
         $this->view('products/form', ['action' => 'update', 'product' => $product, 'csrf' => $csrf]);
     }
 
-    // POST /products/update/{id}
+    // update
     public function update($id)
     {
         if (!$this->verifyCSRFToken($_POST['_csrf'] ?? '')) {
@@ -121,10 +111,10 @@ class ProductController extends Controller
             return;
         }
 
-        $code = trim($_POST['code'] ?? '');
-        $name = trim($_POST['name'] ?? '');
-        $price = trim($_POST['price'] ?? '0');
-        $unit = trim($_POST['unit'] ?? '');
+        $code = trim($_POST['kode'] ?? '');
+        $name = trim($_POST['nama'] ?? '');
+        $price = trim($_POST['harga'] ?? '0');
+        $unit = trim($_POST['satuan'] ?? '');
 
         $errors = [];
         if ($code === '')
@@ -155,26 +145,26 @@ class ProductController extends Controller
             $this->view('products/form', [
                 'action' => 'update',
                 'errors' => $errors,
-                'product' => ['id' => $id, 'code' => $code, 'name' => $name, 'price' => $price, 'unit' => $unit, 'image' => $uploadedFilename],
+                'product' => ['id' => $id, 'kode' => $code, 'nama' => $name, 'harga' => $price, 'satuan' => $unit, 'image' => $uploadedFilename],
                 'csrf' => $csrf
             ]);
             return;
         }
 
         $data = [
-            'code' => $code,
-            'name' => $name,
-            'price' => $price,
+            'kode' => $code,
+            'nama' => $name,
+            'harga' => $price,
             'image' => $uploadedFilename,
-            'unit' => $unit
+            'satuan' => $unit
         ];
 
         $this->model->update($id, $data);
 
-        $this->redirect('product');
+        $this->redirect('/');
     }
 
-    // GET or POST /products/delete/{id}
+    // delete
     public function delete($id)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -196,10 +186,10 @@ class ProductController extends Controller
             @unlink(UPLOAD_DIR . $product['image']);
         }
 
-        $this->redirect('product');
+        $this->redirect('/');
     }
 
-    // ===== helper untuk upload file image aman =====
+    // helper upload
     private function handleUpload($file)
     {
         $maxSize = 2 * 1024 * 1024;
@@ -241,105 +231,4 @@ class ProductController extends Controller
 
         return ['success' => true, 'filename' => $newName];
     }
-
-    public function exportPdf()
-    {
-        date_default_timezone_set('Asia/Jakarta');
-
-        $products = $this->model->all();
-
-        $pdf = new FPDF();
-        $pdf->AddPage();
-        $pdf->SetMargins(10, 10, 10);
-
-        // Header
-        $pdf->Image(__DIR__ . '/../../assets/img/logo/logo-dashboard-img.png', 10, 8, 20); 
-        $pdf->SetFont('Helvetica', 'B', 14);
-        $pdf->Cell(0, 8, 'Tani Digital', 0, 1, 'C');
-        $pdf->SetFont('Helvetica', '', 10);
-        $pdf->Cell(0, 5, 'Jl. Pertanian No. 123, Cirebon | 0812-3456-7890', 0, 1, 'C');
-        $pdf->Ln(5);
-
-        // line
-        $pdf->SetDrawColor(0, 0, 0);
-        $pdf->SetLineWidth(0.3);
-        $pdf->Line(10, 35, 200, 35);
-        $pdf->Ln(15);
-
-        // title
-        $pdf->SetFont('Helvetica', 'B', 12);
-        $pdf->Cell(0, 10, 'Laporan Data Produk', 0, 1, 'C');
-        $pdf->Ln(3);
-
-        // table
-        $pdf->SetFont('Helvetica', 'B', 10);
-        $pdf->SetFillColor(200, 220, 255);
-
-        // colomn width
-        $w = [10, 30, 60, 25, 30, 35];
-        $header = ['No', 'Kode', 'Nama Produk', 'Harga', 'Satuan', 'Tanggal'];
-
-        // Table header
-        foreach ($header as $i => $col) {
-            $pdf->Cell($w[$i], 10, $col, 1, 0, 'C', true);
-        }
-        $pdf->Ln();
-
-        // Isi tabel
-        $pdf->SetFont('Helvetica', '', 9);
-        $fill = false;
-        $no = 1;
-
-        foreach ($products as $row) {
-            $pdf->SetFillColor(245, 245, 245);
-            $pdf->Cell($w[0], 8, $no++, 1, 0, 'C', $fill);
-            $pdf->Cell($w[1], 8, $row['code'], 1, 0, 'C', $fill);
-            $pdf->Cell($w[2], 8, $row['name'], 1, 0, 'C', $fill);
-            $pdf->Cell($w[3], 8, number_format($row['price']), 1, 0, 'C', $fill);
-            $pdf->Cell($w[4], 8, $row['unit'], 1, 0, 'C', $fill);
-            $pdf->Cell($w[5], 8, date('d-m-Y', strtotime($row['created_at'])), 1, 0, 'C', $fill);
-            $pdf->Ln();
-            $fill = !$fill;
-        }
-
-        // Footer
-        $pdf->Ln(5);
-        $pdf->SetFont('Helvetica', 'I', 9);
-
-        // Tanggal print
-        $tanggalCetak = date('l, d F Y H:i:s');
-        $indonesianDays = [
-            'Sunday' => 'Minggu',
-            'Monday' => 'Senin',
-            'Tuesday' => 'Selasa',
-            'Wednesday' => 'Rabu',
-            'Thursday' => 'Kamis',
-            'Friday' => 'Jumat',
-            'Saturday' => 'Sabtu'
-        ];
-        $indonesianMonths = [
-            'January' => 'Januari',
-            'February' => 'Februari',
-            'March' => 'Maret',
-            'April' => 'April',
-            'May' => 'Mei',
-            'June' => 'Juni',
-            'July' => 'Juli',
-            'August' => 'Agustus',
-            'September' => 'September',
-            'October' => 'Oktober',
-            'November' => 'November',
-            'December' => 'Desember'
-        ];
-        $tanggalCetak = strtr($tanggalCetak, $indonesianDays);
-        $tanggalCetak = strtr($tanggalCetak, $indonesianMonths);
-
-        // Footer kiri & kanan
-        $pdf->Cell(95, 10, 'Dicetak pada: ' . $tanggalCetak, 0, 0, 'L');
-        $pdf->Cell(95, 10, 'Halaman ' . $pdf->PageNo(), 0, 0, 'R');
-
-        // Output ke PDF
-        $pdf->Output('D', 'laporan_produk_' . date('Y-m-d_H.i') . '.pdf');
-    }
-
 }

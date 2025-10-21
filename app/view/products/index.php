@@ -211,15 +211,9 @@
                     <?= $this->e($p['nama']) ?>
                   </td>
                   <td class="px-4 py-3 fw-medium unit-col">
-                    <?php if (!empty($p['satuan'])): ?>
                       <span class="badge bg-success badge-custom">
                         <?= $this->e($p['satuan']) ?>
                       </span>
-                    <?php else: ?>
-                      <span class="badge bg-secondary badge-custom">
-                        Tidak ada data
-                      </span>
-                    <?php endif; ?>
                   </td>
                   <td class="px-4 py-3 fw-medium">
                     Rp

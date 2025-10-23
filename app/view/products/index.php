@@ -171,17 +171,42 @@
           <table class="table table-hover mb-0 rounded-3 align-middle" id="productTable">
             <thead>
               <tr>
-                <th class="px-4 py-3 fs-lg">Aksi</th>
-                <th class="px-4 py-3 fs-lg">Gambar</th>
                 <th class="px-4 py-3 fs-lg">Kode</th>
                 <th class="px-4 py-3 fs-lg">Nama</th>
                 <th class="px-4 py-3 fs-lg">Satuan</th>
                 <th class="px-4 py-3 fs-lg">Harga</th>
+                <th class="px-4 py-3 fs-lg">Gambar</th>
+                <th class="px-4 py-3 fs-lg">Aksi</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($products as $p): ?>
                 <tr class="align-middle">
+                  <td class="px-4 py-3 fw-medium">
+                    <span class="badge bg-primary badge-custom">
+                      <?= $this->e($p['kode']) ?>
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 fw-medium">
+                    <?= $this->e($p['nama']) ?>
+                  </td>
+                  <td class="px-4 py-3 fw-medium unit-col">
+                    <span class="badge bg-success badge-custom">
+                      <?= $this->e($p['satuan']) ?>
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 fw-medium">
+                    Rp
+                    <?= number_format($p['harga'], 0, ',', '.') ?>
+                  </td>
+                  <td class="px-4 py-3 fw-medium">
+                    <?php if (!empty($p['image'])): ?>
+                      <img src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>" alt="img" class="thumb img-thumbnail"
+                        width="60" />
+                    <?php else: ?> 
+                      <span class="text-muted">-</span>
+                    <?php endif; ?>
+                  </td>
                   <td>
                     <div class="d-flex h-100 justify-content-center align-items-center gap-2">
                       <a href="<?= BASE_URL ?>product/edit/<?= htmlspecialchars($p['id']) ?>"
@@ -193,31 +218,6 @@
                         <i class="fi fi-tr-trash-xmark"></i>
                       </button>
                     </div>
-                  </td>
-                  <td class="px-4 py-3 fw-medium">
-                    <?php if (!empty($p['image'])): ?>
-                      <img src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>" alt="img" class="thumb img-thumbnail"
-                        width="60" />
-                    <?php else: ?> 
-                      <span class="text-muted">-</span>
-                    <?php endif; ?>
-                  </td>
-                  <td class="px-4 py-3 fw-medium">
-                    <span class="badge bg-primary badge-custom">
-                      <?= $this->e($p['kode']) ?>
-                    </span>
-                  </td>
-                  <td class="px-4 py-3 fw-medium">
-                    <?= $this->e($p['nama']) ?>
-                  </td>
-                  <td class="px-4 py-3 fw-medium unit-col">
-                      <span class="badge bg-success badge-custom">
-                        <?= $this->e($p['satuan']) ?>
-                      </span>
-                  </td>
-                  <td class="px-4 py-3 fw-medium">
-                    Rp
-                    <?= number_format($p['harga'], 0, ',', '.') ?>
                   </td>
                 </tr>
               <?php endforeach; ?>

@@ -34,21 +34,21 @@
         <a href="<?= BASE_URL ?>gudang"
           class="nav-link sidebar-link <?= ($active ?? '') === 'gudang' ? 'active' : '' ?>">
           <i class="fas fa-tachometer-alt"></i>
-          <span>Produk</span>
+          <span>Gudang</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="<?= BASE_URL ?>pengiriman"
           class="nav-link sidebar-link <?= ($active ?? '') === 'pengiriman' ? 'active' : '' ?>">
           <i class="fas fa-tachometer-alt"></i>
-          <span>Produk</span>
+          <span>Pengiriman</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="<?= BASE_URL ?>kendaraan"
           class="nav-link sidebar-link <?= ($active ?? '') === 'kendaraan' ? 'active' : '' ?>">
           <i class="fas fa-tachometer-alt"></i>
-          <span>Produk</span>
+          <span>Kendaraan</span>
         </a>
       </li>
     </ul>

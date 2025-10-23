@@ -31,7 +31,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>/gudang"
+        <a href="<?= BASE_URL ?>gudang"
           class="nav-link sidebar-link <?= ($active ?? '') === 'gudang' ? 'active' : '' ?>">
           <i class="fas fa-tachometer-alt"></i>
           <span>Produk</span>

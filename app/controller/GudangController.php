@@ -15,7 +15,7 @@ class GudangController extends Controller
         $gudang = $this->model->all();
         $this->view('gudang/index', [
             'title' => 'Table Management Gudang - Tani Digital',
-            'active' => 'gudang',
+            'active' => 'Gudang',
             'gudang' => $gudang
         ]);
     }
@@ -42,14 +42,26 @@ class GudangController extends Controller
 
         $errors = [];
 
-        if ($kodegudang === '') $errors[] = "Kode Gudang wajib diisi.";
-        if ($namagudang === '') $errors[] = "Nama Gudang wajib diisi.";
-        if ($golongan === '')   $errors[] = "Golongan Gudang wajib diisi.";
-        if ($keterangan === '') $errors[] = "Keterangan Gudang wajib diisi.";
+        if ($kodegudang === '')
+            $errors[] = "Kode gudang wajib diisi.";
+        if ($namagudang === '')
+            $errors[] = "Nama gudang wajib diisi.";
 
         if ($this->model->existsByCode($kodegudang))
-            $errors[] = "Kode Gudang sudah digunakan.";
+            $errors[] = "Kode gudang sudah digunakan.";
 
+        // Upload Gambar
+        $uploadedFilename = null;
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $uploadResult = $this->handleUpload($_FILES['image']);
+            if ($uploadResult['success']) {
+                $uploadedFilename = $uploadResult['filename'];
+            } else {
+                $errors[] = $uploadResult['error'];
+            }
+        }
+
+        // Jika ada error
         if (!empty($errors)) {
             $csrf = $this->generateCSRFToken();
             $this->view('gudang/form', [
@@ -66,11 +78,13 @@ class GudangController extends Controller
             return;
         }
 
+        // Simpan data
         $data = [
             'kodegudang' => $kodegudang,
             'namagudang' => $namagudang,
             'golongan' => $golongan,
-            'keterangan' => $keterangan
+            'keterangan' => $keterangan,
+            'image' => $uploadedFilename
         ];
 
         $this->model->create($data);
@@ -108,18 +122,32 @@ class GudangController extends Controller
 
         $kodegudang = trim($_POST['kodegudang'] ?? '');
         $namagudang = trim($_POST['namagudang'] ?? '');
-        $golongan   = trim($_POST['golongan'] ?? '');
+        $golongan = trim($_POST['golongan'] ?? '');
         $keterangan = trim($_POST['keterangan'] ?? '');
 
         $errors = [];
 
-        if ($kodegudang === '') $errors[] = "Kode Gudang wajib diisi.";
-        if ($namagudang === '') $errors[] = "Nama Gudang wajib diisi.";
-        if ($golongan === '')   $errors[] = "Golongan Gudang wajib diisi.";
-        if ($keterangan === '') $errors[] = "Keterangan Gudang wajib diisi.";
+        if ($kodegudang === '')
+            $errors[] = "Kode gudang wajib diisi.";
+        if ($namagudang === '')
+            $errors[] = "Nama gudang wajib diisi.";
 
         if ($this->model->existsByCode($kodegudang, $id))
-            $errors[] = "Kode Gudang sudah digunakan oleh gudang lain.";
+            $errors[] = "Kode gudang sudah digunakan oleh gudang lain.";
+
+        // Upload baru jika ada
+        $uploadedFilename = $gudang['image'];
+        if (!empty($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $uploadResult = $this->handleUpload($_FILES['image']);
+            if ($uploadResult['success']) {
+                $uploadedFilename = $uploadResult['filename'];
+                if (!empty($gudang['image']) && is_file(UPLOAD_DIR . $gudang['image'])) {
+                    @unlink(UPLOAD_DIR . $gudang['image']);
+                }
+            } else {
+                $errors[] = $uploadResult['error'];
+            }
+        }
 
         if (!empty($errors)) {
             $csrf = $this->generateCSRFToken();
@@ -131,7 +159,8 @@ class GudangController extends Controller
                     'kodegudang' => $kodegudang,
                     'namagudang' => $namagudang,
                     'golongan' => $golongan,
-                    'keterangan' => $keterangan
+                    'keterangan' => $keterangan,
+                    'image' => $uploadedFilename
                 ],
                 'csrf' => $csrf
             ]);
@@ -142,10 +171,12 @@ class GudangController extends Controller
             'kodegudang' => $kodegudang,
             'namagudang' => $namagudang,
             'golongan' => $golongan,
-            'keterangan' => $keterangan
+            'keterangan' => $keterangan,
+            'image' => $uploadedFilename
         ];
 
         $this->model->update($id, $data);
+
         $this->redirect('/gudang');
     }
 
@@ -154,6 +185,7 @@ class GudangController extends Controller
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             die('Invalid request method.');
         }
+
         if (!$this->verifyCSRFToken($_POST['_csrf'] ?? '')) {
             die('CSRF token tidak valid.');
         }
@@ -165,6 +197,11 @@ class GudangController extends Controller
         }
 
         $this->model->delete($id);
+
+        if (!empty($gudang['image']) && is_file(UPLOAD_DIR . $gudang['image'])) {
+            @unlink(UPLOAD_DIR . $gudang['image']);
+        }
+
         $this->redirect('/gudang');
     }
 }

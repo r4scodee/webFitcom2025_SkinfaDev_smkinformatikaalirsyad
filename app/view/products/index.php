@@ -1,13 +1,7 @@
 <?php ob_start(); ?>
 
 <style>
-  .gradient-bg {
-    background: linear-gradient(135deg, #22c55e, #16a34a, #14b8a6, #3b82f6);
-    background-size: 400% 400%;
-    animation: gradientShift 10s ease infinite;
-    color: #fff;
-  }
-
+  /* Animasi pergeseran warna background */
   @keyframes gradientShift {
     0% {
       background-position: 0% 50%;
@@ -22,34 +16,11 @@
     }
   }
 
-  .form-control,
-  .form-select {
-    height: 46px;
-    font-size: 0.95rem;
-    transition: all 0.25s ease;
-  }
-
-  .form-control:focus,
-  .form-select:focus {
-    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.4);
-    outline: none;
-  }
-
-  .btn-light {
-    transition: all 0.3s ease;
-  }
-
-  .btn-light:hover {
-    background-color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.4);
-  }
-
-
+  /* Animasi fade masuk */
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(12px);
     }
 
     to {
@@ -58,18 +29,173 @@
     }
   }
 
-  @media (max-width: 768px) {
-    .gradient-bg {
-      text-align: center;
-      padding: 2rem 1rem;
+  /* Style umum */
+  body {
+    background: #f8fdf5;
+    font-family: "Inter", sans-serif !important;
+    color: #2d5016;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ====== GRADIENT BG DENGAN ANIMASI ====== */
+  .gradient-bg {
+    background: linear-gradient(135deg, #22c55e, #16a34a, #14b8a6, #3b82f6);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite, fadeIn 1s ease both;
+    color: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 2rem 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gradient-bg:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  }
+
+  /* ====== HEADER ====== */
+  .top-header {
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .page-title h3 {
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .profile-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 2px #22c55e33;
+  }
+
+  .row.g-4 {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+  }
+
+  .row.g-4::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .row.g-4::-webkit-scrollbar-thumb {
+    background: rgba(34, 197, 94, 0.4);
+    border-radius: 10px;
+  }
+
+  .row.g-4>div {
+    flex: 0 0 48%;
+    scroll-snap-align: start;
+  }
+
+  .info-card {
+    border: none;
+    border-radius: 1.25rem;
+    background: #ffffff;
+    transition: all 0.35s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .info-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #22c55e, #14b8a6, #3b82f6);
+    border-top-left-radius: 1.25rem;
+    border-top-right-radius: 1.25rem;
+  }
+
+  .info-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(22, 163, 74, 0.18);
+  }
+
+  .info-card .card-body {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    padding: 1.4rem 1.6rem;
+  }
+
+  .info-icon {
+    font-size: 1.6rem;
+    background: linear-gradient(135deg, #22c55e, #3b82f6);
+    color: #fff;
+    padding: 0.8rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+    flex-shrink: 0;
+  }
+
+  .info-text h5 {
+    margin-bottom: 0.4rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1f2937;
+    letter-spacing: -0.3px;
+  }
+
+  .info-text p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #4b5563;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 992px) {
+    .row.g-4>div {
+      flex: 0 0 80%;
     }
 
-    .btn-light {
-      width: 100%;
-      justify-content: center;
+    .info-card .card-body {
+      flex-direction: row;
+      text-align: left;
+      padding: 1.2rem 1.4rem;
+    }
+
+    .info-text p {
+      white-space: normal;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .row.g-4>div {
+      flex: 0 0 90%;
+    }
+
+    .info-card .card-body {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      padding: 1.3rem;
+    }
+
+    .info-icon {
+      margin-bottom: 0.8rem;
     }
   }
 </style>
+
+
+
 
 <div class="top-header border-bottom bg-white shadow-sm">
   <div class="container-fluid">
@@ -93,75 +219,85 @@
 </div>
 
 <main class="container-fluid px-4 py-4">
+  <!-- 2 Info Cards -->
+  <div class="row g-4 mb-4">
+    <!-- Total Produk -->
+    <div class="col-md-6 fade-in">
+      <div class="card info-card shadow-sm">
+        <div class="card-body">
+          <div class="info-icon">
+            <i class="fas fa-box"></i>
+          </div>
+          <div class="info-text">
+            <h5>Total Produk</h5>
+            <p class="fs-5 fw-bold text-success mb-0"><?= count($products) ?> produk</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cuaca Terkini -->
+    <div class="col-md-6 fade-in">
+      <div class="card info-card shadow-sm">
+        <div class="card-body">
+          <div class="info-icon">
+            <i class="fas fa-cloud-sun"></i>
+          </div>
+          <div class="info-text" id="weatherBox">
+            <h5>Cuaca Terkini</h5>
+            <p id="weatherText" class="mb-0 text-muted">Memuat cuaca...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Header -->
   <div class="dashboard-header p-4 mb-4 position-relative gradient-bg rounded-4 shadow-sm">
-    <div class="row align-items-center position-relative g-3" style="z-index: 1;">
-      <div class="row g-3 align-items-end">
-
-        <!-- Search -->
-        <div class="col-md-3">
-          <div class="position-relative">
-            <input type="text" id="searchProduct" class="form-control ps-5 rounded-5 border-0 shadow-sm"
-              placeholder="Cari Produk..." />
-            <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
-              <i class="fas fa-search text-muted"></i>
-            </span>
-          </div>
+    <div class="row align-items-center g-3">
+      <div class="col-md-3">
+        <div class="position-relative">
+          <input type="text" id="searchProduct" class="form-control ps-5 rounded-5 border-0 shadow-sm"
+            placeholder="Cari Produk..." />
+          <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
+            <i class="fas fa-search text-muted"></i>
+          </span>
         </div>
+      </div>
 
-        <!-- Filter -->
-        <div class="col-md-3">
-          <div class="position-relative">
-            <select id="filterUnit" class="form-select bg-white ps-5 rounded-5 border-0 shadow-sm">
-              <option value="">Semua Satuan</option>
-              <?php
-              $default_units = ['pcs', 'g', 'kg', 'ton'];
-
-              $unit = array_unique(array_merge($default_units, array_column($products, 'satuan')));
-
-              foreach ($unit as $s):
-                $s = strtolower(trim($s));
-                ?>
-                <option value="<?= $s ?>">
-                  <?= htmlspecialchars($s) ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-
-            <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
-              <i class="fas fa-balance-scale text-muted"></i>
-            </span>
-          </div>
+      <div class="col-md-3">
+        <div class="position-relative">
+          <select id="filterUnit" class="form-select bg-white ps-5 rounded-5 border-0 shadow-sm">
+            <option value="">Semua Satuan</option>
+            <?php
+            $default_units = ['pcs', 'g', 'kg', 'ton'];
+            $unit = array_unique(array_merge($default_units, array_column($products, 'satuan')));
+            foreach ($unit as $s):
+              $s = strtolower(trim($s));
+              ?>
+              <option value="<?= $s ?>">
+                <?= htmlspecialchars($s) ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+          <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
+            <i class="fas fa-balance-scale text-muted"></i>
+          </span>
         </div>
+      </div>
 
-
-        <!-- Info + Button -->
-        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 mt-3">
-          <div class="d-flex flex-wrap gap-4 justify-content-center justify-content-md-start text-white fw-semibold">
-            <div class="d-flex align-items-center">
-              <i class="fas fa-box me-2 text-light"></i>
-              <span>Total Produk: <span class="fw-bold"><?= count($products) ?></span></span>
-            </div>
-
-            <div class="d-flex align-items-center text-light" id="weatherBox">
-              <i class="fas fa-cloud-sun me-2"></i>
-              <span id="weatherText">Memuat cuaca...</span>
-            </div>
-          </div>
-
-          <div class="text-center text-md-end">
-            <a href="<?= BASE_URL ?>product/create"
-              class="btn btn-light text-success px-4 py-2 rounded-5 fw-semibold shadow-sm d-inline-flex align-items-center gap-2 border-0">
-              <i class="fas fa-plus-circle"></i>
-              Tambah Produk
-            </a>
-          </div>
-
-        </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a href="<?= BASE_URL ?>product/create"
+          class="btn btn-light text-success px-4 py-2 rounded-5 fw-semibold shadow-sm d-inline-flex align-items-center gap-2 border-0">
+          <i class="fas fa-plus-circle"></i>
+          Tambah Produk
+        </a>
       </div>
     </div>
   </div>
 
 
+
+  <!-- Table Produk -->
   <div class="card fade-in shadow-sm border-0">
     <div class="card-body pt-0 pb-4">
       <?php if (empty($products)): ?>
@@ -183,27 +319,18 @@
               <?php foreach ($products as $p): ?>
                 <tr class="align-middle">
                   <td class="px-4 py-3 fw-medium">
-                    <span class="badge bg-primary badge-custom">
-                      <?= $this->e($p['kode']) ?>
-                    </span>
+                    <span class="badge bg-primary"><?= $this->e($p['kode']) ?></span>
                   </td>
+                  <td class="px-4 py-3 fw-medium"><?= $this->e($p['nama']) ?></td>
                   <td class="px-4 py-3 fw-medium">
-                    <?= $this->e($p['nama']) ?>
+                    <span class="badge bg-success"><?= $this->e($p['satuan']) ?></span>
                   </td>
-                  <td class="px-4 py-3 fw-medium unit-col">
-                    <span class="badge bg-success badge-custom">
-                      <?= $this->e($p['satuan']) ?>
-                    </span>
-                  </td>
-                  <td class="px-4 py-3 fw-medium">
-                    Rp
-                    <?= number_format($p['harga'], 0, ',', '.') ?>
-                  </td>
+                  <td class="px-4 py-3 fw-medium">Rp <?= number_format($p['harga'], 0, ',', '.') ?></td>
                   <td class="px-4 py-3 fw-medium">
                     <?php if (!empty($p['image'])): ?>
                       <img src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>" alt="img" class="thumb img-thumbnail"
                         width="60" />
-                    <?php else: ?> 
+                    <?php else: ?>
                       <span class="text-muted">-</span>
                     <?php endif; ?>
                   </td>
@@ -249,7 +376,7 @@
             </div>
           </div>
 
-          <!-- Overlay Animasi Checklist -->
+          <!-- Overlay Sukses -->
           <div id="successOverlay" class="success-overlay d-none">
             <div class="checkmark-container">
               <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
@@ -262,13 +389,11 @@
         </div>
       <?php endif; ?>
 
-      <!-- Tampil jika hasil filter/search tidak menemukan produk -->
       <div id="noResults" class="text-center d-none">
         <p class="text-muted mt-4">Produk tidak ditemukan</p>
       </div>
     </div>
   </div>
-
 </main>
 
 <footer class="bg-light text-dark py-4 mt-5 fixed-bottom">
@@ -278,7 +403,6 @@
     </p>
   </div>
 </footer>
-
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -296,19 +420,16 @@
     deleteForm.addEventListener("submit", function (e) {
       e.preventDefault();
       const form = this;
-
       const modalEl = document.getElementById("deleteModal");
       const modal = bootstrap.Modal.getInstance(modalEl);
       modal.hide();
 
       successOverlay.classList.remove("d-none");
-
-      setTimeout(() => {
-        form.submit();
-      }, 1500);
+      setTimeout(() => form.submit(), 1500);
     });
   });
 
+  // Cuaca
   const latitude = -7.2575;
   const longitude = 112.7521;
 
@@ -319,22 +440,18 @@
       const data = await res.json();
 
       if (data && data.current_weather) {
-        const kondisiKode = data.current_weather.weathercode;
+        const kode = data.current_weather.weathercode;
         const suhu = Math.round(data.current_weather.temperature);
+        let kondisi = "Cerah";
 
-        let kondisi = "Langit Cerah";
-        if (kondisiKode === 0) kondisi = "Cerah";
-        else if (kondisiKode === 1) kondisi = "Cerah berawan";
-        else if (kondisiKode >= 2 && kondisiKode <= 3) kondisi = "Berawan";
-        else if (kondisiKode >= 45 && kondisiKode <= 48) kondisi = "Berkabut";
-        else if (kondisiKode >= 51 && kondisiKode <= 57) kondisi = "Hujan ringan";
-        else if (kondisiKode >= 61 && kondisiKode <= 69) kondisi = "Hujan";
-        else if (kondisiKode >= 80 && kondisiKode <= 82) kondisi = "Hujan lebat";
+        if (kode === 1) kondisi = "Cerah berawan";
+        else if (kode >= 2 && kode <= 3) kondisi = "Berawan";
+        else if (kode >= 45 && kode <= 48) kondisi = "Berkabut";
+        else if (kode >= 51 && kode <= 57) kondisi = "Hujan ringan";
+        else if (kode >= 61 && kode <= 69) kondisi = "Hujan";
+        else if (kode >= 80 && kode <= 82) kondisi = "Hujan lebat";
 
-        document.getElementById("weatherBox").innerHTML = `
-          <i class="fas fa-cloud-sun me-2"></i>
-          <span>Cuaca hari ini: ${kondisi}, ${suhu}°C</span>
-        `;
+        document.getElementById("weatherText").innerHTML = `${kondisi}, ${suhu}°C`;
       } else {
         document.getElementById("weatherText").textContent = "Gagal memuat cuaca 😢";
       }

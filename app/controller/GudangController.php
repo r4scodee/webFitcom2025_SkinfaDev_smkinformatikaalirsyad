@@ -10,25 +10,34 @@ class GudangController extends Controller
         $this->model = new GudangModel();
     }
 
-    // read
+    // ==============================
+    // READ
+    // ==============================
     public function index()
     {
         $gudang = $this->model->all();
         $this->view('gudang/index', [
             'title' => 'Table Management Gudang - Tani Digital',
-            'active' => 'products',
+            'active' => 'Gudang',
             'gudang' => $gudang
         ]);
     }
 
-    // create
+    // ==============================
+    // CREATE FORM
+    // ==============================
     public function create()
     {
         $csrf = $this->generateCSRFToken();
-        $this->view('gudang/form', ['action' => 'store', 'csrf' => $csrf]);
+        $this->view('gudang/form', [
+            'action' => 'store',
+            'csrf' => $csrf
+        ]);
     }
 
-    // store
+    // ==============================
+    // STORE DATA
+    // ==============================
     public function store()
     {
         if (!$this->verifyCSRFToken($_POST['_csrf'] ?? '')) {
@@ -43,15 +52,14 @@ class GudangController extends Controller
         $errors = [];
 
         if ($kodegudang === '')
-            $errors[] = "Kode produk wajib diisi.";
+            $errors[] = "Kode gudang wajib diisi.";
         if ($namagudang === '')
-            $errors[] = "Nama produk wajib diisi.";
-        if (!is_numeric($price) || $price < 0)
-            $errors[] = "Harga harus angka >= 0.";
+            $errors[] = "Nama gudang wajib diisi.";
 
         if ($this->model->existsByCode($kodegudang))
-            $errors[] = "Kode produk sudah digunakan.";
+            $errors[] = "Kode gudang sudah digunakan.";
 
+        // Upload Gambar
         $uploadedFilename = null;
         if (!empty($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
             $uploadResult = $this->handleUpload($_FILES['image']);
@@ -62,80 +70,94 @@ class GudangController extends Controller
             }
         }
 
+        // Jika ada error
         if (!empty($errors)) {
             $csrf = $this->generateCSRFToken();
-            $this->view('products/form', [
+            $this->view('gudang/form', [
                 'action' => 'store',
                 'errors' => $errors,
-                'old' => ['kode' => $kodegudang, 'nama' => $namagudang, 'harga' => $price, 'satuan' => $unit],
+                'old' => [
+                    'kodegudang' => $kodegudang,
+                    'namagudang' => $namagudang,
+                    'golongan' => $golongan,
+                    'keterangan' => $keterangan
+                ],
                 'csrf' => $csrf
             ]);
             return;
         }
 
+        // Simpan data
         $data = [
-            'kode' => $kodegudang,
-            'nama' => $namagudang,
-            'harga' => $price,
-            'image' => $uploadedFilename,
-            'satuan' => $unit,
-            'kodegudang' => $kodegudang
+            'kodegudang' => $kodegudang,
+            'namagudang' => $namagudang,
+            'golongan' => $golongan,
+            'keterangan' => $keterangan,
+            'image' => $uploadedFilename
         ];
 
-        $id = $this->model->create($data);
+        $this->model->create($data);
 
-        $this->redirect('/');
+        $this->redirect('/gudang');
     }
 
-    // edit
+    // ==============================
+    // EDIT FORM
+    // ==============================
     public function edit($id)
     {
-        $product = $this->model->find($id);
-        if (!$product) {
-            echo "Produk tidak ditemukan.";
+        $gudang = $this->model->find($id);
+        if (!$gudang) {
+            echo "Gudang tidak ditemukan.";
             return;
         }
+
         $csrf = $this->generateCSRFToken();
-        $this->view('products/form', ['action' => 'update', 'product' => $product, 'csrf' => $csrf]);
+        $this->view('gudang/form', [
+            'action' => 'update',
+            'gudang' => $gudang,
+            'csrf' => $csrf
+        ]);
     }
 
-    // update
+    // ==============================
+    // UPDATE DATA
+    // ==============================
     public function update($id)
     {
         if (!$this->verifyCSRFToken($_POST['_csrf'] ?? '')) {
             die('CSRF token tidak valid.');
         }
 
-        $product = $this->model->find($id);
-        if (!$product) {
-            echo "Produk tidak ditemukan.";
+        $gudang = $this->model->find($id);
+        if (!$gudang) {
+            echo "Gudang tidak ditemukan.";
             return;
         }
 
-        $kodegudang = trim($_POST['kode'] ?? '');
-        $namagudang = trim($_POST['nama'] ?? '');
-        $price = trim($_POST['harga'] ?? '0');
-        $unit = trim($_POST['satuan'] ?? '');
         $kodegudang = trim($_POST['kodegudang'] ?? '');
+        $namagudang = trim($_POST['namagudang'] ?? '');
+        $golongan = trim($_POST['golongan'] ?? '');
+        $keterangan = trim($_POST['keterangan'] ?? '');
 
         $errors = [];
+
         if ($kodegudang === '')
-            $errors[] = "Kode produk wajib diisi.";
+            $errors[] = "Kode gudang wajib diisi.";
         if ($namagudang === '')
-            $errors[] = "Nama produk wajib diisi.";
-        if (!is_numeric($price) || $price < 0)
-            $errors[] = "Harga harus angka >= 0.";
+            $errors[] = "Nama gudang wajib diisi.";
 
         if ($this->model->existsByCode($kodegudang, $id))
-            $errors[] = "Kode produk sudah digunakan oleh produk lain.";
+            $errors[] = "Kode gudang sudah digunakan oleh gudang lain.";
 
-        $uploadedFilename = $product['image'];
+        // Upload baru jika ada
+        $uploadedFilename = $gudang['image'];
         if (!empty($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
             $uploadResult = $this->handleUpload($_FILES['image']);
             if ($uploadResult['success']) {
                 $uploadedFilename = $uploadResult['filename'];
-                if (!empty($product['image']) && is_file(UPLOAD_DIR . $product['image'])) {
-                    @unlink(UPLOAD_DIR . $product['image']);
+                if (!empty($gudang['image']) && is_file(UPLOAD_DIR . $gudang['image'])) {
+                    @unlink(UPLOAD_DIR . $gudang['image']);
                 }
             } else {
                 $errors[] = $uploadResult['error'];
@@ -144,79 +166,92 @@ class GudangController extends Controller
 
         if (!empty($errors)) {
             $csrf = $this->generateCSRFToken();
-            $this->view('products/form', [
+            $this->view('gudang/form', [
                 'action' => 'update',
                 'errors' => $errors,
-                'product' => ['id' => $id, 'kode' => $kodegudang, 'nama' => $namagudang, 'harga' => $price, 'satuan' => $unit, 'image' => $uploadedFilename],
+                'gudang' => [
+                    'id' => $id,
+                    'kodegudang' => $kodegudang,
+                    'namagudang' => $namagudang,
+                    'golongan' => $golongan,
+                    'keterangan' => $keterangan,
+                    'image' => $uploadedFilename
+                ],
                 'csrf' => $csrf
             ]);
             return;
         }
 
         $data = [
-            'kode' => $kodegudang,
-            'nama' => $namagudang,
-            'harga' => $price,
-            'image' => $uploadedFilename,
-            'satuan' => $unit,
-            'kodegudang' => $kodegudang
+            'kodegudang' => $kodegudang,
+            'namagudang' => $namagudang,
+            'golongan' => $golongan,
+            'keterangan' => $keterangan,
+            'image' => $uploadedFilename
         ];
 
         $this->model->update($id, $data);
 
-        $this->redirect('/');
+        $this->redirect('/gudang');
     }
 
-    // delete
+    // ==============================
+    // DELETE DATA
+    // ==============================
     public function delete($id)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             die('Invalid request method.');
         }
+
         if (!$this->verifyCSRFToken($_POST['_csrf'] ?? '')) {
             die('CSRF token tidak valid.');
         }
 
-        $product = $this->model->find($id);
-        if (!$product) {
-            echo "Produk tidak ditemukan.";
+        $gudang = $this->model->find($id);
+        if (!$gudang) {
+            echo "Gudang tidak ditemukan.";
             return;
         }
 
         $this->model->delete($id);
 
-        if (!empty($product['image']) && is_file(UPLOAD_DIR . $product['image'])) {
-            @unlink(UPLOAD_DIR . $product['image']);
+        if (!empty($gudang['image']) && is_file(UPLOAD_DIR . $gudang['image'])) {
+            @unlink(UPLOAD_DIR . $gudang['image']);
         }
 
-        $this->redirect('/');
+        $this->redirect('/gudang');
     }
 
-    // helper upload
+    // ==============================
+    // HELPER: UPLOAD FILE
+    // ==============================
     private function handleUpload($file)
     {
-        $maxSize = 2 * 1024 * 1024;
-
-        $allowedExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        $maxSize = 2 * 1024 * 1024; // 2MB max
+        $validMimes = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/gif' => 'gif',
+            'image/webp' => 'webp'
+        ];
 
         if ($file['error'] !== UPLOAD_ERR_OK) {
             return ['success' => false, 'error' => 'Upload error kode: ' . $file['error']];
         }
 
         if ($file['size'] > $maxSize) {
-            return ['success' => false, 'error' => 'Ukuran file terlalu besar (max 2MB).'];
+            return ['success' => false, 'error' => 'Ukuran file terlalu besar (maksimal 2MB).'];
         }
 
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $mime = $finfo->file($file['tmp_name']);
-        $validMimes = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/gif' => 'gif', 'image/webp' => 'webp'];
 
         if (!isset($validMimes[$mime])) {
             return ['success' => false, 'error' => 'Tipe file tidak diizinkan.'];
         }
 
         $ext = $validMimes[$mime];
-
         $newName = bin2hex(random_bytes(8)) . '_' . time() . '.' . $ext;
 
         if (!is_dir(UPLOAD_DIR)) {

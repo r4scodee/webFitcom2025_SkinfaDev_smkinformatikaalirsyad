@@ -1,7 +1,7 @@
 <?php
-class ProductModel
+class GudangModel
 {
-    private $db; 
+    private $db;
 
     public function __construct()
     {
@@ -9,26 +9,28 @@ class ProductModel
         $this->db = Database::getInstance()->getConnection();
     }
 
+    // ambil semua data
     public function all()
     {
         $stmt = $this->db->prepare("
-        SELECT p.*, w.namagudang, w.golongan
-        FROM produk p
-        LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
-        ORDER BY p.id ASC
+            SELECT g.*, w.namagudang AS namagudang_parent, w.golongan
+            FROM gudang g
+            LEFT JOIN gudang w ON g.kodegudang = w.kodegudang
+            ORDER BY g.kodegudang ASC
         ");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
+    // ambil satu data
     public function find($id)
     {
         $stmt = $this->db->prepare("
-        SELECT p.*, w.namagudang, w.golongan
-        FROM produk p
-        LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
-        WHERE p.id = :id
-        LIMIT 1
+            SELECT g.*, w.namagudang AS namagudang_parent, w.golongan
+            FROM gudang g
+            LEFT JOIN gudang w ON g.kodegudang = w.kodegudang
+            WHERE g.id = :id
+            LIMIT 1
         ");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch();
@@ -37,7 +39,7 @@ class ProductModel
     // insert
     public function create($data)
     {
-        $sql = "INSERT INTO produk (kode, nama, harga, image, satuan, kodegudang) 
+        $sql = "INSERT INTO gudang (kode, nama, harga, image, satuan, kodegudang) 
                 VALUES (:kode, :nama, :harga, :image, :satuan, :kodegudang)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
@@ -54,7 +56,9 @@ class ProductModel
     // update
     public function update($id, $data)
     {
-        $sql = "UPDATE produk SET kode = :kode, nama = :nama, harga = :harga, image = :image, satuan = :satuan, kodegudang = :kodegudang WHERE id = :id";
+        $sql = "UPDATE gudang 
+                SET kode = :kode, nama = :nama, harga = :harga, image = :image, satuan = :satuan, kodegudang = :kodegudang 
+                WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':kode' => $data['kode'],
@@ -70,18 +74,18 @@ class ProductModel
     // hapus
     public function delete($id)
     {
-        $stmt = $this->db->prepare("DELETE FROM produk WHERE id = :id");
+        $stmt = $this->db->prepare("DELETE FROM gudang WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
 
-    // Cek kode produk
+    // cek kode
     public function existsByCode($code, $excludeId = null)
     {
         if ($excludeId) {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM produk WHERE kode = :kode AND id != :id");
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM gudang WHERE kode = :kode AND id != :id");
             $stmt->execute([':kode' => $code, ':id' => $excludeId]);
         } else {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM produk WHERE kode = :kode");
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM gudang WHERE kode = :kode");
             $stmt->execute([':kode' => $code]);
         }
         return $stmt->fetchColumn() > 0;

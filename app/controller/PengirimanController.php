@@ -1,23 +1,23 @@
 <?php
 require_once __DIR__ . '/../library/Controller.php';
 
-class ProductController extends Controller
+class PengirimanController extends Controller
 {
     private $model;
 
     public function __construct()
     {
-        $this->model = new ProductModel();
+        $this->model = new PengirimanModel();
     }
 
     // read
     public function index()
     {
-        $products = $this->model->all();
-        $this->view('products/index', [
-            'title' => 'Table Management Products - Tani Digital',
-            'active' => 'products',
-            'products' => $products
+        $pengirimen = $this->model->all();
+        $this->view('pengiriman/index', [
+            'title' => 'Manajemen Data Pengiriman - Tani Digital',
+            'active' => 'pengiriman',
+            'pengirimen' => $pengirimen
         ]);
     }
 
@@ -25,7 +25,7 @@ class ProductController extends Controller
     public function create()
     {
         $csrf = $this->generateCSRFToken();
-        $this->view('products/form', ['action' => 'store', 'csrf' => $csrf]);
+        $this->view('pengiriman/form', ['action' => 'store', 'csrf' => $csrf]);
     }
 
     // store
@@ -35,27 +35,29 @@ class ProductController extends Controller
             die('CSRF token tidak valid.');
         }
 
-        $code = trim($_POST['kode'] ?? '');
-        $name = trim($_POST['nama'] ?? '');
-        $price = trim($_POST['harga'] ?? '0');
-        $unit = trim($_POST['satuan'] ?? '');
-        $kodegudang = trim($_POST['kodegudang'] ?? '');
+        $kode = trim($_POST['kode'] ?? '');
+        $kendaraan = trim($_POST['kendaraan'] ?? '');
+        $tujuan = trim($_POST['tujuan'] ?? '');
+        $tanggal = trim($_POST['tanggal'] ?? '');
+        $harga = trim($_POST['harga'] ?? '0');
 
         $errors = [];
 
-        if ($code === '')
-            $errors[] = "Kode produk wajib diisi.";
-        if ($name === '')
-            $errors[] = "Nama produk wajib diisi.";
-        if (!is_numeric($price) || $price < 0)
-            $errors[] = "Harga harus angka >= 0.";
+        if ($kode === '')
+            $errors[] = "Kode pengiriman wajib diisi.";
+        if ($kendaraan === '')
+            $errors[] = "Kendaraan wajib diisi.";
+        if ($tujuan === '')
+            $errors[] = "Tujuan wajib diisi.";
+        if (!is_numeric($harga) || $harga < 0)
+            $errors[] = "Harga harus berupa angka ≥ 0.";
 
-        if ($this->model->existsByCode($code))
-            $errors[] = "Kode produk sudah digunakan.";
+        if ($this->model->existsByCode($kode))
+            $errors[] = "Kode pengiriman sudah digunakan.";
 
         $uploadedFilename = null;
-        if (!empty($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
-            $uploadResult = $this->handleUpload($_FILES['image']);
+        if (!empty($_FILES['dokumen']) && $_FILES['dokumen']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $uploadResult = $this->handleUpload($_FILES['dokumen']);
             if ($uploadResult['success']) {
                 $uploadedFilename = $uploadResult['filename'];
             } else {
@@ -65,39 +67,44 @@ class ProductController extends Controller
 
         if (!empty($errors)) {
             $csrf = $this->generateCSRFToken();
-            $this->view('products/form', [
+            $this->view('pengiriman/form', [
                 'action' => 'store',
                 'errors' => $errors,
-                'old' => ['kode' => $code, 'nama' => $name, 'harga' => $price, 'satuan' => $unit],
+                'old' => [
+                    'kode' => $kode,
+                    'kendaraan' => $kendaraan,
+                    'tujuan' => $tujuan,
+                    'tanggal' => $tanggal,
+                    'harga' => $harga
+                ],
                 'csrf' => $csrf
             ]);
             return;
         }
 
         $data = [
-            'kode' => $code,
-            'nama' => $name,
-            'harga' => $price,
-            'image' => $uploadedFilename,
-            'satuan' => $unit,
-            'kodegudang' => $kodegudang
+            'kode' => $kode,
+            'kendaraan' => $kendaraan,
+            'tujuan' => $tujuan,
+            'tanggal' => $tanggal,
+            'harga' => $harga,
+            'dokumen' => $uploadedFilename
         ];
 
-        $id = $this->model->create($data);
-
-        $this->redirect('/');
+        $this->model->create($data);
+        $this->redirect('/pengiriman');
     }
 
     // edit
     public function edit($id)
     {
-        $product = $this->model->find($id);
-        if (!$product) {
-            echo "Produk tidak ditemukan.";
+        $pengiriman = $this->model->find($id);
+        if (!$pengiriman) {
+            echo "Data pengiriman tidak ditemukan.";
             return;
         }
         $csrf = $this->generateCSRFToken();
-        $this->view('products/form', ['action' => 'update', 'product' => $product, 'csrf' => $csrf]);
+        $this->view('pengiriman/form', ['action' => 'update', 'pengiriman' => $pengiriman, 'csrf' => $csrf]);
     }
 
     // update
@@ -107,36 +114,39 @@ class ProductController extends Controller
             die('CSRF token tidak valid.');
         }
 
-        $product = $this->model->find($id);
-        if (!$product) {
-            echo "Produk tidak ditemukan.";
+        $pengiriman = $this->model->find($id);
+        if (!$pengiriman) {
+            echo "Data pengiriman tidak ditemukan.";
             return;
         }
 
-        $code = trim($_POST['kode'] ?? '');
-        $name = trim($_POST['nama'] ?? '');
-        $price = trim($_POST['harga'] ?? '0');
-        $unit = trim($_POST['satuan'] ?? '');
-        $kodegudang = trim($_POST['kodegudang'] ?? '');
+        $kode = trim($_POST['kode'] ?? '');
+        $kendaraan = trim($_POST['kendaraan'] ?? '');
+        $tujuan = trim($_POST['tujuan'] ?? '');
+        $tanggal = trim($_POST['tanggal'] ?? '');
+        $harga = trim($_POST['harga'] ?? '0');
 
         $errors = [];
-        if ($code === '')
-            $errors[] = "Kode produk wajib diisi.";
-        if ($name === '')
-            $errors[] = "Nama produk wajib diisi.";
-        if (!is_numeric($price) || $price < 0)
-            $errors[] = "Harga harus angka >= 0.";
 
-        if ($this->model->existsByCode($code, $id))
-            $errors[] = "Kode produk sudah digunakan oleh produk lain.";
+        if ($kode === '')
+            $errors[] = "Kode pengiriman wajib diisi.";
+        if ($kendaraan === '')
+            $errors[] = "Kendaraan wajib diisi.";
+        if ($tujuan === '')
+            $errors[] = "Tujuan wajib diisi.";
+        if (!is_numeric($harga) || $harga < 0)
+            $errors[] = "Harga harus berupa angka ≥ 0.";
 
-        $uploadedFilename = $product['image'];
-        if (!empty($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
-            $uploadResult = $this->handleUpload($_FILES['image']);
+        if ($this->model->existsByCode($kode, $id))
+            $errors[] = "Kode pengiriman sudah digunakan oleh data lain.";
+
+        $uploadedFilename = $pengiriman['dokumen'];
+        if (!empty($_FILES['dokumen']) && $_FILES['dokumen']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $uploadResult = $this->handleUpload($_FILES['dokumen']);
             if ($uploadResult['success']) {
                 $uploadedFilename = $uploadResult['filename'];
-                if (!empty($product['image']) && is_file(UPLOAD_DIR . $product['image'])) {
-                    @unlink(UPLOAD_DIR . $product['image']);
+                if (!empty($pengiriman['dokumen']) && is_file(UPLOAD_DIR . $pengiriman['dokumen'])) {
+                    @unlink(UPLOAD_DIR . $pengiriman['dokumen']);
                 }
             } else {
                 $errors[] = $uploadResult['error'];
@@ -145,27 +155,34 @@ class ProductController extends Controller
 
         if (!empty($errors)) {
             $csrf = $this->generateCSRFToken();
-            $this->view('products/form', [
+            $this->view('pengiriman/form', [
                 'action' => 'update',
                 'errors' => $errors,
-                'product' => ['id' => $id, 'kode' => $code, 'nama' => $name, 'harga' => $price, 'satuan' => $unit, 'image' => $uploadedFilename],
+                'pengiriman' => [
+                    'id' => $id,
+                    'kode' => $kode,
+                    'kendaraan' => $kendaraan,
+                    'tujuan' => $tujuan,
+                    'tanggal' => $tanggal,
+                    'harga' => $harga,
+                    'dokumen' => $uploadedFilename
+                ],
                 'csrf' => $csrf
             ]);
             return;
         }
 
         $data = [
-            'kode' => $code,
-            'nama' => $name,
-            'harga' => $price,
-            'image' => $uploadedFilename,
-            'satuan' => $unit,
-            'kodegudang' => $kodegudang
+            'kode' => $kode,
+            'kendaraan' => $kendaraan,
+            'tujuan' => $tujuan,
+            'tanggal' => $tanggal,
+            'harga' => $harga,
+            'dokumen' => $uploadedFilename
         ];
 
         $this->model->update($id, $data);
-
-        $this->redirect('/');
+        $this->redirect('/pengiriman');
     }
 
     // delete
@@ -178,27 +195,25 @@ class ProductController extends Controller
             die('CSRF token tidak valid.');
         }
 
-        $product = $this->model->find($id);
-        if (!$product) {
-            echo "Produk tidak ditemukan.";
+        $pengiriman = $this->model->find($id);
+        if (!$pengiriman) {
+            echo "Data pengiriman tidak ditemukan.";
             return;
         }
 
         $this->model->delete($id);
 
-        if (!empty($product['image']) && is_file(UPLOAD_DIR . $product['image'])) {
-            @unlink(UPLOAD_DIR . $product['image']);
+        if (!empty($pengiriman['dokumen']) && is_file(UPLOAD_DIR . $pengiriman['dokumen'])) {
+            @unlink(UPLOAD_DIR . $pengiriman['dokumen']);
         }
 
-        $this->redirect('/');
+        $this->redirect('/pengiriman');
     }
 
     // helper upload
     private function handleUpload($file)
     {
         $maxSize = 2 * 1024 * 1024;
-
-        $allowedExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
         if ($file['error'] !== UPLOAD_ERR_OK) {
             return ['success' => false, 'error' => 'Upload error kode: ' . $file['error']];
@@ -210,14 +225,19 @@ class ProductController extends Controller
 
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $mime = $finfo->file($file['tmp_name']);
-        $validMimes = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/gif' => 'gif', 'image/webp' => 'webp'];
+        $validMimes = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/gif' => 'gif',
+            'image/webp' => 'webp',
+            'application/pdf' => 'pdf'
+        ];
 
         if (!isset($validMimes[$mime])) {
             return ['success' => false, 'error' => 'Tipe file tidak diizinkan.'];
         }
 
         $ext = $validMimes[$mime];
-
         $newName = bin2hex(random_bytes(8)) . '_' . time() . '.' . $ext;
 
         if (!is_dir(UPLOAD_DIR)) {
@@ -232,7 +252,6 @@ class ProductController extends Controller
         }
 
         @chmod($target, 0644);
-
         return ['success' => true, 'filename' => $newName];
     }
 }

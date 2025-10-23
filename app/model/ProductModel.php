@@ -1,5 +1,5 @@
 <?php
-class GudangModel
+class PengirimanModel
 {
     private $db;
 
@@ -9,76 +9,85 @@ class GudangModel
         $this->db = Database::getInstance()->getConnection();
     }
 
-    // Ambil semua data gudang
+    // ambil semua data
     public function all()
     {
-        $stmt = $this->db->prepare("SELECT * FROM gudang ORDER BY id ASC");
+        $stmt = $this->db->prepare("
+            SELECT p.*, w.namagudang, w.golongan
+            FROM pengiriman p
+            LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
+            ORDER BY p.id ASC
+        ");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    // Cari data gudang berdasarkan ID (primary key baru)
+    // ambil satu data
     public function find($id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM gudang WHERE id = :id LIMIT 1");
+        $stmt = $this->db->prepare("
+            SELECT p.*, w.namagudang, w.golongan
+            FROM pengiriman p
+            LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
+            WHERE p.id = :id
+            LIMIT 1
+        ");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch();
     }
 
-    // Tambah data gudang
+    // insert
     public function create($data)
     {
-        $sql = "INSERT INTO gudang (kodegudang, namagudang, golongan, keterangan) 
-                VALUES (:kodegudang, :namagudang, :golongan, :keterangan)";
+        $sql = "INSERT INTO pengiriman (kode, nama, harga, image, satuan, kodegudang) 
+                VALUES (:kode, :nama, :harga, :image, :satuan, :kodegudang)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
-            ':kodegudang' => $data['kodegudang'],
-            ':namagudang' => $data['namagudang'],
-            ':golongan' => $data['golongan'],
-            ':keterangan' => $data['keterangan'],
+            ':kode' => $data['kode'],
+            ':nama' => $data['nama'],
+            ':harga' => $data['harga'],
+            ':image' => $data['image'],
+            ':satuan' => $data['satuan'],
+            ':kodegudang' => $data['kodegudang'] ?? null,
         ]);
-        return $this->db->lastInsertId(); 
+        return $this->db->lastInsertId();
     }
 
-    // Update data gudang berdasarkan id
+    // update
     public function update($id, $data)
     {
-        $sql = "UPDATE gudang 
-                SET kodegudang = :kodegudang, 
-                    namagudang = :namagudang, 
-                    golongan = :golongan, 
-                    keterangan = :keterangan
+        $sql = "UPDATE pengiriman 
+                SET kode = :kode, nama = :nama, harga = :harga, image = :image, satuan = :satuan, kodegudang = :kodegudang 
                 WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            ':kodegudang' => $data['kodegudang'],
-            ':namagudang' => $data['namagudang'],
-            ':golongan' => $data['golongan'],
-            ':keterangan' => $data['keterangan'],
-            ':id' => $id
+            ':kode' => $data['kode'],
+            ':nama' => $data['nama'],
+            ':harga' => $data['harga'],
+            ':image' => $data['image'],
+            ':satuan' => $data['satuan'],
+            ':kodegudang' => $data['kodegudang'] ?? null,
+            ':id' => $id,
         ]);
     }
 
+    // hapus
     public function delete($id)
     {
-        $stmt = $this->db->prepare("DELETE FROM gudang WHERE id = :id");
+        $stmt = $this->db->prepare("DELETE FROM pengiriman WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
 
-    public function existsByCode($kodegudang, $excludeId = null)
+    // cek kode pengiriman
+    public function existsByCode($code, $excludeId = null)
     {
         if ($excludeId) {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM gudang WHERE kodegudang = :kodegudang AND id != :id");
-            $stmt->execute([
-                ':kodegudang' => $kodegudang,
-                ':id' => $excludeId
-            ]);
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM pengiriman WHERE kode = :kode AND id != :id");
+            $stmt->execute([':kode' => $code, ':id' => $excludeId]);
         } else {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM gudang WHERE kodegudang = :kodegudang");
-            $stmt->execute([':kodegudang' => $kodegudang]);
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM pengiriman WHERE kode = :kode");
+            $stmt->execute([':kode' => $code]);
         }
-
         return $stmt->fetchColumn() > 0;
     }
 }
-?>

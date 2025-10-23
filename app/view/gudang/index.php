@@ -201,7 +201,7 @@
 
       <div class="ms-2 order-3 order-md-1 page-title">
         <h3 class="mb-0 fw-bold text-success d-flex align-items-center">
-          <i class="fas fa-seedling me-2"></i> Manajemen Produk
+          <i class="fas fa-seedling me-2"></i> Manajemen Gudang
         </h3>
       </div>
       

@@ -36,15 +36,15 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="<?= BASE_URL ?>pengiriman"
-          class="nav-link sidebar-link <?= ($active ?? '') === 'pengiriman' ? 'active' : '' ?>">
-          <span>Pengiriman</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a href="<?= BASE_URL ?>kendaraan"
           class="nav-link sidebar-link <?= ($active ?? '') === 'kendaraan' ? 'active' : '' ?>">
           <span>Kendaraan</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= BASE_URL ?>pengiriman"
+          class="nav-link sidebar-link <?= ($active ?? '') === 'pengiriman' ? 'active' : '' ?>">
+          <span>Pengiriman</span>
         </a>
       </li>
     </ul>

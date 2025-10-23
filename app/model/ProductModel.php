@@ -1,36 +1,34 @@
 <?php
-class PengirimanModel
+class ProductModel
 {
-    private $db;
+    private $db; 
 
     public function __construct()
     {
-        // koneksi database
+        // koneksi
         $this->db = Database::getInstance()->getConnection();
     }
 
-    // ambil semua data
     public function all()
     {
         $stmt = $this->db->prepare("
-            SELECT p.*, w.namagudang, w.golongan
-            FROM pengiriman p
-            LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
-            ORDER BY p.id ASC
+        SELECT p.*, w.namagudang, w.golongan
+        FROM produk p
+        LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
+        ORDER BY p.id ASC
         ");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    // ambil satu data
     public function find($id)
     {
         $stmt = $this->db->prepare("
-            SELECT p.*, w.namagudang, w.golongan
-            FROM pengiriman p
-            LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
-            WHERE p.id = :id
-            LIMIT 1
+        SELECT p.*, w.namagudang, w.golongan
+        FROM produk p
+        LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
+        WHERE p.id = :id
+        LIMIT 1
         ");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch();
@@ -39,7 +37,7 @@ class PengirimanModel
     // insert
     public function create($data)
     {
-        $sql = "INSERT INTO pengiriman (kode, nama, harga, image, satuan, kodegudang) 
+        $sql = "INSERT INTO produk (kode, nama, harga, image, satuan, kodegudang) 
                 VALUES (:kode, :nama, :harga, :image, :satuan, :kodegudang)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
@@ -56,9 +54,7 @@ class PengirimanModel
     // update
     public function update($id, $data)
     {
-        $sql = "UPDATE pengiriman 
-                SET kode = :kode, nama = :nama, harga = :harga, image = :image, satuan = :satuan, kodegudang = :kodegudang 
-                WHERE id = :id";
+        $sql = "UPDATE produk SET kode = :kode, nama = :nama, harga = :harga, image = :image, satuan = :satuan, kodegudang = :kodegudang WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':kode' => $data['kode'],
@@ -74,18 +70,18 @@ class PengirimanModel
     // hapus
     public function delete($id)
     {
-        $stmt = $this->db->prepare("DELETE FROM pengiriman WHERE id = :id");
+        $stmt = $this->db->prepare("DELETE FROM produk WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
 
-    // cek kode pengiriman
+    // Cek kode produk
     public function existsByCode($code, $excludeId = null)
     {
         if ($excludeId) {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM pengiriman WHERE kode = :kode AND id != :id");
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM produk WHERE kode = :kode AND id != :id");
             $stmt->execute([':kode' => $code, ':id' => $excludeId]);
         } else {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM pengiriman WHERE kode = :kode");
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM produk WHERE kode = :kode");
             $stmt->execute([':kode' => $code]);
         }
         return $stmt->fetchColumn() > 0;

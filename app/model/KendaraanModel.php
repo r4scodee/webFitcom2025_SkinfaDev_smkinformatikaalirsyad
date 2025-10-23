@@ -1,7 +1,7 @@
 <?php
 class KendaraanModel
 {
-    private $db; 
+    private $db;
 
     public function __construct()
     {
@@ -13,25 +13,24 @@ class KendaraanModel
     public function all()
     {
         $stmt = $this->db->prepare("
-            SELECT k.*, w.namagudang, w.golongan
-            FROM kendaraan k
-            LEFT JOIN gudang w ON k.kodegudang = w.kodegudang
-            ORDER BY k.id ASC
-        ");
+        SELECT * 
+        FROM kendaraan
+        ORDER BY nopol ASC
+    ");
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
 
     // ambil satu data
     public function find($id)
     {
         $stmt = $this->db->prepare("
-            SELECT k.*, w.namagudang, w.golongan
-            FROM kendaraan k
-            LEFT JOIN gudang w ON k.kodegudang = w.kodegudang
-            WHERE k.id = :id
-            LIMIT 1
-        ");
+        SELECT *
+        FROM kendaraan
+        WHERE nopol = :id
+        LIMIT 1
+    ");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch();
     }
@@ -39,16 +38,17 @@ class KendaraanModel
     // insert
     public function create($data)
     {
-        $sql = "INSERT INTO kendaraan (kode, nama, harga, image, satuan, kodegudang) 
-                VALUES (:kode, :nama, :harga, :image, :satuan, :kodegudang)";
+        $sql = "INSERT INTO kendaraan (nopol, namakendaraan, jenis, tahun, kapasitas, driver, kontakdriver) 
+                VALUES (:nopol, :namakendaraan, :jenis, :tahun, :kapasitas, :driver, :kontakdriver)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
-            ':kode' => $data['kode'],
-            ':nama' => $data['nama'],
-            ':harga' => $data['harga'],
-            ':image' => $data['image'],
-            ':satuan' => $data['satuan'],
-            ':kodegudang' => $data['kodegudang'] ?? null,
+            ':nopol' => $data['nopol'],
+            ':namakendaraan' => $data['namakendaraan'],
+            ':jenis' => $data['jenis'],
+            ':tahun' => $data['tahun'],
+            ':kapasitas' => $data['kapasitas'],
+            ':driver' => $data['driver'] ?? null,
+            ':kontakdriver' => $data['kontakdriver'] ?? null,
         ]);
         return $this->db->lastInsertId();
     }
@@ -57,19 +57,28 @@ class KendaraanModel
     public function update($id, $data)
     {
         $sql = "UPDATE kendaraan 
-                SET kode = :kode, nama = :nama, harga = :harga, image = :image, satuan = :satuan, kodegudang = :kodegudang 
-                WHERE id = :id";
+            SET nopol = :nopol, 
+                namakendaraan = :namakendaraan, 
+                jenis = :jenis, 
+                tahun = :tahun, 
+                kapasitas = :kapasitas, 
+                driver = :driver, 
+                kontakdriver = :kontakdriver
+            WHERE id = :id";
+
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            ':kode' => $data['kode'],
-            ':nama' => $data['nama'],
-            ':harga' => $data['harga'],
-            ':image' => $data['image'],
-            ':satuan' => $data['satuan'],
-            ':kodegudang' => $data['kodegudang'] ?? null,
-            ':id' => $id,
+            ':nopol' => $data['nopol'],
+            ':namakendaraan' => $data['namakendaraan'],
+            ':jenis' => $data['jenis'],
+            ':tahun' => $data['tahun'],
+            ':kapasitas' => $data['kapasitas'],
+            ':driver' => $data['driver'] ?? null,
+            ':kontakdriver' => $data['kontakdriver'] ?? null,
+            ':id' => $id,  // penting! harus dikirim
         ]);
     }
+
 
     // hapus
     public function delete($id)
@@ -82,11 +91,11 @@ class KendaraanModel
     public function existsByCode($code, $excludeId = null)
     {
         if ($excludeId) {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM kendaraan WHERE kode = :kode AND id != :id");
-            $stmt->execute([':kode' => $code, ':id' => $excludeId]);
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM kendaraan WHERE nopol = :nopol AND id != :id");
+            $stmt->execute([':nopol' => $code, ':id' => $excludeId]);
         } else {
-            $stmt = $this->db->prepare("SELECT COUNT(*) FROM kendaraan WHERE kode = :kode");
-            $stmt->execute([':kode' => $code]);
+            $stmt = $this->db->prepare("SELECT COUNT(*) FROM kendaraan WHERE nopol = :nopol");
+            $stmt->execute([':nopol' => $code]);
         }
         return $stmt->fetchColumn() > 0;
     }

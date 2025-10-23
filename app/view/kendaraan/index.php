@@ -1,131 +1,248 @@
 <?php ob_start(); ?>
+
 <style>
+    /* ====== Animasi & Style Umum ====== */
+    @keyframes gradientShift {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
     body {
-        font-family: 'Inter', sans-serif;
-        background: #f0fdf4;
-        color: #065f46;
+        background: #f8fdf5;
+        font-family: "Inter", sans-serif !important;
+        color: #2d5016;
+        margin: 0;
+        padding: 0;
     }
 
-    main {
-        padding: 2rem;
-    }
-
-    .card-kendaraan {
-        background: #fff;
-        border-radius: 1.25rem;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
-        transition: all 0.3s ease;
-    }
-
-    .card-kendaraan:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-    }
-
-    .card-header {
-        font-weight: 700;
-        font-size: 1.25rem;
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid #d1fae5;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .btn-add {
-        background: linear-gradient(135deg, #16a34a, #22c55e);
+    /* ====== GRADIENT HEADER ====== */
+    .gradient-bg {
+        background: linear-gradient(135deg, #22c55e, #16a34a, #14b8a6, #3b82f6);
+        background-size: 400% 400%;
+        animation: gradientShift 10s ease infinite, fadeIn 1s ease both;
         color: #fff;
-        border: none;
-        border-radius: 50px;
-        padding: 0.5rem 1.5rem;
-        font-weight: 600;
-        transition: 0.3s;
+        border-radius: 1.2rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        padding: 2rem 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .btn-add:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(22, 163, 74, 0.3);
+    .gradient-bg:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
     }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
+    /* ====== HEADER ====== */
+    .top-header {
+        background: #fff;
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
-    th,
-    td {
-        padding: 0.8rem 1rem;
-        text-align: left;
-        border-bottom: 1px solid #e5f3eb;
+    .page-title h3 {
+        font-weight: 700;
+        letter-spacing: -0.3px;
     }
 
-    th {
-        background: #e6f4ea;
+    .profile-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 0 2px #22c55e33;
     }
 
-    tr:hover {
-        background: #d1fae5;
+    /* ====== TABEL ====== */
+    .table-responsive {
+        overflow-x: auto;
     }
 
-    .action-btn {
-        border: none;
-        background: none;
-        cursor: pointer;
-        font-size: 1rem;
-        margin-right: 0.5rem;
-        color: #065f46;
-    }
-
-    .action-btn.delete {
-        color: #dc2626;
+    .table th,
+    .table td {
+        vertical-align: middle;
     }
 </style>
 
-<main>
-    <div class="card-kendaraan">
-        <div class="card-header">
-            <span>Daftar Kendaraan</span>
-            <a href="<?= BASE_URL ?>kendaraan/create" class="btn-add"><i class="fas fa-plus-circle me-1"></i> Tambah
-                Kendaraan</a>
+<div class="top-header border-bottom bg-white shadow-sm">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between py-2 flex-nowrap gap-2">
+            <div class="d-md-none">
+                <button class="btn btn-toggle" id="sidebarToggle" aria-label="Toggle sidebar" aria-expanded="false">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+
+            <div class="ms-2 order-3 order-md-1 page-title">
+                <h3 class="mb-0 fw-bold text-success d-flex align-items-center">
+                    <i class="fas fa-seedling me-2"></i> Manajemen Kendaraan
+                </h3>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0 order-1 order-md-2">
+                <div class="d-flex align-items-center p-2">
+                    <img src="<?= BASE_URL ?>assets/img/logo/logo-dashboard-img.png" alt="admin" class="profile-avatar">
+                    <div class="text-start d-md-block me-2">
+                        <small class="text-muted">Super Admin</small>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Kode Kendaraan</th>
-                        <th>Nama Kendaraan</th>
-                        <th>Plat Nomor</th>
-                        <th>Tipe</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($kendaraans as $k): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($k['kodekendaraan']) ?></td>
-                            <td><?= htmlspecialchars($k['namakendaraan']) ?></td>
-                            <td><?= htmlspecialchars($k['platnomor']) ?></td>
-                            <td><?= htmlspecialchars($k['tipe']) ?></td>
-                            <td>
-                                <a href="<?= BASE_URL ?>kendaraan/edit/<?= $k['kodekendaraan'] ?>" class="action-btn"><i
-                                        class="fas fa-edit"></i></a>
-                                <form action="<?= BASE_URL ?>kendaraan/delete/<?= $k['kodekendaraan'] ?>" method="post"
-                                    style="display:inline;">
-                                    <input type="hidden" name="_csrf" value="<?= $csrf ?>">
-                                    <button class="action-btn delete" onclick="return confirm('Hapus kendaraan ini?')"><i
-                                            class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    <?php if (empty($kendaraans)): ?>
-                        <tr>
-                            <td colspan="5" class="text-center text-muted">Belum ada data kendaraan.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+    </div>
+</div>
+
+<main class="container-fluid px-4 py-4">
+    <!-- Header -->
+    <div class="dashboard-header p-4 mb-4 position-relative gradient-bg rounded-4 shadow-sm">
+        <div class="row align-items-center g-3">
+            <div class="col-md-6">
+                <div class="position-relative">
+                    <input type="text" id="searchKendaraan" class="form-control ps-5 rounded-5 border-0 shadow-sm"
+                        placeholder="Cari Kendaraan..." />
+                    <span class="position-absolute top-50 start-0 translate-middle-y ms-3">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="<?= BASE_URL ?>kendaraan/create"
+                    class="btn btn-light text-success px-4 py-2 rounded-5 fw-semibold shadow-sm d-inline-flex align-items-center gap-2 border-0">
+                    <i class="fas fa-plus-circle"></i> Tambah Kendaraan
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Kendaraan -->
+    <div class="card fade-in shadow-sm border-0">
+        <div class="card-body pt-0 pb-4">
+            <?php if (empty($kendaraans)): ?>
+                <div class="alert alert-info">Belum ada kendaraan.</div>
+            <?php else: ?>
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0 rounded-3 align-middle" id="kendaraanTable">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 fs-lg">No. Polisi</th>
+                                <th class="px-4 py-3 fs-lg">Nama Kendaraan</th>
+                                <th class="px-4 py-3 fs-lg">Jenis</th>
+                                <th class="px-4 py-3 fs-lg">Tahun</th>
+                                <th class="px-4 py-3 fs-lg">Kapasitas</th>
+                                <th class="px-4 py-3 fs-lg">Driver</th>
+                                <th class="px-4 py-3 fs-lg">Kontak Driver</th>
+                                <th class="px-4 py-3 fs-lg">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($kendaraans as $k): ?>
+                                <tr class="align_middle">
+                                    <td class="px-4 py-3 fw-medium"><span class="badge bg-primary"><?= htmlspecialchars($k['nopol']) ?></span></td>
+                                    <td class="px-4 py-3 fw-medium"><?= htmlspecialchars($k['namakendaraan']) ?></td>
+                                    <td class="px-4 py-3 fw-medium"><?= htmlspecialchars($k['jenis']) ?></td>
+                                    <td class="px-4 py-3 fw-medium"><?= htmlspecialchars($k['tahun']) ?></td>
+                                    <td class="px-4 py-3 fw-medium"><?= htmlspecialchars($k['kapasitas']) ?></td>
+                                    <td class="px-4 py-3 fw-medium"><?= htmlspecialchars($k['driver']) ?></td>
+                                    <td class="px-4 py-3 fw-medium"><?= htmlspecialchars($k['kontakdriver']) ?></td>
+                                    <td class="px-4 py-3 fw-medium">
+                                        <div class="d-flex h-100 justify-content-center align-items-center gap-2">
+                                            <a href="<?= BASE_URL ?>kendaraan/edit/<?= htmlspecialchars($p['id']) ?>"
+                                                class="btn btn-sm btn-outline-success">
+                                                <i class="fi fi-tr-pen-field"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-sm btn-outline-danger btn-delete"
+                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                data-id="<?= htmlspecialchars($p['id']) ?>">
+                                                <i class="fi fi-tr-trash-xmark"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                    <!-- Modal Konfirmasi Hapus -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content border-0 shadow">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title text-white">Konfirmasi Hapus</h5>
+                                    <button type="button" class="btn-close btn-close-white"
+                                        data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div class="delete-animation mb-3">
+                                        <i class="fi fi-tr-trash-xmark text-danger fs-1"></i>
+                                    </div>
+                                    <p class="mb-0">Apakah Anda yakin ingin menghapus data ini?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <form id="deleteForm" method="post" action="">
+                                        <input type="hidden" name="_csrf" value="<?= $this->generateCSRFToken() ?>" />
+                                        <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overlay Sukses -->
+                    <div id="successOverlay" class="success-overlay d-none">
+                        <div class="checkmark-container">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16" />
+                            </svg>
+                            <p class="mt-3 text-white fw-bold">Data berhasil dihapus</p>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <div id="noResults" class="text-center d-none">
+                <p class="text-muted mt-4">Kendaraan tidak ditemukan</p>
+            </div>
         </div>
     </div>
 </main>
+
+<footer class="bg-light text-dark py-4 mt-5">
+    <div class="container text-center">
+        &copy; <?= date('Y') ?> Tani Digital. Semua Hak Dilindungi.
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".btn-delete");
+        const deleteForm = document.getElementById("deleteForm");
+
+        deleteButtons.forEach(btn => {
+            btn.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                deleteForm.action = <?= BASE_URL ?>kendaraan/delete/ + id;
+            });
+        });
+    });
+</script>

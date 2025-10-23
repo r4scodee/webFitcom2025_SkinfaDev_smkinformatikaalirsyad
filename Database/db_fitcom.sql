@@ -1,62 +1,88 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               8.4.3 - MySQL Community Server - GPL
--- Server OS:                    Win64
--- HeidiSQL Version:             12.8.0.6908
+-- Database SkinfaDev Full Structure
 -- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Dumping database structure for tanidigital_db
-CREATE DATABASE IF NOT EXISTS `skinfadev` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `skinfadev` 
+CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `skinfadev`;
 
--- Dumping structure for table tanidigital_db.gudang
+-- ========================================================
+-- Table: gudang
+-- ========================================================
 CREATE TABLE IF NOT EXISTS `gudang` (
-  `kodegudang` varchar(10) NOT NULL,
-  `namagudang` varchar(100) NOT NULL,
-  `golongan` varchar(50) NOT NULL,
-  `keterangan` text,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `kodegudang` VARCHAR(10) NOT NULL,
+  `namagudang` VARCHAR(100) NOT NULL,
+  `golongan` VARCHAR(50) NOT NULL,
+  `keterangan` TEXT,
+  `alamat` VARCHAR(255) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`kodegudang`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table tanidigital_db.gudang: ~2 rows (approximately)
-INSERT INTO `gudang` (`kodegudang`, `namagudang`, `golongan`, `keterangan`, `created_at`) VALUES
-	('G01', 'Gudang Utama', 'Sayur', 'Sayuran', '2025-10-18 22:25:49'),
-	('G02', 'Gudang Cabang', 'Buah', 'Buah-buahan', '2025-10-18 22:25:49');
+-- Data dummy gudang
+INSERT INTO `gudang` (`kodegudang`, `namagudang`, `golongan`, `keterangan`, `alamat`) VALUES
+('G01', 'Gudang Utama', 'Sayur', 'Sayuran segar', 'Jl. Raya No.1, Kota A'),
+('G02', 'Gudang Cabang', 'Buah', 'Buah-buahan segar', 'Jl. Kebon No.5, Kota B');
 
--- Dumping structure for table tanidigital_db.produk
+-- ========================================================
+-- Table: produk
+-- ========================================================
 CREATE TABLE IF NOT EXISTS `produk` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `kode` varchar(50) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `harga` decimal(12,2) NOT NULL DEFAULT '0.00',
-  `satuan` enum('pcs','g','kg','ton') DEFAULT NULL,
-  `kodegudang` varchar(10) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode` VARCHAR(50) NOT NULL,
+  `nama` VARCHAR(255) NOT NULL,
+  `harga` DECIMAL(12,2) NOT NULL DEFAULT '0.00',
+  `stok` INT UNSIGNED DEFAULT 0,
+  `satuan` ENUM('pcs','g','kg','ton') DEFAULT NULL,
+  `kodegudang` VARCHAR(10) DEFAULT NULL,
+  `image` VARCHAR(255) DEFAULT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kode` (`kode`),
   KEY `fk_produk_gudang` (`kodegudang`),
   CONSTRAINT `fk_produk_gudang` FOREIGN KEY (`kodegudang`) REFERENCES `gudang` (`kodegudang`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table tanidigital_db.produk: ~2 rows (approximately)
-INSERT INTO `produk` (`id`, `kode`, `nama`, `harga`, `satuan`, `kodegudang`, `image`, `created_at`) VALUES
-	(1, 'PRD-001', 'Bawang Merah', 34500.00, 'kg', NULL, 'eacf06adc35b50bd_1758979031.jpg', '2025-09-09 00:37:03'),
-	(2, 'PRD-002', 'Kol Putih', 12750.00, 'pcs', NULL, '944e6343e9fdc009_1758979254.jpg', '2025-09-18 05:21:53');
+-- Data dummy produk
+INSERT INTO `produk` (`kode`, `nama`, `harga`, `stok`, `satuan`, `kodegudang`, `image`) VALUES
+('PRD-001', 'Bawang Merah', 34500.00, 50, 'kg', 'G01', 'bawang_merah.jpg'),
+('PRD-002', 'Kol Putih', 12750.00, 100, 'pcs', 'G02', 'kol_putih.jpg');
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+-- ========================================================
+-- Table: kendaraan
+-- ========================================================
+CREATE TABLE IF NOT EXISTS `kendaraan` (
+  `kodekendaraan` VARCHAR(10) NOT NULL,
+  `namakendaraan` VARCHAR(100) NOT NULL,
+  `platnomor` VARCHAR(20) NOT NULL,
+  `kapasitas` INT DEFAULT 0,
+  `status` ENUM('Tersedia','Sedang Kirim','Servis') DEFAULT 'Tersedia',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`kodekendaraan`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Data dummy kendaraan
+INSERT INTO `kendaraan` (`kodekendaraan`, `namakendaraan`, `platnomor`, `kapasitas`, `status`) VALUES
+('K01', 'Truk A', 'B 1234 CD', 1000, 'Tersedia'),
+('K02', 'Pickup B', 'B 5678 EF', 500, 'Tersedia');
+
+-- ========================================================
+-- Table: pengiriman
+-- ========================================================
+CREATE TABLE IF NOT EXISTS `pengiriman` (
+  `kodepengiriman` VARCHAR(10) NOT NULL,
+  `kendaraan` VARCHAR(10) NOT NULL,
+  `tujuan` VARCHAR(255) NOT NULL,
+  `tanggal` DATE NOT NULL,
+  `status` ENUM('Pending','Berjalan','Selesai') DEFAULT 'Pending',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`kodepengiriman`),
+  CONSTRAINT `fk_pengiriman_kendaraan` FOREIGN KEY (`kendaraan`) REFERENCES `kendaraan` (`kodekendaraan`) ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Data dummy pengiriman
+INSERT INTO `pengiriman` (`kodepengiriman`, `kendaraan`, `tujuan`, `tanggal`, `status`) VALUES
+('P001', 'K01', 'Pasar Kota A', '2025-10-25', 'Pending'),
+('P002', 'K02', 'Supermarket Kota B', '2025-10-26', 'Pending');
+

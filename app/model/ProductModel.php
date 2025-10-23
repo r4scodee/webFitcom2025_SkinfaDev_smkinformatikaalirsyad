@@ -11,14 +11,25 @@ class ProductModel
 
     public function all()
     {
-        $stmt = $this->db->prepare("SELECT * FROM produk ORDER BY id ASC");
+        $stmt = $this->db->prepare("
+        SELECT p.*, w.namagudang, w.golongan
+        FROM produk p
+        LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
+        ORDER BY p.id ASC
+        ");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
     public function find($id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM produk WHERE id = :id LIMIT 1");
+        $stmt = $this->db->prepare("
+        SELECT p.*, w.namagudang, w.golongan
+        FROM produk p
+        LEFT JOIN gudang w ON p.kodegudang = w.kodegudang
+        WHERE p.id = :id
+        LIMIT 1
+        ");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch();
     }
@@ -26,8 +37,8 @@ class ProductModel
     // insert
     public function create($data)
     {
-        $sql = "INSERT INTO produk (kode, nama, harga, image, satuan) 
-                VALUES (:kode, :nama, :harga, :image, :satuan)";
+        $sql = "INSERT INTO produk (kode, nama, harga, image, satuan, kodegudang) 
+                VALUES (:kode, :nama, :harga, :image, :satuan, :kodegudang)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             ':kode' => $data['kode'],
@@ -35,6 +46,7 @@ class ProductModel
             ':harga' => $data['harga'],
             ':image' => $data['image'],
             ':satuan' => $data['satuan'],
+            ':kodegudang' => $data['kodegudang'] ?? null,
         ]);
         return $this->db->lastInsertId();
     }
@@ -42,7 +54,7 @@ class ProductModel
     // update
     public function update($id, $data)
     {
-        $sql = "UPDATE produk SET kode = :kode, nama = :nama, harga = :harga, image = :image, satuan = :satuan WHERE id = :id";
+        $sql = "UPDATE produk SET kode = :kode, nama = :nama, harga = :harga, image = :image, satuan = :satuan, kodegudang = :kodegudang WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             ':kode' => $data['kode'],
@@ -50,6 +62,7 @@ class ProductModel
             ':harga' => $data['harga'],
             ':image' => $data['image'],
             ':satuan' => $data['satuan'],
+            ':kodegudang' => $data['kodegudang'] ?? null,
             ':id' => $id,
         ]);
     }

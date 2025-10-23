@@ -16,8 +16,8 @@
 
 
 -- Dumping database structure for tanidigital_db
-CREATE DATABASE IF NOT EXISTS `tanidigital_db` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `tanidigital_db`;
+CREATE DATABASE IF NOT EXISTS `skinfadev` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `skinfadev`;
 
 -- Dumping structure for table tanidigital_db.gudang
 CREATE TABLE IF NOT EXISTS `gudang` (

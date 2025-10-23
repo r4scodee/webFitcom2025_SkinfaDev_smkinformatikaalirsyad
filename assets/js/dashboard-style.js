@@ -35,8 +35,33 @@ function filterTable() {
   } else {
     $("#noResults").removeClass("d-none");
   }
-}
+} 
 
+// Sidebar toggle
+$(document).ready(function () {
+  $("#sidebarToggle").on("click", function () {
+    $("#sidebarbtn").toggleClass("show");
+  });
+
+  // Klik di luar sidebar buat close
+  $(document).on("click", function (e) {
+    if (
+      $(window).width() < 768 &&
+      !$(e.target).closest("#sidebarbtn, #sidebarToggle").length
+    ) {
+      $("#sidebarbtn").removeClass("show");
+    }
+  });
+});
+
+document
+  .getElementById("sidebarToggle")
+  ?.addEventListener("click", function (e) {
+    const btn = e.currentTarget;
+    btn.classList.toggle("active");
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!expanded));
+  });
 
 $(document).ready(function () {
   $("#searchProduct").on("keyup", filterTable);

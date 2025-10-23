@@ -1,9 +1,9 @@
 <?php
 // Kondigurasi database
-define('DB_HOST', '127.0.0.1');      
-define('DB_NAME', 'tanidigital_db');       
-define('DB_USER', 'root');          
-define('DB_PASS', '');               
+define('DB_HOST', '192.168.0.10');      
+define('DB_NAME', 'skinfadev');       
+define('DB_USER', 'skinfadev');          
+define('DB_PASS', 'skinfadev');               
 
 // BASE_URL
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';

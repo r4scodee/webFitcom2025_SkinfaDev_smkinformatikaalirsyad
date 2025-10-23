@@ -237,6 +237,23 @@ if (is_numeric($hargaValue)) {
         </select>
       </div>
 
+      <div class="col-lg-6 col-md-6">
+        <label class="form-label">Gudang</label>
+        <select name="kodegudang" class="form-select">
+          <option value="">Pilih Gudang</option>
+          <?php
+          $db = Database::getInstance()->getConnection();
+          $stmt = $db->query("SELECT kodegudang, namagudang FROM gudang ORDER BY namagudang ASC");
+          $warehouses = $stmt->fetchAll();
+          foreach ($warehouses as $g):
+            ?>
+            <option value="<?= htmlspecialchars($g['kodegudang']) ?>" <?= $val('kodegudang') == $g['kodegudang'] ? 'selected' : '' ?>>
+              <?= htmlspecialchars($g['namagudang']) ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+
       <div class="col-12">
         <label class="form-label">Gambar Produk <small class="text-muted">(jpg/png/webp, maks 2MB)</small></label>
         <input type="file" name="image" id="image" accept="image/*" class="form-control mt-2 w-300">

@@ -39,6 +39,7 @@ class ProductController extends Controller
         $name = trim($_POST['nama'] ?? '');
         $price = trim($_POST['harga'] ?? '0');
         $unit = trim($_POST['satuan'] ?? '');
+        $kodegudang = trim($_POST['kodegudang'] ?? '');
 
         $errors = [];
 
@@ -79,6 +80,7 @@ class ProductController extends Controller
             'harga' => $price,
             'image' => $uploadedFilename,
             'satuan' => $unit,
+            'kodegudang' => $kodegudang
         ];
 
         $id = $this->model->create($data);
@@ -115,6 +117,7 @@ class ProductController extends Controller
         $name = trim($_POST['nama'] ?? '');
         $price = trim($_POST['harga'] ?? '0');
         $unit = trim($_POST['satuan'] ?? '');
+        $kodegudang = trim($_POST['kodegudang'] ?? '');
 
         $errors = [];
         if ($code === '')
@@ -156,7 +159,8 @@ class ProductController extends Controller
             'nama' => $name,
             'harga' => $price,
             'image' => $uploadedFilename,
-            'satuan' => $unit
+            'satuan' => $unit,
+            'kodegudang' => $kodegudang
         ];
 
         $this->model->update($id, $data);

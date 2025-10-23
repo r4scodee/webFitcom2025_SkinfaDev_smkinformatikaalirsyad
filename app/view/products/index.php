@@ -120,17 +120,12 @@
     border-top-right-radius: 1.25rem;
   }
 
-  .info-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(22, 163, 74, 0.18);
-  }
-
   .info-card .card-body {
     display: flex;
     align-items: center;
     justify-content: start;
     gap: 1rem;
-    padding: 1.4rem 1.6rem;
+    padding: 1.4rem 1.4rem;
   }
 
   .info-icon {
@@ -194,22 +189,26 @@
   }
 </style>
 
-
-
-
 <div class="top-header border-bottom bg-white shadow-sm">
   <div class="container-fluid">
     <div class="d-flex align-items-center justify-content-between py-2 flex-nowrap gap-2">
+
+    <div class="d-md-none">
+        <button class="btn btn-toggle" id="sidebarToggle" aria-label="Toggle sidebar" aria-expanded="false">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
       <div class="ms-2 order-3 order-md-1 page-title">
         <h3 class="mb-0 fw-bold text-success d-flex align-items-center">
           <i class="fas fa-seedling me-2"></i> Manajemen Produk
         </h3>
       </div>
+      
       <div class="d-flex align-items-center justify-content-end gap-2 flex-shrink-0 order-1 order-md-2">
         <div class="d-flex align-items-center p-2">
           <img src="<?= BASE_URL ?>assets/img/logo/logo-dashboard-img.png" alt="admin" class="profile-avatar">
           <div class="text-start d-md-block me-2">
-            <div class="fw-bold" style="font-size: 16px">TANI DIGITAL</div>
             <small class="text-muted">Super Admin</small>
           </div>
         </div>
@@ -311,6 +310,8 @@
                 <th class="px-4 py-3 fs-lg">Nama</th>
                 <th class="px-4 py-3 fs-lg">Satuan</th>
                 <th class="px-4 py-3 fs-lg">Harga</th>
+                <th class="px-4 py-3 fs-lg">Gudang</th>
+                <th class="px-4 py-3 fs-lg">Golongan</th>
                 <th class="px-4 py-3 fs-lg">Gambar</th>
                 <th class="px-4 py-3 fs-lg">Aksi</th>
               </tr>
@@ -325,7 +326,15 @@
                   <td class="px-4 py-3 fw-medium">
                     <span class="badge bg-success"><?= $this->e($p['satuan']) ?></span>
                   </td>
-                  <td class="px-4 py-3 fw-medium">Rp <?= number_format($p['harga'], 0, ',', '.') ?></td>
+                  <td class="px-4 py-3 fw-medium">
+                    Rp <?= number_format($p['harga'], 0, ',', '.') ?>
+                  </td>
+                  <td class="px-4 py-3 fw-medium">
+                    <?= $p['namagudang'] ? $this->e($p['namagudang']) : '<span class="text-muted">-</span>' ?>
+                  </td>
+                  <td class="px-4 py-3 fw-medium">
+                    <?= $p['golongan'] ? $this->e($p['golongan']) : '<span class="text-muted">-</span>' ?>
+                  </td>
                   <td class="px-4 py-3 fw-medium">
                     <?php if (!empty($p['image'])): ?>
                       <img src="<?= UPLOAD_URL . htmlspecialchars($p['image']) ?>" alt="img" class="thumb img-thumbnail"
@@ -396,9 +405,9 @@
   </div>
 </main>
 
-<footer class="bg-light text-dark py-4 mt-5 fixed-bottom">
-  <div class="container text-center">
-    <p class="mb-1 mb-0">
+<footer class="bg-light text-dark py-4 mt-5 footer-products">
+  <div class="container">
+    <p class="mb-1">
       &copy; <?= date('Y') ?> Tani Digital. Semua Hak Dilindungi.
     </p>
   </div>

@@ -12,8 +12,27 @@
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column">
 
+<!-- Sidebar -->
+ <nav class="sidebar" id="sidebarbtn">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <img src="<?= BASE_URL ?>assets/img/logo/logo-dashboard-img.png" alt="Logo" width="35" height="35" class="ms-3">
+        <span>TANI DIGITAL</span>
+      </div>
+    </div>
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a href="<?= BASE_URL ?>"
+          class="nav-link sidebar-link <?= ($active ?? '') === 'dashboard' ? 'active' : '' ?>">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Product</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  
   <div class="main-content min-vh-100">
     <?= $content ?>
   </div>

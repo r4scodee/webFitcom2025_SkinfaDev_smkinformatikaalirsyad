@@ -25,9 +25,30 @@
     <ul class="sidebar-nav">
       <li class="nav-item">
         <a href="<?= BASE_URL ?>"
-          class="nav-link sidebar-link <?= ($active ?? '') === 'dashboard' ? 'active' : '' ?>">
+          class="nav-link sidebar-link <?= ($active ?? '') === 'product' ? 'active' : '' ?>">
           <i class="fas fa-tachometer-alt"></i>
-          <span>Product</span>
+          <span>Produk</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= BASE_URL ?>/gudang"
+          class="nav-link sidebar-link <?= ($active ?? '') === 'gudang' ? 'active' : '' ?>">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Produk</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= BASE_URL ?>pengiriman"
+          class="nav-link sidebar-link <?= ($active ?? '') === 'pengiriman' ? 'active' : '' ?>">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Produk</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= BASE_URL ?>kendaraan"
+          class="nav-link sidebar-link <?= ($active ?? '') === 'kendaraan' ? 'active' : '' ?>">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Produk</span>
         </a>
       </li>
     </ul>

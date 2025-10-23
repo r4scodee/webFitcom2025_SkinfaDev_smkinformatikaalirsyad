@@ -436,7 +436,7 @@ body {
 
   .footer-products {
     margin-left: 0;
-    padding-left: 0;
+    padding-left: 15px;
     width: 100%;
     font-size: 14px;
     text-align: center;

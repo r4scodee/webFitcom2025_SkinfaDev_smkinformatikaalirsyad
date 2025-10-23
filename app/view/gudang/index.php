@@ -334,12 +334,10 @@
   </div>
 </main>
 
-<footer class="bg-light text-dark py-4 mt-5 footer-products">
-  <div class="container">
-    <p class="mb-1">
-      &copy; <?= date('Y') ?> Tani Digital. Semua Hak Dilindungi.
-    </p>
-  </div>
+<footer class="bg-light text-dark py-4 mt-5">
+    <div class="container text-center">
+        &copy; <?= date('Y') ?> Tani Digital. Semua Hak Dilindungi.
+    </div>
 </footer>
 
 <script>
